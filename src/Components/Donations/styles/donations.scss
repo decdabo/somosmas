@@ -1,0 +1,14 @@
+.donations-div {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  &-link {
+    background-color: #009ee3;
+    padding: 10px 20px;
+    border-radius: 3px;
+    text-decoration: none;
+    color: #fff;
+  }
+}

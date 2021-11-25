@@ -1,0 +1,11 @@
+.slide{
+    &__home{
+        background-position: center;
+        background-size: 100vw;
+        height: 30vh;
+        max-height: 250px;
+        display: flex;
+        align-items: end;
+        justify-content: center
+    }
+}

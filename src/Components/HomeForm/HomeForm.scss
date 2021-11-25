@@ -4,6 +4,12 @@
   margin: 10px 0;
 }
 
+.images-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
 .uploaded-image-container {
   position: relative;
   height: 200px;

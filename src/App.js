@@ -11,6 +11,7 @@ import SchoolCampaign from "./Campaigns/School/SchoolCampaign";
 import ToysCampaign from "./Campaigns/Toys/ToysCampaign";
 import MembersForm from "./Components/Members/MembersForm";
 import ProjectsForm from "./Components/Projects/ProjectsForm";
+import HomeForm from "./Components/HomeForm/HomeForm";
 import { DonationsGreet } from "./Components/Donations/DonationsGreet";
 import { ThanksGreet } from "./Components/Donations/ThanksGreet";
 import ContactForm from "./Components/Contact/ContactForm";
@@ -26,6 +27,7 @@ function App() {
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
+          <Route path="/backoffice/home" component={HomeForm} />
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
           <Route path="/create-member" component={MembersForm} />

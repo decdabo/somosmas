@@ -10,10 +10,11 @@ import UserForm from "./Components/Users/UsersForm";
 import SchoolCampaign from "./Campaigns/School/SchoolCampaign";
 import ToysCampaign from "./Campaigns/Toys/ToysCampaign";
 import MembersForm from "./Components/Members/MembersForm";
-import MembersEdit from "./Components//Members/MembersEdit";
 import ProjectsForm from "./Components/Projects/ProjectsForm";
 import { DonationsGreet } from "./Components/Donations/DonationsGreet";
 import { ThanksGreet } from "./Components/Donations/ThanksGreet";
+import ContactForm from "./Components/Contact/ContactForm";
+import MembersEdit from "./Components//Members/MembersEdit";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/backoffice/news" component={NewsForm} />
           <Route path="/donar" component={DonationsGreet} />
           <Route path="/gracias" component={ThanksGreet} />
+          <Route path="/contact-form" component={ContactForm} />
         </Switch>
       </BrowserRouter>
     </>

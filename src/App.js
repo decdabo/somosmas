@@ -10,6 +10,7 @@ import UserForm from "./Components/Users/UsersForm";
 import SchoolCampaign from "./Campaigns/School/SchoolCampaign";
 import ToysCampaign from "./Campaigns/Toys/ToysCampaign";
 import MembersForm from "./Components/Members/MembersForm";
+import MembersEdit from "./Components//Members/MembersEdit";
 import ProjectsForm from "./Components/Projects/ProjectsForm";
 import { DonationsGreet } from "./Components/Donations/DonationsGreet";
 import { ThanksGreet } from "./Components/Donations/ThanksGreet";
@@ -27,6 +28,7 @@ function App() {
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
           <Route path="/create-member" component={MembersForm} />
+          <Route path="/backoffice/members/edit" component={MembersEdit} />
           <Route path="/create-project" component={ProjectsForm} />
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />

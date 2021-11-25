@@ -8,6 +8,8 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const validUrl =
   /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/;
+const linkedInUrl =
+  /(https?)?:?(\/\/)?(([w]{3}||\w\w)\.)?linkedin.com(\w+:{0,1}\w*@)?(\S+)(:([0-9])+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
 
@@ -17,13 +19,15 @@ const SignupSchema = Yup.object().shape({
 
     .required("Name is required"),
 
-  description: Yup.string().required("Description required"),
+  description: Yup.string()
+    .required("Description required")
+    .min(8, "Too Short!"),
   image: Yup.string().required("Image required"),
   facebookUrl: Yup.string()
     .matches(validUrl, "Enter correct url!")
     .required("Please enter website"),
   linkedinUrl: Yup.string()
-    .matches(validUrl, "Enter correct url!")
+    .matches(linkedInUrl, "Enter correct url!")
     .required("Please enter website"),
 });
 

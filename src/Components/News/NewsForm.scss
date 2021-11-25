@@ -1,0 +1,29 @@
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.uploaded-image-container {
+  position: relative;
+  height: 200px;
+  border: 1px solid rgb(187, 187, 187);
+}
+
+.uploaded-image {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 90%;
+  max-width: 100%;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+}
+
+.success-message {
+  color: green;
+  text-align: center;
+}

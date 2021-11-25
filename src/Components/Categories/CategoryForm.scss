@@ -1,0 +1,83 @@
+$error-fg-color: #f20;
+$padding-button: 10px;
+$border-color: rgba(76, 131, 216, 0.8);
+
+@mixin commonHoverEffect {
+  background-color: rgba(146, 183, 240, 0.4);
+}
+
+@mixin commonOutline {
+  outline: 1px solid $border-color;
+}
+
+.title {
+  padding: 0 20px;
+}
+
+.form {
+  width: 100%;
+  max-width: 400px;
+  padding: 0 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__image {
+    &-preview {
+      margin: 20px 0;
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+  }
+  &__input {
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid $border-color;
+
+    &:focus {
+      outline: none;
+    }
+
+    &[type="file"] {
+      display: none;
+    }
+
+    &-error {
+      color: $error-fg-color;
+      color: red;
+      margin: 10px 0;
+    }
+  }
+  &__label {
+    margin-right: 10px;
+    width: 10px;
+
+    &-required {
+      color: red;
+    }
+  }
+
+  &__label[for="image"] {
+    padding: $padding-button;
+
+    @include commonOutline();
+    cursor: pointer;
+    &:hover {
+      @include commonHoverEffect();
+    }
+  }
+
+  &__button {
+    background-color: transparent;
+    @include commonOutline();
+    border-radius: 2px;
+    padding: $padding-button;
+    border: none;
+    cursor: pointer;
+    &:hover {
+      @include commonHoverEffect();
+    }
+  }
+}

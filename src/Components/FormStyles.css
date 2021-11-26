@@ -27,3 +27,19 @@
     cursor: pointer;
     background-color: #3498DB;
 }
+
+
+.form-success {
+    color: #02a802;
+    text-align: center;
+    font-size: 14px;
+    padding-top: 20px;
+    color: #02a802;
+}
+
+.form-error {
+    color: #e92b2d;
+    font-weight: 600;
+    font-size: 12px;
+}
+

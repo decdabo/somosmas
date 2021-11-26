@@ -163,7 +163,13 @@ const NewsForm = () => {
                   const data = editor.getData();
                   setFieldValue("content", data);
                 }}
-                placeholder="d"
+                config={{
+                  cloudServices: {
+                    tokenUrl:
+                      "https://85122.cke-cs.com/token/dev/63f1e5122f7b89374a44f0ba134c7a670437bab84212188ac1b17d829d92",
+                    uploadUrl: "https://85122.cke-cs.com/easyimage/upload/",
+                  },
+                }}
               />
               {errors.content && (
                 <div className="error-message">{errors.content}</div>

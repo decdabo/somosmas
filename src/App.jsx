@@ -12,8 +12,8 @@ import ToysCampaign from "./Campaigns/Toys/ToysCampaign";
 import MembersForm from "./Components/Members/MembersForm";
 import ProjectsForm from "./Components/Projects/ProjectsForm";
 import HomeForm from "./Components/HomeForm/HomeForm";
-import { DonationsGreet } from "./Components/Donations/DonationsGreet";
-import { ThanksGreet } from "./Components/Donations/ThanksGreet";
+import DonationsGreet from "./Components/Donations/DonationsGreet";
+import ThanksGreet from "./Components/Donations/ThanksGreet";
 import ContactForm from "./Components/Contact/ContactForm";
 import MembersEdit from "./Components//Members/MembersEdit";
 import RegisterForm from './Components/Auth/RegisterForm';
@@ -47,6 +47,7 @@ function App() {
           <Route path="/backoffice/news" component={NewsForm} />
           <Route path="/donar" component={DonationsGreet} />
           <Route path="/gracias" component={ThanksGreet} />
+          <Route path="/backoffice/slides" component={SlidesForm} />
           <Route path="/contact-form" component={ContactForm} />
           <Route path="/register-form" component={RegisterForm} />
           <Route path="/login-form" component={LoginForm} />

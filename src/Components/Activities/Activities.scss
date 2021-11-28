@@ -1,0 +1,68 @@
+@mixin borders($color) {
+  border: 3px solid $color;
+  background-color: rgba($color, 0.4);
+  border-radius: 4px;
+}
+
+@mixin flexColumnCenter($gap) {
+  display: flex;
+  flex: {
+    direction: column;
+  }
+  gap: $gap;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.activities {
+  margin: auto;
+}
+
+.list {
+  max-width: 767px;
+  width: 100%;
+  list-style-type: none;
+  padding: 10px 20px;
+
+  @include flexColumnCenter(10px);
+
+  @media screen and (max-width: 450px) {
+    padding: 0;
+  }
+
+  &__item {
+    @include borders(wheat);
+    padding: 20px;
+    width: 100%;
+    height: fit-content;
+
+    &-shutdown-text {
+      opacity: 0.4;
+    }
+
+    & footer {
+      & a {
+        text-decoration: none;
+        padding: 10px;
+        @include borders(rgb(167, 167, 255));
+      }
+    }
+
+    @media screen and (max-width: 450px) {
+      max-width: 100%;
+      padding: 20px 10px;
+      border: {
+        left: none;
+        right: none;
+      }
+    }
+  }
+  &__image {
+    width: 100%;
+    height: auto;
+    max-width: max-content;
+    margin: 0 auto;
+  }
+}

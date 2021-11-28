@@ -1,0 +1,20 @@
+$spinner-color: #333;
+
+.spinner {
+  background-color: transparent;
+  &__circle {
+    color: $spinner-color;
+    animation: spinner 0.6s ease-in-out infinite;
+  }
+
+  font-size: 100px;
+
+  @keyframes spinner {
+    from {
+      transform: rotateZ(0deg);
+    }
+    to {
+      transform: rotateZ(360deg);
+    }
+  }
+}

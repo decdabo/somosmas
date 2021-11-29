@@ -38,6 +38,7 @@ function App() {
           <Route path="/backoffice/home" component={HomeForm} />
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
+          <Route path="/edit-user/:id" component={UserForm} />
           <Route path="/create-member" component={MembersForm} />
           <Route path="/backoffice/members/edit" component={MembersEdit} />
           <Route path="/create-project" component={ProjectsForm} />

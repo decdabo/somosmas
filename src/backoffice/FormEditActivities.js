@@ -32,11 +32,11 @@ export const FormEditActivities = ({ activities = initialValues }) => {
             onSubmit={(values) => {
                 if (!activities.id) {
                     axios.post('http://ongapi.alkemy.org/api/activities', values)
-                        .then(res => console.log(res.data))
+                        .then(res => alert(res.data))
                         .catch(e => console.log(e))
                 } else {
                     axios.path(`http://ongapi.alkemy.org/api/activities/${activities.id}`, values)
-                        .then(res => console.log(res.data))
+                        .then(res => alert(res.data))
                         .catch(e => console.log(e))
                 }
             }}

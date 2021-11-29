@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../FormStyles.css';
-import { Formik } from 'formik'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
 
 const LoginForm = () => {
     const [initialValues, setInitialValues] = useState({
@@ -8,49 +8,109 @@ const LoginForm = () => {
         password: ''
     });
 
-    // const handleChange = (e) => {
-    //     if(e.target.name === 'email'){
-    //         setInitialValues({...initialValues, email: e.target.value})
-    //     } if(e.target.name === 'password'){
-    //         setInitialValues({...initialValues, password: e.target.value})
-    //     }
-    // }
-    
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     console.log(initialValues);
-    //     localStorage.setItem('token', 'tokenValueExample')
-    // }
+    const [formEnviado, setFormEnviado] = useState(false)
+
 
     return (
         <Formik
-            onSubmit={() => {
-                console.log('login enviado')
+            
+            initialValues = {{                
+                email: '',
+                password: '',                          
+            }}
+
+            validate={(values) => {
+
+                let errores = {}
+                
+                if (!values.email.trim()) {
+                    errores.email = 'Please enter an email'
+                } else if (!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.email)) {
+                    errores.email = 'Please enter a valid email'
+                }
+                
+                if (!values.password.trim()) {
+                    errores.password = 'Please enter a password'
+
+                } else if (values.password.length < 6) {
+                    errores.password = 'Your password must be at least 6 characters'
+
+                } else if (values.password.search(/[a-z]/i) < 0) {
+                    errores.password = "Your password must contain at least one letter."
+
+                } else if (values.password.search(/[0-9]/) < 0) {
+                    errores.password = "Your password must contain at least one digit."
+                }
+
+                else if (values.password.search(/(?=.*[!@#$%^&*])/)) {
+                    errores.password = "Your password must contain at least one special character."
+                }
+
+                return errores
+                
+
+
+
+
+            }}
+            onSubmit={(values, {resetForm}) => {
+                
+                setInitialValues({
+                    email: values.email,
+                    password: values.password,
+                })
+                
+                setFormEnviado(true)
+                setTimeout(() => {
+                    setFormEnviado(false)
+                }, 10000);
+                alert(
+                    `
+                    Email: ${values.email}
+                    Password: ${values.password}                    
+                    `
+                )
+                resetForm()
             }}
         
         >
 
-            {(handleSubmit, handleChange) => (
-                <form className="form-container" onSubmit={handleSubmit}>
-                    <input 
-                        className="input-field" 
-                        type="text" 
+            {({errors}) => (
+                <Form className="form-container">
+                    <Field 
+                        className="input-field"
+                        id='email'
+                        type="email" 
                         name="email" 
-                        value={initialValues.name} 
-                        onChange={handleChange}
                         placeholder="Enter email"
+                        
                     />
-                    <input 
-                        className="input-field" 
-                        type="text" 
+
+                    <ErrorMessage name='email' component={() => (
+                        <div className='form-error'>{errors.email}</div>
+                    )}/>
+
+                    
+
+                    <Field 
+                        className="input-field"
+                        id='password'
+                        type="password" 
                         name="password" 
-                        value={initialValues.password} 
-                        onChange={handleChange} 
-                        placeholder="Enter password" />
+                        placeholder="Enter password"
+                        
+                    />
+
+                    <ErrorMessage name='password' component={() => (
+                        <div className='form-error'>{errors.password}</div>
+                    )}/>
                         
                         
                     <button className="submit-btn" type="submit">Log In</button>
-                </form>                
+                    {
+                        formEnviado && <p className="form-success">Log in successfull</p>
+                    }
+                </Form>                
             )}
 
         </Formik>

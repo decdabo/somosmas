@@ -6,14 +6,8 @@
 
 @mixin flexColumnCenter($gap) {
   display: flex;
-  flex: {
-    direction: column;
-  }
+  flex-direction: column;
   gap: $gap;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 .activities {
@@ -42,12 +36,10 @@
       opacity: 0.4;
     }
 
-    & footer {
-      & a {
-        text-decoration: none;
-        padding: 10px;
-        @include borders(rgb(167, 167, 255));
-      }
+    & a {
+      text-decoration: none;
+      padding: 10px;
+      @include borders(rgb(167, 167, 255));
     }
 
     @media screen and (max-width: 450px) {

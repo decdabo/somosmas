@@ -9,4 +9,11 @@ const getAllActivities = () => {
     .catch((err) => console.log(err));
 };
 
-export { getAllActivities };
+const getActivityById = (id) => {
+  return axios
+    .get(`${BASE_URL}/${id}`)
+    .then((res) => res.data)
+    .catch((err) => console.log(err));
+};
+
+export { getAllActivities, getActivityById };

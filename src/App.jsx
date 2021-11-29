@@ -20,6 +20,7 @@ import RegisterForm from './Components/Auth/RegisterForm';
 import LoginForm from './Components/Auth/LoginForm';
 import OrganizationForm from "./Components/OrganizationForm/OrganizationForm";
 import ActivitiesList from "./Components/Activities/ActivitiesList";
+import ActivityInfo from "./Components/Activities/Detail/ActivityInfo";
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <Switch>
           {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
           <Route exact path="/actividades" component={ActivitiesList} />
+          <Route exact path="/actividades/:id" component={ActivityInfo} />
 
           <Route path="/create-activity" component={ActivitiesForm} />
           <Route path="/create-category" component={CategoriesForm} />

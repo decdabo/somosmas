@@ -20,4 +20,20 @@ const Put = async (endPoint, id, body) => {
   }
 };
 
-export { Put };
+const Get = async (endPoint, id) =>{
+  const url = id ? `${baseUrl}/${endPoint}/${id}` : `${baseUrl}/${endPoint}`;
+
+  try {
+    const response = await axios.get(url,  {
+      headers: {
+        Authorization: `Bearer ${tempToken}`,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    return { success: false, error };
+  }
+}
+
+export { Put, Get };

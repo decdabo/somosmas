@@ -17,7 +17,7 @@ export const SliderApp = ({ URL = 'http://ongapi.alkemy.org/api/slides', method 
         axios({ method: method, url: URL })
             .then(res => setData(res.data.data))
             .catch(e => console.log(e))
-    }, [URL, type])
+    }, [URL, method])
     return (
         <Slider {...settings}>
             {data.map(obj => {

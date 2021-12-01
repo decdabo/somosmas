@@ -35,3 +35,19 @@ export const Get = async (endPoint, id) => {
     return { success: false, error };
   }
 };
+
+export const Delete = async (endPoint, id) => {
+  const url = `${baseUrl}/${endPoint}/${id}`;
+
+  try {
+    const { data } = await axios.delete(url, {
+      headers: {
+        Authorization: tempToken,
+      },
+    });
+
+    return data;
+  } catch (error) {
+    return { success: false, error };
+  }
+};

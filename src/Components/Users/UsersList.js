@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import "./UsersStyles.scss";
 import { UsersTable } from "./UsersTable";
-import { data } from "./usersMock.json";
 
 export const UsersList = () => {
+  const { data } = require("../../lib/mock/usersMock.json");
+
   return (
     <div>
       <div className="return">

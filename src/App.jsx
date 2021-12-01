@@ -20,6 +20,7 @@ import LoginForm from "./Components/Auth/LoginForm";
 import OrganizationForm from "./Components/OrganizationForm/OrganizationForm";
 import ActivitiesList from "./Components/Activities/ActivitiesList";
 import ActivityInfo from "./Components/Activities/Detail/ActivityInfo";
+import ManageActivities from "./Components/ManageActivities/ManageActivities";
 import { UsersList } from "./Components/Users/UsersList";
 import { DonationsGreet } from "./Components/Donations/DonationsGreet";
 import { ThanksGreet } from "./Components/Donations/ThanksGreet";
@@ -61,6 +62,11 @@ function App() {
           <Route exact path="/toys-campaign" component={ToysCampaign} />
           <Route exact path="/backoffice/news/:id" component={NewsForm} />
           <Route exact path="/backoffice/news" component={NewsForm} />
+          <Route
+            exact
+            path="/backoffice/activities"
+            component={ManageActivities}
+          />
           <Route exact path="/backoffice/users" component={UsersList} />
           <Route exact path="/donar" component={DonationsGreet} />
           <Route exact path="/gracias" component={ThanksGreet} />

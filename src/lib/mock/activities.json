@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Nombre 1",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Un1.svg/1200px-Un1.svg.png",
+    "created_at": "2021-11-30T16:47:15.220Z",
+    "decription": "Descripcion de prueba 1"
+  },
+  {
+    "id": 2,
+    "name": "Nombre 2",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Deux.svg/1200px-Deux.svg.png",
+    "created_at": "2021-11-30T16:47:15.220Z",
+    "decription": "Descripcion de prueba 2"
+  },
+  {
+    "id": 3,
+    "name": "Nombre 3",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Trois.svg/1200px-Trois.svg.png",
+    "created_at": "2021-11-30T16:47:15.220Z",
+    "decription": "Descripcion de prueba 3"
+  }
+]

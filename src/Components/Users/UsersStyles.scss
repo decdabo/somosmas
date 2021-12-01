@@ -1,0 +1,67 @@
+.return {
+  margin: 20px 0 0 20px;
+}
+
+.return__button {
+  text-decoration: none;
+  color: #000;
+  border: 1px solid rgb(185, 38, 38);
+  padding: 5px 10px;
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: rgb(185, 38, 38);
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+  }
+}
+
+.table__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.table {
+  width: 70%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  &__rows th,
+  td {
+    border-right: 1px solid black;
+  }
+  &__rows td {
+    border-top: 1px solid black;
+  }
+  &__head {
+    width: 40%;
+  }
+  &__actions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  &__buttons {
+    margin: 5px;
+    border: none;
+    border-radius: 2px;
+    padding: 5px 10px;
+    color: #ddd;
+    cursor: pointer;
+
+    &:nth-child(1) {
+      background-color: rgb(228, 41, 41);
+      &:hover {
+        background-color: darken(rgb(228, 41, 41), 10%);
+      }
+    }
+    &:nth-child(2) {
+      background-color: rgb(32, 175, 32);
+      &:hover {
+        background-color: darken(rgb(32, 175, 32), 10%);
+      }
+    }
+  }
+}

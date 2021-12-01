@@ -1,4 +1,5 @@
 import React from 'react';
+import './slidehome.scss';
 
 export const SlideComponent = ({ data }) => {
     return (

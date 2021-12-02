@@ -25,6 +25,9 @@ import { UsersList } from "./Components/Users/UsersList";
 import { DonationsGreet } from "./Components/Donations/DonationsGreet";
 import { ThanksGreet } from "./Components/Donations/ThanksGreet";
 import Home from './Home/Home';
+import HomeDashboard from "./Components/HomeDashboard/HomeDashboard";
+
+
 function App() {
   return (
     <>
@@ -33,7 +36,7 @@ function App() {
 
           <Route exact path="/actividades" component={ActivitiesList} />
           <Route exact path="/actividades/:id" component={ActivityInfo} />
-
+          <Route path="/backoffice" exact component={HomeDashboard}/>
           <Route exact path="/create-activity" component={ActivitiesForm} />
           <Route exact path="/create-category" component={CategoriesForm} />
           <Route exact path="/create-news" component={NewsForm} />

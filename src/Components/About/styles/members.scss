@@ -8,23 +8,35 @@
 .container{
     display: flex;
     justify-content: center;
-    height: 100vh;
+    height: 100vh;    
+    
     align-items: center;
     cursor: default;
+    flex-wrap: wrap;
 }
 
 .card{
-    width: 50%;
+    width: 300px;
     border-radius: 6px;
     overflow: hidden;
     background: #fff;
     box-shadow: 0 1px 10px rgba(0,0,0,0.2);
     transition: all 400ms ease;
     text-align: center;
+    margin: 15px;
+    
 }
+
+
 
 .card:hover{
     box-shadow: 5px 5px 20px rgba(0,0,0,0.4);
+}
+
+.card img{
+    width: 100%;
+    height: 190px;
+    object-fit: cover;    
 }
 
 .content {
@@ -57,19 +69,20 @@
     cursor: pointer;
 }
 
-.spinner{
+.links{
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    flex-direction: column;
 }
 
-.spinner h6{
-    font-size: 30px;
+.link{
+    text-decoration: none;
+    color: #0a5c6b;
+    font-weight: 700;
+    transition: all 300ms ease;
 }
 
-figure img{
-    width: 100%;
-    object-fit: cover;
+.link:hover{
+    color: #93cbd4;
 }
 

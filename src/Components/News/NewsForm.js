@@ -3,10 +3,10 @@ import { useParams } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import axios from "axios";
 
 import "../../Components/FormStyles.css";
 import "./NewsForm.scss";
+import { Get, Post, Put } from "../../Services/privateApiService";
 
 const NewsForm = () => {
   const [categories, setCategories] = useState([]);
@@ -27,10 +27,7 @@ const NewsForm = () => {
       deleted_at: "2021-11-23T19:19:56.825Z",
     };
     try {
-      const response = await axios.post(
-        "http://ongapi.alkemy.org/api/news",
-        body
-      );
+      const response = await Post("news", body);
       if (response.data.success) {
         setMessage("Created successfully.");
       } else {
@@ -57,10 +54,7 @@ const NewsForm = () => {
     }
 
     try {
-      const response = await axios.put(
-        `http://ongapi.alkemy.org/api/news/${id}`,
-        body
-      );
+      const response = await Put("news", id, body);
       if (response.data.success) {
         setMessage("Updated successfully.");
       } else {
@@ -75,14 +69,10 @@ const NewsForm = () => {
   //   load categories and existing article data if editting
   const loadApiData = useCallback(async () => {
     try {
-      const categories = await axios.get(
-        "http://ongapi.alkemy.org/api/categories"
-      );
+      const categories = await Get("categories");
       setCategories(categories.data.data);
       if (id) {
-        const newData = await axios.get(
-          `http://ongapi.alkemy.org/api/news/${id}`
-        );
+        const newData = await Get("news", id);
 
         setExistingNew(newData.data.data);
       }

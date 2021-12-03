@@ -11,7 +11,7 @@ const settings = {
     slidesToScroll: 1
 };
 
-export const SliderApp = ({ URL = 'http://ongapi.alkemy.org/api/slides', method }) => {
+export const SliderApp = ({ URL = 'http://ongapi.alkemy.org/api/slides', method='GET', arrayData }) => {
     const [data, setData] = useState([])
     useEffect(() => {
         axios({ method: method, url: URL })
@@ -19,11 +19,17 @@ export const SliderApp = ({ URL = 'http://ongapi.alkemy.org/api/slides', method 
             .catch(e => console.log(e))
     }, [URL, method])
     return (
-        <Slider {...settings}>
-            {data.map(obj => {
-                return <SlideComponent key={obj.id} data={obj} />
-            })
-            }
-        </Slider>
+        <>
+            <Slider {...settings}>
+                {arrayData ?
+                     (arrayData.map(obj => {
+                        return <SlideComponent key={obj.id} data={obj} />
+                    }))
+                    :(data.map(obj => {
+                        return <SlideComponent key={obj.id} data={obj} />
+                    }))
+                }
+            </Slider>
+        </>
     )
 }

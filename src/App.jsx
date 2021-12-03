@@ -24,6 +24,8 @@ import ManageActivities from "./Components/ManageActivities/ManageActivities";
 import { UsersList } from "./Components/Users/UsersList";
 import { DonationsGreet } from "./Components/Donations/DonationsGreet";
 import { ThanksGreet } from "./Components/Donations/ThanksGreet";
+import { ScreenSliderList } from "./backoffice/SlidesScreen/ScreenSliderList";
+
 import Home from './Home/Home';
 import HomeDashboard from "./Components/HomeDashboard/HomeDashboard";
 
@@ -40,6 +42,7 @@ function App() {
           <Route exact path="/create-activity" component={ActivitiesForm} />
           <Route exact path="/create-category" component={CategoriesForm} />
           <Route exact path="/create-news" component={NewsForm} />
+          <Route exact path="/backoffice/Slides" component={ScreenSliderList} />
           <Route exact path="/backoffice/create-slide" component={SlidesForm} />
           <Route
             exact

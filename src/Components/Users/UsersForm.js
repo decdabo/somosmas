@@ -1,12 +1,15 @@
-import React, {useEffect, useState} from 'react';
-import {Field, Form, Formik} from "formik";
+import React, { useEffect, useState } from 'react';
+import { useParams, useHistory } from "react-router-dom";
+import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
+
+import { Get, Post } from '../../Services/publicApiService';
 import '../FormStyles.css';
-import axios from "axios";
-import {useParams} from "react-router-dom";
 import '../FormStyles.css'
+import { Put } from '../../Services/privateApiService';
 
 const UserForm = () => {
+    const { push } = useHistory();
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -15,45 +18,51 @@ const UserForm = () => {
     const [profile_image, setProfile_Image] = useState("");
     const [create, setCreate] = useState(true);
 
-    const {id} = useParams()
-    const url = `http://ongapi.alkemy.org/api/users`
+    const { id } = useParams();
 
-    const submitForm = (values) => {
+    const submitForm = async (values) => {
 
         if (create) {
-            axios.post(`${url}`, values)
-                .then(function (response) {
-                    alert(response.data.message)
-                })
-
+            try {
+                const response = await Post('users', values)
+                return alert(response.data.message)
+            } catch (error) {
+                console.log(error)
+            }
         } else {
-            axios.put(`${url}/${id}`, values)
-                .then(function (response) {
-                    alert(response.data.message)
+            try {
+                const response = await Put('users', id, values)
+                return alert(response.data.message)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
+
+    const getData = async () => {
+        try {
+            await Get('users', id)
+                .then(res => {
+                    const { data: { name, email, role_id, password, profile_image } } = res
+                    setName(name);
+                    setEmail(email);
+                    setRole_id(role_id);
+                    setPassword(password);
+                    setProfile_Image(profile_image);
+                    setCreate(false);
                 })
-                .catch(error => {
-                    alert(error)
-                })
+        } catch (error) {
+            alert(error)
         }
     }
 
     useEffect(() => {
-        axios.get(`${url}/${id}`)
-            .then(response => {
-                const {data} = response
-                const {data: data2} = data
-                const {name, email, role_id, password, profile_image} = data2
-                setName(name)
-                setEmail(email)
-                setRole_id(role_id)
-                setPassword(password)
-                setProfile_Image(profile_image)
-                setCreate(false)
-
-            })
-            .catch(error => {
-                alert(error)
-            })
+        if (id) {
+            getData();
+        } else {
+            alert('user inexistente');
+            push('/create-user');
+        }
     }, []);
 
     const ErrorSchema = Yup.object().shape({
@@ -76,12 +85,12 @@ const UserForm = () => {
 
     return (
         <div>
-            <Formik initialValues={{name, email, role_id, password, profile_image}}
-                    onSubmit={(values => {
-                        submitForm(values)
-                    })}
-                    validationSchema={ErrorSchema}
-                    enableReinitialize={true}
+            <Formik initialValues={{ name, email, role_id, password, profile_image }}
+                onSubmit={(values => {
+                    submitForm(values)
+                })}
+                validationSchema={ErrorSchema}
+                enableReinitialize={true}
             >
                 {
                     (props) => {
@@ -90,13 +99,13 @@ const UserForm = () => {
                                 <div className="form-container">
                                     <h3>Information</h3>
                                     <label>Name: </label>
-                                    <Field name={'name'} type={'text'} className="input-field"/>
+                                    <Field name={'name'} type={'text'} className="input-field" />
                                     <small>{props.errors.name}</small>
                                     <label>Email: </label>
-                                    <Field name={'email'} type={'email'} className="input-field"/>
+                                    <Field name={'email'} type={'email'} className="input-field" />
                                     <small>{props.errors.email}</small>
                                     <label>Password: </label>
-                                    <Field name={'password'} type={'password'} className="input-field"/>
+                                    <Field name={'password'} type={'password'} className="input-field" />
                                     <small>{props.errors.password}</small>
                                     <label>Role: </label>
                                     <Field name={'role_id'} as="select" className="select-field">
@@ -116,7 +125,7 @@ const UserForm = () => {
                                     />
                                     <small>{props.errors.profile_image}</small>
                                     <button type={'submit'}
-                                            disabled={!props.isValid} className="submit-btn"> Send
+                                        disabled={!props.isValid} className="submit-btn"> Send
                                     </button>
                                 </div>
                             </Form>

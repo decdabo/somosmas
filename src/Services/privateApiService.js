@@ -67,3 +67,18 @@ export const Delete = async (endPoint, id) => {
     return { success: false, error };
   }
 };
+
+export const Post = async (endPoint, body) => {
+  const url = `${baseUrl}/${endPoint}`;
+
+  return axios
+    .post(url, body, {
+      headers: {
+        Authorization: `Bearer ${tempToken}`,
+      },
+    })
+    .then((res) => res)
+    .catch((err) => {
+      return { success: false, err };
+    });
+};

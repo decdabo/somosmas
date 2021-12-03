@@ -25,9 +25,9 @@ import { UsersList } from "./Components/Users/UsersList";
 import { DonationsGreet } from "./Components/Donations/DonationsGreet";
 import { ThanksGreet } from "./Components/Donations/ThanksGreet";
 import { ScreenSliderList } from "./backoffice/SlidesScreen/ScreenSliderList";
-
 import Home from './Home/Home';
 import HomeDashboard from "./Components/HomeDashboard/HomeDashboard";
+import OrganizationData from "./backoffice/Organization/OrganizationData";
 
 
 function App() {
@@ -81,7 +81,8 @@ function App() {
           <Route exact path="/contact-form" component={ContactForm} />
           <Route exact path="/register-form" component={RegisterForm} />
           <Route exact path="/login-form" component={LoginForm} />
-          <Route path="/" component={Home} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/backoffice/organization" component={OrganizationData} />
         </Switch>
       </BrowserRouter>
     </>

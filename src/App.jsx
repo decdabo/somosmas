@@ -43,7 +43,7 @@ function App() {
           <Route exact path="/create-category" component={CategoriesForm} />
           <Route exact path="/create-news" component={NewsForm} />
           <Route exact path="/backoffice/Slides" component={ScreenSliderList} />
-          <Route exact path="/backoffice/create-slide" component={SlidesForm} />
+          <Route exact path="/backoffice/Slides/create" component={SlidesForm} />
           <Route
             exact
             path="/backoffice/organization/edit"

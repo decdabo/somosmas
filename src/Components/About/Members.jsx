@@ -34,9 +34,22 @@ const Members = () => {
                             <h3 className="content-description">{item.description}</h3>
                             <div className='links'>
 
-                                <Link className="content-description link" to={`/${item.facebookUrl }`} >Facebook</Link>
+                                <a
+                                    className="content-description link"
+                                    href={item.facebookUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Facebook</a>
                             
-                                <Link className="content-description link" to={`/${item.linkedinUrl }`}>Linkedin</Link>
+                                <a
+                                    className="content-description link"
+                                    href={item.linkedinUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Linkedin
+                                </a>
                             </div>
                                 
                             </div>

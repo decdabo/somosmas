@@ -1,19 +1,19 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Delete } from '../../Services/privateApiService';
 
-const URL = 'http://ongapi.alkemy.org/api/slides';
 
 export const ItemList = ({ data }) => {
     const [msg, setMsg] = useState('');
 
     const handleDelete = async() => {
         try {
-            const deleteData = await axios.delete(`${URL}/${data.id}`);
+            const deleteData = await Delete('slides', data.id);
             setMsg(deleteData.data.message);
             return deleteData.data;
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            setMsg('Esta publicación no existe')
         }
     };
 

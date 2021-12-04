@@ -1,12 +1,13 @@
 import React from 'react';
 import { Formik } from 'formik';
-import axios from 'axios';
 
 import InputImageFile from '../Components/Categories/InputImageFile';
 import useCategoriesForm from '../hooks/useCategoriesForm';
 import InputCkEditor from '../Components/Categories/InputCkEditor';
 import InputText from '../Components/Categories/InputText';
 import { validateCategoryForm } from '../schemas/categoryFormValidation';
+import { Post } from '../Services/publicApiService';
+import { Put } from '../Services/privateApiService';
 import './FormEditActivities/formedit.scss';
 
 const initialValues = {
@@ -15,9 +16,27 @@ const initialValues = {
     image: ''
 }
 
-export const FormEditActivities = ({ data = initialValues, linkApi = "http://ongapi.alkemy.org/api/activities" }) => {
+export const FormEditActivities = ({ data = initialValues, endPoint = "activities" }) => {
     const { imageInputRef, imagePreview, fileReader } =
         useCategoriesForm(data);
+
+    const handleSend = async (values) => {
+        if (!data.id) {
+            try {
+                const response = await Post(endPoint, values);
+                return response;
+            } catch (error) {
+                console.log(error)
+            }
+        } else {
+            try {
+                const response = await Put(endPoint, data.id, values);
+                return response;
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
 
     return (
         <Formik
@@ -30,15 +49,7 @@ export const FormEditActivities = ({ data = initialValues, linkApi = "http://ong
                 return validateCategoryForm(values, imageInputRef);
             }}
             onSubmit={(values) => {
-                if (!data.id) {
-                    axios.post(linkApi, values)
-                        .then(res => alert(res.data))
-                        .catch(e => console.log(e))
-                } else {
-                    axios.put(`${linkApi}/${data.id}`, values)
-                        .then(res => alert(res.data))
-                        .catch(e => console.log(e))
-                }
+                handleSend(values);
             }}
         >
             {({ values, handleChange, handleBlur, handleSubmit, errors, touched, setFieldValue, setTouched }) => (

@@ -19,6 +19,24 @@ export const FormEditData = ({ data = initialValues, linkApi = "http://ongapi.al
     const { imageInputRef, imagePreview, fileReader } =
         useCategoriesForm(data);
 
+    const handleSend = async (values) => {
+        if (!data.id) {
+            try {
+                const response = await Post(endPoint, values);
+                return response;
+            } catch (error) {
+                console.log(error)
+            }
+        } else {
+            try {
+                const response = Put(endPoint, data.id, values);
+                return response;
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
+
     return (
         <Formik
             initialValues={{
@@ -30,15 +48,7 @@ export const FormEditData = ({ data = initialValues, linkApi = "http://ongapi.al
                 return validateCategoryForm(values, imageInputRef);
             }}
             onSubmit={(values) => {
-                if (!data.id) {
-                    axios.post(linkApi, values)
-                        .then(res => alert(res.data))
-                        .catch(e => console.log(e))
-                } else {
-                    axios.put(`${linkApi}/${data.id}`, values)
-                        .then(res => alert(res.data))
-                        .catch(e => console.log(e))
-                }
+                handleSend(values);
             }}
         >
             {({ values, handleChange, handleBlur, handleSubmit, errors, touched, setFieldValue, setTouched }) => (

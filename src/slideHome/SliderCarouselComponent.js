@@ -11,7 +11,7 @@ const settings = {
     slidesToScroll: 1
 };
 
-export const SliderApp = ({ URL = 'http://ongapi.alkemy.org/api/slides', method='GET', arrayData }) => {
+export const SliderCarouselComponent = ({ URL = 'http://ongapi.alkemy.org/api/slides', method='GET', arrayData }) => {
     const [data, setData] = useState([])
     useEffect(() => {
         axios({ method: method, url: URL })

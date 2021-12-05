@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router";
-import { getActivityById } from "../../../Services/public/activitiesApi";
+//import { getActivityById } from "../../../Services/public/activitiesApi";
 import LoadingSpinner from "../../Spinner/LoadingSpinner";
 import apiDateToText from "../../../helpers/apiDateToText";
 import { Title } from "../../Title/Title";
+import { Get } from "../../../Services/privateApiService";
 
 /*
 RECEIVES => empty
@@ -24,10 +25,22 @@ const ActivityInfo = () => {
   const { id } = useParams();
   const [currentActivity, setCurrentActivity] = useState({});
 
+
+
   useEffect(() => {
-    getActivityById(parseInt(id))
-      .then((res) => setCurrentActivity(res.data))
-      .catch((err) => console.log(err));
+    const getData = async () => {
+    try {
+      const response = await Get('activities',id)
+      setCurrentActivity(response.data)
+      
+    } catch (error) {
+      console.log(error)
+    }
+    
+  }    
+      // .then((res) => setCurrentActivity(res.data))
+      // .catch((err) => console.log(err));
+    getData()
   }, [id]);
 
   const { name, description, created_at, image } = currentActivity;

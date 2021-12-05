@@ -1,16 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { getAllActivities } from "../../Services/public/activitiesApi";
+//import { getAllActivities } from "../../Services/public/activitiesApi";
 import ActivityCard from "./ActivityCard";
 import "./Activities.scss";
 import LoadingSpinner from "../Spinner/LoadingSpinner";
+import { Get } from "../../Services/privateApiService";
 
 const ActivitiesList = () => {
   const [activities, setActivities] = useState([]);
 
+  const getData = async () => {
+    try {
+      const response = await Get('activities')
+      setActivities(response.data)
+      
+    } catch (error) {
+      console.log(error)
+    }
+    
+  } 
+
   useEffect(() => {
-    getAllActivities()
-      .then((res) => setActivities(res))
-      .catch((err) => console.log(err));
+      getData()
+      // .then((res) => setActivities(res))
+      // .catch((err) => console.log(err));
   }, []);
 
   return (

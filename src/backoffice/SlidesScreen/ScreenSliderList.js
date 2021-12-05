@@ -1,18 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { mock } from './mock';
 import { ItemList } from './ItemList';
-import './screenslide.scss';
+import { mock } from './mock';
 
 export const ScreenSliderList = () => {
     return (
-        <table className="screen__main">
-            <tr className="screen__head-container">
-                <th className="screen__head-title">Listado de Slides</th>
+        <table className="table__main">
+            <tr className="table__head-container">
+                <th className="table__head-title">Listado de Slides</th>
                 <Link
                     to="/backoffice/Slides/create"
-                    className="screen__create-button"
+                    className="table__create-button"
                 >
                     Create
                 </Link>

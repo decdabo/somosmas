@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-
 import { useFormik } from "formik";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -8,8 +7,8 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { validate } from "./helpers/slideValidations";
 import { slidesPost, slidesPatch } from "./helpers/slidesAPI";
 
-import "../FormStyles.css";
 import "./slidesForm.scss";
+import "../../styles/components/formStyles.scss"
 import { Get } from "../../Services/privateApiService";
 
 const SlidesForm = ({data}) => {
@@ -53,11 +52,11 @@ const SlidesForm = ({data}) => {
     });
 
     return (
-        <form className="form-container" onSubmit={ formik.handleSubmit }>
+        <form className="form__container" onSubmit={ formik.handleSubmit }>
             <label htmlFor="name">Nombre:</label>
             <input
                 id="name"
-                className="input-field"
+                className="form__input"
                 type="text"
                 name="name"
                 onChange={ formik.handleChange }
@@ -85,7 +84,7 @@ const SlidesForm = ({data}) => {
             ) : null }
             <label htmlFor="order">Orden:</label>
             <input
-                className="input-field"
+                className="form__input"
                 type="text"
                 name="order"
                 id="order"
@@ -100,7 +99,6 @@ const SlidesForm = ({data}) => {
             ) : null }
             <label htmlFor="image">Imagen:</label>
             <input
-                className="input-field"
                 type="file"
                 id="image"
                 name="image"
@@ -113,13 +111,15 @@ const SlidesForm = ({data}) => {
                 placeholder="Write the description"
                 autoComplete="off"
             />
+            <div className="form__image-container">
             { imagePreview ? (
-                <img src={ imagePreview } className="image-preview" alt="..."/>
+                <img src={ imagePreview } alt="..."/>
             ) : null }
             { formik.touched.image && formik.errors.image ? (
                 <div className="error-msg">{ formik.errors.image }</div>
             ) : null }
-            <button className="submit-btn" type="submit">
+            </div>
+            <button className="form__btn-primary" type="submit">
                 Send
             </button>
         </form>

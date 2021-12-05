@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "../../styles/components/tableStyles.scss"
 import "./UsersStyles.scss";
 import { UsersTable } from "./UsersTable";
 

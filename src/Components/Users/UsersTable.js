@@ -1,4 +1,20 @@
+import { Link } from "react-router-dom";
+import { Delete } from "../../Services/privateApiService";
+
 export const UsersTable = ({ users }) => {
+
+  const handleDelete = async (id, user) => {
+      const userDelete = await Delete("users", user.id);
+
+      if (userDelete.message) {
+        alert(userDelete.message);
+        
+      } else { 
+        alert("El usuario no existe")
+
+      }
+  };
+
   return (
     <div className="table__container">
       <table className="table">
@@ -15,12 +31,18 @@ export const UsersTable = ({ users }) => {
               <td>{user.name || ""}</td>
               <td>{user.email || ""}</td>
               <td className="table__actions">
-                <button className="table__buttons">
-                  Borrar
+                <button
+                  className="table__buttons"
+                  onClick={() => handleDelete(id, user)}
+                >
+                  <i className="fas fa-trash-alt" />
                 </button>
-                <button className="table__buttons">
-                  Editar
-                </button>
+                <Link
+                  to={`/edit-user/${user.id}`}
+                  className="table__buttons edit-button"
+                >
+                  <i className="fas fa-edit"></i>
+                </Link>
               </td>
             </tr>
           </tbody>

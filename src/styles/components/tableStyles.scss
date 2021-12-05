@@ -1,0 +1,108 @@
+.table{
+    &__main{
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 1vh;
+    }
+    &__items{
+        background-color: rgb(240, 240, 240);
+        border-radius: 3px;
+        border: 1px solid rgba(0, 0, 0, 0.63);
+        display: flex;
+        // flex-direction: column;
+        justify-content: space-between;
+        margin-bottom: 2vh;
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+    }
+    &__image{
+        max-width: 25%;
+    }
+    &__title{
+        text-align: center;
+    }
+    &__text{
+        width: 100%;
+    }
+    &__div-button{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: 2vh;
+        padding-right: 2vh;
+    }
+    &__create-button{
+        align-self: flex-start;
+        color: rgb(0, 197, 181);
+        text-decoration: none;
+        margin: auto;
+        width: 10vw;
+    }
+    &__head-container{
+        width: 50%;
+        display: flex;
+    }
+    &__head-title{
+        width: 70%;
+    }
+    &__buttons-box{
+        display: flex;
+        margin-bottom: 2vh;
+        justify-content: space-evenly;
+        width: 40%;
+    }
+    &__button-table{
+        align-items: center;
+        border-radius: 5px;
+        border: none;
+        color: rgb(240, 240, 240);
+        display: flex;
+        height: 4vh;
+        justify-content: center;
+        transition: all .3s;
+        width: 5vw;
+    }
+}
+.edit-button{
+    background-color: rgb(70, 70, 236);
+    &:hover{
+        color: rgb(70, 70, 236);
+        background-color: rgb(240, 240, 240);
+    }
+}
+
+.delete-button{
+    background-color: rgb(216, 30, 30);
+    &:hover{
+        color: rgb(216, 30, 30);
+        background-color: rgb(240, 240, 240);
+    }
+}
+
+@media (max-width: 1000px){
+    .table{
+        &__items{
+            flex-direction: column;
+            width: 60%;
+        }
+        &__image{
+            max-width: 100%;
+        }
+    }
+}
+
+@media (max-width: 750px){
+    .table{
+        &__items{
+            width: 80%;
+        }
+        &__head-container{
+            width: 90%;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-bottom: 1vh;
+        }
+}}

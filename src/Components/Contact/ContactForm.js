@@ -1,6 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
-
+import '../../styles/components/formStyles.scss'
+import './contactForm.scss'
 const initialValues = {
   name: "",
   email: "",
@@ -54,70 +55,74 @@ function ContactForm() {
   });
 
   return (
-    <div>
+    <div className="form__container">
       <h1> Formulario de contacto </h1>
-      <form onSubmit={formik.handleSubmit}>
-        <div className="form-control">
-          <label htmlFor="name">Nombre</label>
+      <form onSubmit={formik.handleSubmit} >
+        <div className="form-control form__control">
+          <label htmlFor="name" >Nombre</label>
           <br />
           <input
             type="text"
             id="name"
             name="name"
+            className="form__input "
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.name}
           />
           {formik.touched.name && formik.errors.name ? (
-            <div className="error">{formik.errors.name}</div>
+            <div className="error form__message-validation">{formik.errors.name}</div>
           ) : null}
         </div>
-        <div className="form-control">
+        <div className="form-control form__control">
           <label htmlFor="email">Email</label>
           <br />
           <input
             type="text"
             id="email"
             name="email"
+            className="form__input"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.email}
           />
           {formik.touched.email && formik.errors.email ? (
-            <div className="error">{formik.errors.email}</div>
+            <div className="error form__message-validation">{formik.errors.email}</div>
           ) : null}
         </div>
-        <div className="form-control">
+        <div className="form-control form__control">
           <label htmlFor="phone">Teléfono</label>
           <br />
           <input
             type="number"
             id="phone"
             name="phone"
+            className="form__input"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.phone}
           />
           {formik.touched.phone && formik.errors.phone ? (
-            <div className="error">{formik.errors.phone}</div>
+            <div className="error form__message-validation">{formik.errors.phone}</div>
           ) : null}
         </div>
-        <div className="form-control">
+        <div className="form-control form__control">
           <label htmlFor="message">Mensaje</label>
           <br />
           <textarea
             type="text"
             id="message"
+            className="form__textarea"
             name="message"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.message}
           />
           {formik.touched.message && formik.errors.message ? (
-            <div className="error">{formik.errors.message}</div>
+            <div className="error form__message-validation">{formik.errors.message}</div>
           ) : null}
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" className="form__btn-primary">Submit</button>
       </form>
     </div>
   );

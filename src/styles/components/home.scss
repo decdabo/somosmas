@@ -1,0 +1,46 @@
+@import "../variables.scss";
+
+
+.container{
+    display:flex;
+    &__carousel{
+        width: 55vw;
+        @media (max-width: $breakpoint-tablet) {
+            width: 70vw;
+        }
+    }
+    &__welcomeMsj{
+        width: 25vw;  
+        @media (max-width: $breakpoint-tablet) {
+            width: 70vw;
+        }
+        @media (max-width: $breakpoint-mobile) {
+            width: auto;
+        }
+    }
+    &__title{
+        font-family: 'Bebas Neue', cursive;
+        margin:0px;  
+        padding:0;
+    }
+    &__text{
+        font-size:16px;
+        margin:20px 30px 0px 0px;
+        @media (max-width: $breakpoint-tablet) {
+            font-size: 13px;
+        }
+    }
+    &__hr{
+        color:$accent-color;
+        width: 170px;
+        padding: 10px 0px;
+        margin:-20px 0px 0px 20px;
+        opacity:1;
+        @media (max-width: $breakpoint-tablet) {
+            width: 110px;
+        }
+    }
+}
+
+
+

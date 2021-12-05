@@ -1,6 +1,6 @@
 import React from "react";
 import imgDefault from '../../images/placeholderImg.png';
-import './modelCard.scss'
+import './cardStyles.scss'
 
 const CardModel = (props) => {  
     const {image, imgAlt, title, description} = props;

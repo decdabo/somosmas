@@ -1,0 +1,43 @@
+@import "../../styles//variables.scss";
+.form {
+  &__container {
+    min-height: 100vh !important;
+  }
+
+  &__input {
+    margin: 0.7rem;
+  }
+}
+
+input[type="file"] {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  white-space: nowrap;
+  width: 1px;
+}
+.ck-editor {
+  width: 40%;
+}
+
+label {
+  margin: 1rem;
+
+  width: auto;
+  cursor: pointer;
+  color: $bg-primary-color;
+  display: inline-block;
+  background: #313839;
+  font-size: 16px;
+  padding: 8px 20px;
+  transition: 0.15s;
+  border: none;
+}
+
+label:hover {
+  background: #748185;
+  transition: 0.15s;
+}

@@ -50,9 +50,10 @@ const MembersEdit = () => {
         }}
       >
         {({ errors, touched, setFieldValue, values }) => (
-          <Form className="form__container">
+          <Form className=" form__members-container">
+            <h3 className="txt-center">Members Edit Form</h3>
             <Field
-              className="form__input"
+              className="form__input form__members-input"
               type="text"
               id="name"
               name="name"
@@ -85,9 +86,9 @@ const MembersEdit = () => {
                 {errors.description}
               </div>
             ) : null}
-            <label htmlFor="image">
+            <label htmlFor="image" className="form__members-label">
               <Field
-                className="input-field"
+                className="form__input form__members-input"
                 id="image"
                 type="file"
                 accept="image/png,image/jpeg"
@@ -100,7 +101,7 @@ const MembersEdit = () => {
               <div className="form__message-validation"> {errors.image}</div>
             ) : null}
             <Field
-              className="form__input"
+              className="form__input form__members-input"
               id="facebookUrl"
               type="text"
               name="facebookUrl"
@@ -113,7 +114,7 @@ const MembersEdit = () => {
               </div>
             ) : null}
             <Field
-              className="form__input"
+              className="form__input form__members-input"
               id="linkedinUrl"
               type="text"
               name="linkedinUrl"
@@ -130,7 +131,6 @@ const MembersEdit = () => {
           </Form>
         )}
       </Formik>
-      )
     </>
   );
 };

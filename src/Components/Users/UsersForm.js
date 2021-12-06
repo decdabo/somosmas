@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from "react-router-dom";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-
+import "./UserForm.scss"
+import "../../utils.scss"
 import { Get, Post } from '../../Services/publicApiService';
-import '../FormStyles.css';
-import '../FormStyles.css'
+import "../../styles/components/formStyles.scss"
 import { Put } from '../../Services/privateApiService';
 
 const UserForm = () => {
@@ -95,25 +95,25 @@ const UserForm = () => {
                 {
                     (props) => {
                         return (
-                            <Form>
-                                <div className="form-container">
-                                    <h3>Information</h3>
+                            <Form className="form__user">
+                                <div className="form__container">
+                                    <h3 className="txt-center">User Form</h3>
                                     <label>Name: </label>
-                                    <Field name={'name'} type={'text'} className="input-field" />
-                                    <small>{props.errors.name}</small>
+                                    <Field name={'name'} type={'text'} className="form__input" />
+                                    <small className="form__message-validation">{props.errors.name}</small>
                                     <label>Email: </label>
-                                    <Field name={'email'} type={'email'} className="input-field" />
-                                    <small>{props.errors.email}</small>
+                                    <Field name={'email'} type={'email'} className="form__input" />
+                                    <small className="form__message-validation">{props.errors.email}</small>
                                     <label>Password: </label>
-                                    <Field name={'password'} type={'password'} className="input-field" />
-                                    <small>{props.errors.password}</small>
+                                    <Field name={'password'} type={'password'} className="form__input" />
+                                    <small className="form__message-validation">{props.errors.password}</small>
                                     <label>Role: </label>
-                                    <Field name={'role_id'} as="select" className="select-field">
+                                    <Field name={'role_id'} as="select" className="form__select">
                                         <option value="">-- Select role --</option>
                                         <option value="0">User</option>
                                         <option value="1">Administrator</option>
                                     </Field>
-                                    <small>{props.errors.role_id}</small>
+                                    <small className="form__message-validation">{props.errors.role_id}</small>
                                     <label>Image: </label>
                                     <input
                                         type="file"
@@ -123,9 +123,9 @@ const UserForm = () => {
                                             handleChange(event, props)
                                         }}
                                     />
-                                    <small>{props.errors.profile_image}</small>
+                                    <small className="form__message-validation">{props.errors.profile_image}</small>
                                     <button type={'submit'}
-                                        disabled={!props.isValid} className="submit-btn"> Send
+                                        disabled={!props.isValid} className="form__btn-primary mx-auto"> Send
                                     </button>
                                 </div>
                             </Form>

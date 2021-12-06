@@ -1,5 +1,5 @@
 import HomeCards from "../HomeCards/HomeCards";
-import "./HomeDashboard.css"
+import "./HomeDashboard.scss"
 import NavbarDashboard from "../NavbarDashboard/NavbarDashboard";
 import { useState } from "react";
 

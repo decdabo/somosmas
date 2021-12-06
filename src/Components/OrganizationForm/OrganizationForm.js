@@ -4,7 +4,6 @@ import {Field, Form, Formik} from "formik";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import * as Yup from "yup";
-import '../FormStyles.css'
 
 const OrganizationForm = () => {
 
@@ -93,13 +92,13 @@ const OrganizationForm = () => {
                 {
                     (props) => {
                         return (
-                            <Form>
-                                <div className="form-container">
-                                    <h3>Information</h3>
-                                    <label>Name: </label>
-                                    <Field name={'name'} type={'text'} className='input-field'/>
-                                    <small>{props.errors.name}</small>
-                                    <label>Image: </label>
+                            <Form className="form__user">
+                                <div className="form__container">
+                                    <h3 className="txt-center">Organization Form</h3>
+                                    <label className="my-1r">Name: </label>
+                                    <Field name={'name'} type={'text'} className="form__input "/>
+                                    <small  className="form__message-validation">{props.errors.name}</small>
+                                    <label className="my-1r">Image: </label>
                                     <input
                                         type="file"
                                         name="logo"
@@ -108,8 +107,8 @@ const OrganizationForm = () => {
                                             handleChange(event,props)
                                         }}
                                     />
-                                    <small>{props.errors.logo}</small>
-                                    <label>shortDescription: </label>
+                                    <small  className="form__message-validation">{props.errors.logo}</small>
+                                    <label>Short Description: </label>
                                     <CKEditor
                                         name={"short_description"}
                                         editor={ClassicEditor}
@@ -119,25 +118,25 @@ const OrganizationForm = () => {
                                             setShort_description(data)
                                         }}
                                     />
-                                    <small>{props.errors.short_description}</small>
-                                    <label>Long Description: </label>
+                                    <small  className="form__message-validation">{props.errors.short_description}</small>
+                                    <label className="my-1r">Long Description: </label>
                                     <Field name={'long_description'} as={'textarea'} type={'text'}
-                                           className='input-field'/>
+                                           className="form__textarea"/>
                                     <small>{props.errors.long_description}</small>
-                                    <label>Facebook: </label>
-                                    <Field name={'facebook_url'} type={'text'} className='input-field'/>
-                                    <small>{props.errors.facebook_url}</small>
-                                    <label>Linkedin: </label>
-                                    <Field name={'linkedin_url'} type={'text'} className='input-field'/>
-                                    <small>{props.errors.linkedin_url}</small>
-                                    <label>Instagram: </label>
-                                    <Field name={'instagram_url'} type={'text'} className='input-field'/>
-                                    <small>{props.errors.instagram_url}</small>
-                                    <label>Twitter: </label>
-                                    <Field name={'twitter_url'} type={'text'} className='input-field'/>
-                                    <small>{props.errors.twitter_url}</small>
+                                    <label className="my-1r">Facebook: </label>
+                                    <Field name={'facebook_url'} type={'text'} className="form__input"/>
+                                    <small  className="form__message-validation">{props.errors.facebook_url}</small>
+                                    <label className="my-1r">Linkedin: </label>
+                                    <Field name={'linkedin_url'} type={'text'} className="form__input"/>
+                                    <small  className="form__message-validation">{props.errors.linkedin_url}</small>
+                                    <label className="my-1r">Instagram: </label>
+                                    <Field name={'instagram_url'} type={'text'} className="form__input"/>
+                                    <small  className="form__message-validation">{props.errors.instagram_url}</small>
+                                    <label className="my-1r">Twitter: </label>
+                                    <Field name={'twitter_url'} type={'text'} className="form__input"/>
+                                    <small  className="form__message-validation">{props.errors.twitter_url}</small>
                                     <button type={'submit'}
-                                            disabled={!props.isValid} className="submit-btn"> Send
+                                            disabled={!props.isValid} className="form__btn-primary mx-auto mt-4"> Send
                                     </button>
                                 </div>
                             </Form>

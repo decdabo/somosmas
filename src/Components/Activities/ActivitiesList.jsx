@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 //import { getAllActivities } from "../../Services/public/activitiesApi";
 import ActivityCard from "./ActivityCard";
-import "./Activities.scss";
 import LoadingSpinner from "../Spinner/LoadingSpinner";
 import { Get } from "../../Services/privateApiService";
 

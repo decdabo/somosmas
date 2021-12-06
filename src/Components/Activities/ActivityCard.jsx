@@ -1,5 +1,4 @@
 import React from "react";
-import "./Activities.scss";
 import { Title } from "../Title/Title";
 import apiDateToText from "../../helpers/apiDateToText";
 import { Link } from "react-router-dom";

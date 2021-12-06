@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "../CardListStyles.css";
 import NewsItem from "./NewsItem";
 import { Link } from "react-router-dom";
 import { Get } from "../../Services/privateApiService";
+import "../../styles/components/listStyles.scss";
 
 const NewsList = () => {
   const [news, setNews] = useState([]);
@@ -14,10 +14,14 @@ const NewsList = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Listado de Novedades</h1>
-      <Link to={`news/create`}>Crear</Link>
-      <ul className="list-container">
+    <div className="news-list">
+      <header className="header">
+        <h1 className="header__title">Listado de Novedades</h1>
+        <Link to={`news/create`} className="header__create-btn">
+          Crear
+        </Link>
+      </header>
+      <ul className="list">
         {news.length > 0 ? (
           news.map((element) => {
             return <NewsItem {...element} key={element.id} setNews={setNews} />;

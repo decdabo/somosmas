@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, FieldArray } from "formik";
 
-import "../../Components/FormStyles.css";
 import "./HomeForm.scss";
 
 const HomeForm = () => {
@@ -59,29 +58,26 @@ const HomeForm = () => {
     >
       {({ isSubmitting, values, setFieldValue, errors }) => {
         return (
-          <Form className="form-container">
-            <div className="input-group">
-              <label htmlFor="welcomeText">Texto de Bienvenida</label>
-              <Field
-                type="text"
-                as="textarea"
-                name="welcomeText"
-                className="input-field"
-                id="welcomeText"
-              />
-              {errors.welcomeText && (
-                <div className="error-message">{errors.welcomeText}</div>
-              )}
-            </div>
+          <Form className="form__container">
+            <Field
+              type="text"
+              as="textarea"
+              name="welcomeText"
+              className="form__textarea"
+              id="welcomeText"
+              placeholder="Texto de bienvenida"
+            />
+            <div className="form__message-validation">{errors.welcomeText}</div>
 
-            <div>Imagenes Para Slider</div>
-            <div className="images-container">
+            <div className="homeForm-text">Imagenes Para Slider</div>
+            <div className="homeForm-images-container">
               <FieldArray
                 name="images"
                 render={() =>
                   values.images.map((image, index) => (
-                    <div key={image.key} className="input-group">
+                    <label key={image.key}>
                       <input
+                        className="form__image-input"
                         type="file"
                         accept="image/*"
                         onChange={(e) =>
@@ -89,9 +85,8 @@ const HomeForm = () => {
                         }
                       />
 
-                      <div className="uploaded-image-container">
+                      <div className="form__image-container">
                         <img
-                          className="uploaded-image"
                           src={image.url}
                           alt="decorative"
                           onError={(e) => {
@@ -101,30 +96,36 @@ const HomeForm = () => {
                         />
                       </div>
 
-                      <label htmlFor={index}>Texto de imagen</label>
                       <Field
+                        placeholder="Texto de imagen"
                         type="text"
                         name={`images.${index}.text`}
-                        className="input-field"
+                        className="form__input"
                         id={index}
                       />
-                    </div>
+                    </label>
                   ))
                 }
               />
             </div>
-            {errors.images && (
-              <div className="error-message">{errors.images}</div>
-            )}
+            <div className="form__message-validation">{errors.images}</div>
 
             <button
-              className="submit-btn"
+              className="form__btn-primary"
               type="submit"
               disabled={isSubmitting}
             >
-              Send
+              Enviar
             </button>
-            <div className="success-message">{message}</div>
+            <div
+              className={
+                message.includes("mal")
+                  ? "form__message-fail"
+                  : "form__message-success"
+              }
+            >
+              {message}
+            </div>
           </Form>
         );
       }}

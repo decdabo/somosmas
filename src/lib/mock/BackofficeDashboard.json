@@ -1,34 +1,42 @@
 [
   {
     "title": "Novedades",
-    "image": ""
+    "image": "",
+    "description": "seccion novedades"
   },
   {
     "title": "Actividades",
-    "image": ""
+    "image": "",
+    "description": "seccion actividades"
   },
   {
     "title": "Categorias",
-    "image": ""
+    "image": "",
+    "description": "seccion categorias"
   },
   {
     "title": "Testimonios",
-    "image": ""
+    "image": "",
+    "description": "seccion testimonios"
   },
   {
     "title": "Organizacion",
-    "image": ""
+    "image": "",
+    "description": "seccion organizacion"
   },
   {
     "title": "Slides",
-    "image": ""
+    "image": "",
+    "description": "seccion slides"
   },
   {
     "title": "Usuarios",
-    "image": ""
+    "image": "",
+    "description": "seccion usuarios"
   },
   {
     "title": "Miembros",
-    "image": ""
+    "image": "",
+    "description": "seccion miembros"
   }
 ]

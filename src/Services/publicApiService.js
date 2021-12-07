@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://ongapi.alkemy.org/api";
+const baseUrl = process.env.REACT_APP_API;
 
 export const Post = async (endPoint, body) => {
   const url = `${baseUrl}/${endPoint}`;

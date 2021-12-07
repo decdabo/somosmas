@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const url = "http://ongapi.alkemy.org/api";
-const id = 632;
+const url = process.env.REACT_APP_API_SLIDERS
 
 export function slidesPost(formik) {
   axios

@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import '../../styles/components/formStyles.scss'
-import './contactForm.scss'
+
 const initialValues = {
   name: "",
   email: "",

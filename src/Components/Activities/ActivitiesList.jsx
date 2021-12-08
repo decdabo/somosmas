@@ -1,33 +1,25 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 //import { getAllActivities } from "../../Services/public/activitiesApi";
 import ActivityCard from "./ActivityCard";
 import LoadingSpinner from "../Spinner/LoadingSpinner";
-import { Get } from "../../Services/privateApiService";
+import { fetchActivities } from "../../store/slices/activitiesSlice";
 
 const ActivitiesList = () => {
-  const [activities, setActivities] = useState([]);
+  const { activities } = useSelector((state) => state);
 
-  const getData = async () => {
-    try {
-      const response = await Get("activities");
-      setActivities(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getData();
-    // .then((res) => setActivities(res))
-    // .catch((err) => console.log(err));
+    dispatch(fetchActivities());
   }, []);
 
   return (
     <div className="activities">
       <h1>Listado Actividades</h1>
       <ul className="list">
-        {activities.length > 0 ? (
-          activities.map((activity) => {
+        {activities.data.length > 0 ? (
+          activities.data.map((activity) => {
             return <ActivityCard key={activity.id} activity={activity} />;
           })
         ) : (

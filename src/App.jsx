@@ -81,7 +81,7 @@ function App() {
           <Route exact path="/backoffice/slides" component={SlidesForm} />
           <Route exact path="/contact-form" component={ContactForm} />
           <Route exact path="/register-form" component={RegisterForm} />
-          <Route exact path="/login-form" component={LoginForm} /> 
+          <Route exact path="/login-form" component={LoginForm} />
           <Route
             exact
             path="/backoffice/organization"

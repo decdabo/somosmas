@@ -28,7 +28,7 @@ const modifyCategory = (categoryObject) => {
       .validate(categoryObject)
       .then(() => {
         axios
-          .put(`${BASE_URL}/categories/${categoryObject.id}`, categoryObject)
+          .put(`${BASE_URL}/${process.env.REACT_APP_API_CATEGORY_ENDPOINT}/${categoryObject.id}`, categoryObject)
           .then((res) => {
             if (res.status === 200) {
               resolve(res.data.message);
@@ -65,7 +65,7 @@ const uploadCategory = (categoryObject) => {
       .validate(categoryObject)
       .then(() => {
         axios
-          .post(`${BASE_URL}/categories`, categoryObject)
+          .post(`${BASE_URL}/${process.env.REACT_APP_API_CATEGORY_ENDPOINT}`, categoryObject)
           .then((res) => {
             if (res.status === 200) {
               resolve(res.data.message);

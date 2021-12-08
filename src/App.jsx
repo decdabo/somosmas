@@ -30,6 +30,7 @@ import Home from "./Home/Home";
 import HomeDashboard from "./Components/HomeDashboard/HomeDashboard";
 import OrganizationData from "./backoffice/Organization/OrganizationData";
 import Members from "./Components/About/Members";
+import Contact from "./Components/Contact/Contact";
 
 function App() {
   return (
@@ -43,7 +44,11 @@ function App() {
           <Route exact path="/create-category" component={CategoriesForm} />
           <Route exact path="/create-news" component={NewsForm} />
           <Route exact path="/backoffice/Slides" component={ScreenSliderList} />
-          <Route exact path="/backoffice/Slides/create" component={SlidesForm} />
+          <Route
+            exact
+            path="/backoffice/Slides/create"
+            component={SlidesForm}
+          />
           <Route
             exact
             path="/backoffice/organization/edit"
@@ -77,6 +82,7 @@ function App() {
           <Route exact path="/backoffice/users" component={UsersList} />
           <Route exact path="/donar" component={DonationsGreet} />
           <Route exact path="/gracias" component={ThanksGreet} />
+          <Route exact path="/contacto" component={Contact} />
           <Route exact path="/about" component={AboutMain} />
           <Route exact path="/backoffice/slides" component={SlidesForm} />
           <Route exact path="/contact-form" component={ContactForm} />

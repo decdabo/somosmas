@@ -15,10 +15,8 @@ export const SliderCarouselComponent = ({ URL = "slides", arrayData }) => {
   const [data, setData] = useState([]);
   const getData = async () => {
     try {
-      const dataGet = await Get(URL);
-      const {
-        data: { data },
-      } = dataGet;
+      const fetchedData = await Get(URL);
+      const { data } = fetchedData;
       return setData(data);
     } catch (error) {
       console.log(error);

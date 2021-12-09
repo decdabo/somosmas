@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import '../FormStyles.css';
+import '../../styles/components/formStyles.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 
 const RegisterForm = () => {
@@ -99,9 +99,9 @@ const RegisterForm = () => {
         >
 
             {({errors}) => (
-                <Form className="form-container" >
+                <Form className="form__container" >
                     <Field 
-                        className="input-field" 
+                        className="form__input" 
                         type="text" 
                         name="name"
                         id='name'
@@ -110,7 +110,7 @@ const RegisterForm = () => {
                     />
 
                     <ErrorMessage name='name' component={() => (
-                        <div className='form-error'>{ errors.name }</div>
+                        <div className='form__message-fail'>{ errors.name }</div>
                     ) }/>
 
                     
@@ -119,7 +119,7 @@ const RegisterForm = () => {
                     
 
                     <Field 
-                        className="input-field" 
+                        className="form__input" 
                         type="text" 
                         name="lastName"
                         id='lastName'
@@ -127,7 +127,7 @@ const RegisterForm = () => {
                         
                     />
 
-                        <ErrorMessage name='lastName' component={() => ( <div className='form-error'>{ errors.lastName }</div> )} />
+                        <ErrorMessage name='lastName' component={() => ( <div className='form__message-fail'>{ errors.lastName }</div> )} />
                     
 
                        
@@ -135,48 +135,48 @@ const RegisterForm = () => {
                         
 
                     <Field 
-                        className="input-field" 
+                        className="form__input" 
                         type="email" 
                         name="email"
                         id='email'
                         placeholder="Enter email"
                         
                     />
-                        <ErrorMessage name='email' component={() => ( <div className='form-error'>{ errors.email }</div> )} />
+                        <ErrorMessage name='email' component={() => ( <div className='form__message-fail'>{ errors.email }</div> )} />
 
                     
 
                     <Field 
-                        className="input-field" 
+                        className="form__input" 
                         type="password" 
                         name="password"
                         id='password'
                         placeholder="Enter password"
                         
                     />
-                        <ErrorMessage name='password' component={() => ( <div className='form-error'>{ errors.password }</div> )} />
+                        <ErrorMessage name='password' component={() => ( <div className='form__message-fail'>{ errors.password }</div> )} />
                         
                         
 
                     <Field 
-                        className="input-field" 
+                        className="form__input" 
                         type="password" 
                         name="confirmPassword"
                         id='confirmPassword'
                         placeholder="Confirm password"
                        
                     />
-                        <ErrorMessage name='confirmPassword' component={() => ( <div className='form-error'>{ errors.confirmPassword }</div> )} />
+                        <ErrorMessage name='confirmPassword' component={() => ( <div className='form__message-fail'>{ errors.confirmPassword }</div> )} />
                         
                         
                     <button
-                        className="submit-btn"
+                        className="form__btn-primary"
                         type="submit">
                         Register
                     </button>
 
                     {
-                        formEnviado && <p className="form-success">Form submitted successfully</p>             
+                        formEnviado && <p className="form__message-success">Form submitted successfully</p>             
                             
                         
                     }

@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
-import '../FormStyles.css';
+import '../../styles/components/formStyles.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik'
+//import { alertConfirmation } from '../../Services/alerts/Alerts';
+
 
 const LoginForm = () => {
     const [initialValues, setInitialValues] = useState({
         email: '',
         password: ''
     });
+    
+
+   
+
+    
 
     const [formEnviado, setFormEnviado] = useState(false)
 
@@ -76,9 +83,9 @@ const LoginForm = () => {
         >
 
             {({errors}) => (
-                <Form className="form-container">
+                <Form className="form__container">
                     <Field 
-                        className="input-field"
+                        className="form__input"
                         id='email'
                         type="email" 
                         name="email" 
@@ -87,13 +94,13 @@ const LoginForm = () => {
                     />
 
                     <ErrorMessage name='email' component={() => (
-                        <div className='form-error'>{errors.email}</div>
+                        <div className='form__message-fail'>{errors.email}</div>
                     )}/>
 
                     
 
                     <Field 
-                        className="input-field"
+                        className="form__input"
                         id='password'
                         type="password" 
                         name="password" 
@@ -102,13 +109,28 @@ const LoginForm = () => {
                     />
 
                     <ErrorMessage name='password' component={() => (
-                        <div className='form-error'>{errors.password}</div>
+                        <div className='form__message-fail'>{errors.password}</div>
                     )}/>
                         
                         
-                    <button className="submit-btn" type="submit">Log In</button>
+                    <button
+                        className="form__btn-primary"
+                        type="submit"
+                        
+                    >
+                        Log In
+                    </button>
+                    {/* <button
+                        className="form__btn-primary"
+                        type="submit"
+                        onClick={()=>alertConfirmation('','peticion realiada cone zto')}
+                        
+                    >
+                        Probar alerta
+                    </button> */}
+                    
                     {
-                        formEnviado && <p className="form-success">Log in successfull</p>
+                        formEnviado && <p className="form__message-success">Log in successfull</p>
                     }
                 </Form>                
             )}

@@ -13,6 +13,7 @@ const settings = {
 
 export const SliderCarouselComponent = ({ URL = "slides", arrayData }) => {
   const [data, setData] = useState([]);
+
   const getData = async () => {
     try {
       const fetchedData = await Get(URL);
@@ -32,9 +33,7 @@ export const SliderCarouselComponent = ({ URL = "slides", arrayData }) => {
           ? arrayData.map((obj) => {
               return <SlideComponent key={obj.id} data={obj} />;
             })
-          : data.map((obj) => {
-              return <SlideComponent key={obj.id} data={obj} />;
-            })}
+          : null}
       </Slider>
     </>
   );

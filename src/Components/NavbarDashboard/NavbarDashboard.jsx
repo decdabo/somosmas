@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const NavbarDashboard = () => {
     return (
         <nav className="navbar navbar-light bg-light">
@@ -7,7 +9,9 @@ const NavbarDashboard = () => {
                         aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"/>
                 </button>
-                <a className="navbar-brand" href="#">Navbar</a>
+                <Link className="navbar-brand d-rtl" to={"/"}>
+                    <img src="http://atrilco.com/wp-content/uploads/2017/11/ef3-placeholder-image.jpg" alt="logo"/>
+                </Link>
                 <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">

@@ -7,7 +7,7 @@ const HomeCards = ({title, image, description}) => {
 
     return (
         <div className="card__home-dashboard my-1r txt-center w-18r">
-            <h5>{ title }</h5>
+            <h5 className="my-1r">{ title }</h5>
             <div>
                 <LazyLoadingImage url={image} description={description}/>
             </div>

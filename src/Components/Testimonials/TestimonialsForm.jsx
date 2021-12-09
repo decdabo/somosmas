@@ -77,6 +77,10 @@ const TestimonialForm = () => {
             reader.readAsDataURL(e.currentTarget.files[0]);
         }
     }
+    const handleChangeDescription = (event, editor) => {
+        const data = editor.getData();
+        setDescription(data)
+    }
 
     return (
         <div>
@@ -102,8 +106,7 @@ const TestimonialForm = () => {
                                         editor={ ClassicEditor }
                                         data={ description }
                                         onChange={ (event, editor) => {
-                                            const data = editor.getData();
-                                            setDescription(data)
+                                            handleChangeDescription(event, editor)
                                         } }
                                     />
                                     <small  className="form__message-validation">{props.errors.description}</small>

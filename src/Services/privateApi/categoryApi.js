@@ -4,6 +4,7 @@ import {
   categoryPostApiRequest,
 } from "../../schemas/privateApi/categoryApiSchemas";
 
+import {Post, Put} from '../privateApiService'
 const BASE_URL = "http://ongapi.alkemy.org/api";
 
 /*
@@ -27,8 +28,7 @@ const modifyCategory = (categoryObject) => {
     categoryPutApiRequest
       .validate(categoryObject)
       .then(() => {
-        axios
-          .put(`${BASE_URL}/${process.env.REACT_APP_API_CATEGORY_ENDPOINT}/${categoryObject.id}`, categoryObject)
+        Put('categories', `${categoryObject.id}`, categoryObject)
           .then((res) => {
             if (res.status === 200) {
               resolve(res.data.message);
@@ -64,8 +64,7 @@ const uploadCategory = (categoryObject) => {
     categoryPostApiRequest
       .validate(categoryObject)
       .then(() => {
-        axios
-          .post(`${BASE_URL}/${process.env.REACT_APP_API_CATEGORY_ENDPOINT}`, categoryObject)
+        Post('categories', categoryObject)
           .then((res) => {
             if (res.status === 200) {
               resolve(res.data.message);

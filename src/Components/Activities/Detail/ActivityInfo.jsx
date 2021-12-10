@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import LoadingSpinner from "../../Spinner/LoadingSpinner";
 import apiDateToText from "../../../helpers/apiDateToText";
 import { Title } from "../../Title/Title";
+import "../../../styles/components/detailsStyles.scss";
 import { alertError } from "../../../Services/alerts/Alerts";
 import { useDispatch } from "react-redux";
 import { fetchActivities } from "../../../store/slices/activitiesSlice";

@@ -1,0 +1,27 @@
+@media (max-width: 1000px){
+    .table{
+        &__items{
+            flex-direction: column;
+            width: 60%;
+        }
+        &__image{
+            max-width: 100%;
+        }
+    }
+}
+
+@media (max-width: 750px){
+    .table{
+        &__items{
+            width: 80%;
+        }
+        &__head-container{
+            width: 90%;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-bottom: 1vh;
+        }
+        &__buttons-box{
+            width: 100%;
+        }
+}}

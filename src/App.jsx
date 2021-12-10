@@ -65,7 +65,7 @@ function App() {
           <Route exact path="/create-member" component={MembersForm} />
           <Route
             exact
-            path="/backoffice/members/edit"
+            path="/backoffice/members/edit/:id"
             component={MembersEdit}
           />
           <Route exact path="/create-project" component={ProjectsForm} />

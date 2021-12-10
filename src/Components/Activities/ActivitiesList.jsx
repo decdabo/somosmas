@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 //import { getAllActivities } from "../../Services/public/activitiesApi";
 import ActivityCard from "./ActivityCard";
 import LoadingSpinner from "../Spinner/LoadingSpinner";
 import { fetchActivities } from "../../store/slices/activitiesSlice";
+import { alertError } from "../../Services/alerts/Alerts";
 
 const ActivitiesList = () => {
   const { activities } = useSelector((state) => state);
@@ -11,7 +12,8 @@ const ActivitiesList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchActivities());
+    dispatch(fetchActivities())
+    .catch(err => alertError("No hay actividades disponibles"));
   }, []);
 
   return (

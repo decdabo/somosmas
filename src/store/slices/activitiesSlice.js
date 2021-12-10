@@ -9,8 +9,8 @@ const initialState = {
 
 export const fetchActivities = createAsyncThunk(
   "activities/fetchActivities",
-  async (_, { rejectWithValue }) => {
-    const response = await Get("activities");
+  async ( id , { rejectWithValue }) => {
+    const response = await ( Get("activities", id) || Get("activities") );
     if (response.success) {
       return response.data;
     }

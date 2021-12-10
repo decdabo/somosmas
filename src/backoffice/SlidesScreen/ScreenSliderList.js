@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
 import { ItemList } from './ItemList';
-import { mock } from './mock';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSlides } from "../../store/slices/slidesSlice";
 
 export const ScreenSliderList = () => {
+
+    const { slidesData } = useSelector((state) => state);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchSlides())
+    }, []);
+
     return (
         <table className="table__main">
             <tr className="table__head-container">
@@ -18,7 +26,7 @@ export const ScreenSliderList = () => {
             </tr>
             <tr>
                 {
-                    mock.map((data, i) => {
+                    slidesData.data.map((data, i) => {
                         return (<ItemList key={i} data={data} />)
                     })
                 }

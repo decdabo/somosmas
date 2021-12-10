@@ -4,12 +4,14 @@ import authSlice from "./slices/authSlice";
 // nosotros reducer
 import { membersReducer } from "./reducers/membersReducers";
 import aboutReducer from "./slices/aboutSlice";
+import slidesReducer from "./slices/slidesSlice";
 import activitiesReducer from "./slices/activitiesSlice";
 // Put reducers here
-const reducers = {
+const reducers = { 
   aboutData: aboutReducer,
   members: membersReducer,
   authReducer: authSlice,
+  slidesData: slidesReducer,
   activities: activitiesReducer,
 };
 

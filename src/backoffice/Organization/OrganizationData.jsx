@@ -7,6 +7,7 @@ import "./organizationData.scss"
 
 
 const OrganizationData = (props) => {
+    
 
     const [data, setData] = useState({})
     const [loading, setLoading] = useState(null)
@@ -55,7 +56,9 @@ const OrganizationData = (props) => {
                         Formulario de edición
                     </button>
                 </div>
-            </div>
+            </div> 
+            
+            
             
         </div>
     ) : (

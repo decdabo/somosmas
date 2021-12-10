@@ -33,7 +33,9 @@ export const SliderCarouselComponent = ({ URL = "slides", arrayData }) => {
           ? arrayData.map((obj) => {
               return <SlideComponent key={obj.id} data={obj} />;
             })
-          : null}
+          : data.map((obj) => {
+              return <SlideComponent key={obj.id} data={obj} />;
+            })}
       </Slider>
     </>
   );

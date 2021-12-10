@@ -1,0 +1,26 @@
+.detail {
+  box-sizing: border-box;
+  padding: 20px;
+  margin: 20px;
+  max-width: 767px;
+
+  @media screen and (max-width: 450px) {
+    padding: 8px;
+    margin: 8px;
+  }
+
+  border: 1px solid black;
+  & div img {
+    max-width: 100%;
+    margin-bottom: 16px;
+  }
+  & div h1 {
+    margin-bottom: 8px;
+  }
+  &__datetime {
+    &-text {
+      margin-bottom: 20px;
+      opacity: 0.4;
+    }
+  }
+}

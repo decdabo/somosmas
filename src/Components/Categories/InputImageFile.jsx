@@ -13,40 +13,38 @@ const InputImageFile = ({
   required,
 }) => {
   return (
-    <div>
-      <label className="form__label" htmlFor={name} onBlur={handleBlur}>
-        {values[name] || (
-          <span>
-            Choose an image...
-            {required && <small className="form__label-required">*</small>}
-          </span>
-        )}
-      </label>
-      <input
-        type="file"
-        name={name}
-        id={name}
-        ref={imageInputRef}
-        onChange={(e) => {
-          handleChange(e);
-          fileReader.readAsDataURL(e.target.files[0]);
-        }}
-        className="form__input"
-        accept="image/png,  image/jpeg"
-      />
-      {errors[name] && touched[name] && (
-        <div className="form__input-error">{errors[name]}</div>
-      )}
-      {values[name] ? (
-        <div>
+    <>
+      <label htmlFor={name} onBlur={handleBlur}>
+        <input
+          type="file"
+          name={name}
+          id={name}
+          ref={imageInputRef}
+          onChange={(e) => {
+            handleChange(e);
+            fileReader.readAsDataURL(e.target.files[0]);
+          }}
+          className="form__image-input"
+          accept="image/png,  image/jpeg"
+        />
+        {/* {values[name] ? (
+          <div className="form__image-container">
+            <img src={imagePreview} alt="preview" />
+          </div>
+        ) : null} */}
+        <div className="form__image-container">
           <img
-            src={imagePreview}
-            className="form__image-preview"
+            src={
+              imagePreview ||
+              "https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png"
+            }
             alt="preview"
           />
         </div>
-      ) : null}
-    </div>
+
+        <div className="form__message-validation">{errors[name]}</div>
+      </label>
+    </>
   );
 };
 

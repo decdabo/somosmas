@@ -25,7 +25,7 @@ const NewsForm = () => {
       deleted_at: "2021-11-23T19:19:56.825Z",
     };
     try {
-      const response = await Post("news", body);
+      const response = await Post(process.env.REACT_APP_API_NEWS, body);
       if (response.success) {
         setMessage("Creado exitosamente");
       } else {
@@ -52,7 +52,7 @@ const NewsForm = () => {
     }
 
     try {
-      const response = await Put("news", id, body);
+      const response = await Put(process.env.REACT_APP_API_NEWS, id, body);
       console.log(response);
       if (response.success) {
         setMessage("Actualizado exitosamente");
@@ -71,7 +71,7 @@ const NewsForm = () => {
       const categories = await Get("categories");
       setCategories(categories.data);
       if (id) {
-        const newData = await Get("news", id);
+        const newData = await Get(process.env.REACT_APP_API_NEWS, id);
         if (newData.success) {
           setExistingNew(newData.data);
         }

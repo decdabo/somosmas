@@ -12,14 +12,14 @@ const NewsItem = ({ id, name, image, created_at, setNews }) => {
   const handleDelete = () => {
     setDeleting(true);
     Delete("news", id)
-    .then((res) => {
-      setNews((prev) => prev.filter((news) => news.id !== id));
-    })
-    .catch((err) => alertError(err));
+      .then((res) => {
+        setNews((prev) => prev.filter((news) => news.id !== id));
+      })
+      .catch((err) => alertError(err));
   };
 
   return (
-    <li className="list__item"> 
+    <li className="list__item">
       <img className="item__image" src={image} alt={name} />
       <div className="item__group">
         <h3 className="item__title">{name}</h3>

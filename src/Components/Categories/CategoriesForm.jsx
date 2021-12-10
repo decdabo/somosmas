@@ -1,7 +1,6 @@
 import React from "react";
 import { Formik, Form } from "formik";
 import { validateCategoryForm } from "../../schemas/categoryFormValidation";
-import "./CategoryForm.scss";
 import {
   modifyCategory,
   uploadCategory,
@@ -75,8 +74,8 @@ const CategoriesForm = ({ category }) => {
       : emptyCategoryData;
 
   return (
-    <>
-      <h1 className="title">
+    <div className="form px-8">
+      <h1 className="title my-10px txt-center">
         {category ? "Edit category" : "Create category"}
       </h1>
       <Formik
@@ -96,7 +95,7 @@ const CategoriesForm = ({ category }) => {
           handleChange,
           setTouched,
         }) => (
-          <Form className="form">
+          <Form className="form__container">
             <InputText
               name="name"
               required={true}
@@ -106,6 +105,16 @@ const CategoriesForm = ({ category }) => {
               values={values}
               errors={errors}
               touched={touched}
+            />
+
+            <InputCkEditor
+              name="description"
+              required={true}
+              values={values}
+              defaultObjectValues={category}
+              setTouched={setTouched}
+              touched={touched}
+              errors={errors}
             />
             <InputImageFile
               name="image"
@@ -120,24 +129,24 @@ const CategoriesForm = ({ category }) => {
               required={true}
             />
 
-            <InputCkEditor
-              name="description"
-              required={true}
-              values={values}
-              defaultObjectValues={category}
-              setTouched={setTouched}
-              touched={touched}
-              errors={errors}
-            />
-
-            <button className="form__button" type="submit">
+            <button className="form__btn-primary" type="submit">
               Submit
             </button>
-            {setStatus && <div>{status}</div>}
+            {setStatus && (
+              <div
+                className={
+                  /success/gi.test(status)
+                    ? "form__message-success"
+                    : "form__message-fail"
+                }
+              >
+                {status}
+              </div>
+            )}
           </Form>
         )}
       </Formik>
-    </>
+    </div>
   );
 };
 

@@ -10,10 +10,7 @@ const InputText = ({
   touched,
 }) => {
   return (
-    <div>
-      <label className="form__label" htmlFor={name}>
-        {name}: {required && <small className="form__label-required">*</small>}
-      </label>
+    <>
       <input
         type="text"
         placeholder={`${name}...`}
@@ -23,10 +20,9 @@ const InputText = ({
         className="form__input"
         defaultValue={values[name]}
       />
-      {errors[name] && touched[name] && (
-        <div className="form__input-error">{errors[name]}</div>
-      )}
-    </div>
+
+      <div className="form__message-validation">{errors[name]}</div>
+    </>
   );
 };
 

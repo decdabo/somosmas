@@ -12,9 +12,6 @@ const InputCkEditor = ({
 }) => {
   return (
     <div>
-      <label className="form__label" htmlFor={name}>
-        {name}: {required && <small className="form__label-required">*</small>}
-      </label>
       <CKEditor
         className="form__input"
         name={name}
@@ -24,10 +21,17 @@ const InputCkEditor = ({
         onBlur={() => {
           setTouched({ ...touched, [name]: true });
         }}
+        config={{
+          placeholder: "Contenido",
+          cloudServices: {
+            tokenUrl:
+              "https://85122.cke-cs.com/token/dev/63f1e5122f7b89374a44f0ba134c7a670437bab84212188ac1b17d829d92",
+            uploadUrl: "https://85122.cke-cs.com/easyimage/upload/",
+          },
+        }}
       />
-      {errors[name] && touched[name] && (
-        <div className="form__input-error">{errors[name]}</div>
-      )}
+
+      <div className="form__message-validation">{errors[name]}</div>
     </div>
   );
 };

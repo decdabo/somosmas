@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-//import { getAllActivities } from "../../Services/public/activitiesApi";
+import "../../styles/components/listStyles.scss";
 import ActivityCard from "./ActivityCard";
 import LoadingSpinner from "../Spinner/LoadingSpinner";
 import { fetchActivities } from "../../store/slices/activitiesSlice";
@@ -12,12 +12,13 @@ const ActivitiesList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchActivities())
-    .catch(err => alertError("No hay actividades disponibles"));
+    dispatch(fetchActivities()).catch((err) =>
+      alertError("No hay actividades disponibles")
+    );
   }, []);
 
   return (
-    <div className="activities">
+    <div className="activities__list">
       <h1>Listado Actividades</h1>
       <ul className="list">
         {activities.data.length > 0 ? (

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl =  process.env.REACT_APP_API;
+const baseUrl = process.env.REACT_APP_API;
 
 const tempToken = "token";
 
@@ -84,7 +84,7 @@ export const Post = async (endPoint, body) => {
 };
 
 export const Patch = async (endPoint, id, body) => {
-  const url = id ? `${baseUrl}/${endPoint}/${id}` : `${baseUrl}/${endPoint}`
+  const url = id ? `${baseUrl}/${endPoint}/${id}` : `${baseUrl}/${endPoint}`;
 
   try {
     const response = await axios.patch(url, body, {
@@ -97,4 +97,4 @@ export const Patch = async (endPoint, id, body) => {
   } catch (error) {
     return { success: false, error };
   }
-}
+};

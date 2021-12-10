@@ -83,8 +83,12 @@ function App() {
           <Route exact path="/donar" component={DonationsGreet} />
           <Route exact path="/gracias" component={ThanksGreet} />
           <Route exact path="/contacto" component={Contact} />
-          <Route exact path="/testimonials/create" component={ TestimonialForm }/>
-          <Route exact path="/testimonials/:id" component={ TestimonialForm }/>
+          <Route
+            exact
+            path="/testimonials/create"
+            component={TestimonialForm}
+          />
+          <Route exact path="/testimonials/:id" component={TestimonialForm} />
           <Route exact path="/about" component={AboutMain} />
           <Route exact path="/backoffice/slides" component={SlidesForm} />
           <Route exact path="/contact-form" component={ContactForm} />

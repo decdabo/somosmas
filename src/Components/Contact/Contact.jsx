@@ -1,14 +1,23 @@
 import { useEffect, useState } from "react";
+import { Get } from "../../Services/publicApiService";
 import { Title } from "../Title/Title";
-import mockData from "../../lib/mock/contactData.json";
 
 import "./Contact.scss";
 
 const Contact = () => {
-  const [contactData, setContactData] = useState(mockData);
+  const [contactData, setContactData] = useState({
+    cellphone: "",
+    facebook_url: "",
+    instagram_url: "",
+    twitter_url: "",
+    address: "",
+  });
 
-  const getContactData = () => {
-    //   to implement
+  const getContactData = async () => {
+    const response = await Get("organization", 4);
+    if (response.success) {
+      setContactData(response.data);
+    }
   };
 
   useEffect(() => {
@@ -18,24 +27,32 @@ const Contact = () => {
   return (
     <div className="contact__container">
       <Title title="Contacto" />
-      <div>
+      {contactData.address ? (
         <div>
-          <i className="fas fa-envelope"></i>
-          {contactData.mail}
+          <div>
+            <i className="fas fa-envelope"></i>
+            {contactData.address}
+          </div>
+          <div>
+            <i className="fab fa-instagram"></i>
+            {contactData.instagram_url}
+          </div>
+          <div>
+            <i className="fab fa-facebook-f"></i>
+            {contactData.facebook_url}
+          </div>
+          <div>
+            <i className="fab fa-twitter"></i>
+            {contactData.twitter_url}
+          </div>
+          <div>
+            <i className="fas fa-phone-alt"></i>
+            {contactData.cellphone}
+          </div>
         </div>
-        <div>
-          <i className="fab fa-instagram"></i>
-          {contactData.instagram}
-        </div>
-        <div>
-          <i className="fab fa-facebook-f"></i>
-          {contactData.facebook}
-        </div>
-        <div>
-          <i className="fas fa-phone-alt"></i>
-          {contactData.phone}
-        </div>
-      </div>
+      ) : (
+        <div>Loading...</div>
+      )}
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { Get } from "../Services/publicApiService";
 import { SlideComponent } from "./SlideComponent";
+import { alertError } from '../Services/alerts/Alerts'
 
 const settings = {
   dots: true,
@@ -20,7 +21,7 @@ export const SliderCarouselComponent = ({ URL = "slides", arrayData }) => {
       const { data } = fetchedData;
       return setData(data);
     } catch (error) {
-      console.log(error);
+      alertError(error);
     }
   };
   useEffect(() => {

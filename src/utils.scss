@@ -1,21 +1,8 @@
-.w-18r {
-  width: 18rem;
-}
-.width-50 {
-  width: 50%;
-}
-.txt-center {
-  text-align: center;
-}
+// MARGINS
+
 .my-1r {
   margin: 1rem 0;
 }
-
-.px-8 {
-  padding-left: 8px;
-  padding-right: 8px;
-}
-
 .my-10px {
   margin-top: 16px;
   margin-bottom: 16px;
@@ -23,12 +10,42 @@
 .m-auto {
   margin: auto;
 }
+.m-40px {
+  margin: 40px;
+}
+
+// WIDTH
+.w-18r {
+  width: 18rem;
+}
+.width-50 {
+  width: 50%;
+}
+
+// PADDINGS
+
+.px-8 {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+//TEXT
+.txt-center {
+  text-align: center;
+}
 .d-rtl {
   direction: rtl;
 }
+
+// FLEX
+
 .flex {
   display: flex;
 }
 .align-center {
   align-items: center;
+}
+
+.gap-20px {
+  gap: 20px;
 }

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "../../styles/components/listStyles.scss";
 import ActivityCard from "./ActivityCard";
-import LoadingSpinner from "../Spinner/LoadingSpinner";
 import { fetchActivities } from "../../store/slices/activitiesSlice";
 import { alertError } from "../../Services/alerts/Alerts";
 
@@ -12,9 +11,11 @@ const ActivitiesList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchActivities()).catch((err) =>
-      alertError("No hay actividades disponibles")
-    );
+    setTimeout(() => {
+      dispatch(fetchActivities()).catch((err) =>
+        alertError("No hay actividades disponibles")
+      );
+    }, 1000);
   }, []);
 
   return (
@@ -22,11 +23,11 @@ const ActivitiesList = () => {
       <h1>Listado Actividades</h1>
       <ul className="list">
         {activities.data.length > 0 ? (
-          activities.data.map((activity) => {
-            return <ActivityCard key={activity.id} activity={activity} />;
-          })
+          activities.data.map((activity) => (
+            <ActivityCard key={activity.id} activity={activity} />
+          ))
         ) : (
-          <LoadingSpinner />
+          <ActivityCard />
         )}
       </ul>
     </div>

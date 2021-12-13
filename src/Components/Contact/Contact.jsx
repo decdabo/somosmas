@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { alertError } from "../../Services/alerts/Alerts";
 import { Get } from "../../Services/publicApiService";
 import { Title } from "../Title/Title";
 
@@ -17,6 +18,8 @@ const Contact = () => {
     const response = await Get("organization", 4);
     if (response.success) {
       setContactData(response.data);
+    } else {
+      alertError(JSON.stringify(response.error.message));
     }
   };
 

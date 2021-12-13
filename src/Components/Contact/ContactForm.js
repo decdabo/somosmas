@@ -2,6 +2,7 @@ import React from "react";
 import { useFormik } from "formik";
 import "../../styles/components/formStyles.scss";
 import { Post } from "../../Services/publicApiService";
+import { alertError } from "../../Services/alerts/Alerts";
 
 const initialValues = {
   name: "",
@@ -11,7 +12,9 @@ const initialValues = {
 };
 
 const handleSubmit = async (values) => {
-  await Post(process.env.REACT_APP_CONTACTS_ENDPOINT);
+  const response = await Post(process.env.REACT_APP_CONTACTS_ENDPOINT);
+
+  if (!response.success) alertError(response.message);
 };
 
 // VALIDACIONES

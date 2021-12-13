@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NewsItem from "./NewsItem";
 import { Link } from "react-router-dom";
-import { Get } from "../../Services/privateApiService";
+
 import "../../styles/components/listStyles.scss";
 import LoaderComponent from "../Loader/Loader";
 import { alertError } from "../../Services/alerts/Alerts";
@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 const NewsList = () => {
   const [news, setNews] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   const { newsData } = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -18,6 +17,12 @@ const NewsList = () => {
   useEffect(() => {
     dispatch(fetchNews());
   }, []);
+
+  useEffect(() => {
+    if (newsData.error) {
+      alertError("Algo salió mal, intente nuevamente");
+    }
+  }, [newsData.error]);
 
   return (
     <div className="news-list">
@@ -28,7 +33,7 @@ const NewsList = () => {
         </Link>
       </header>
       <ul className="list">
-        {loading && (
+        {newsData.loading && (
           <div className="m-auto">
             <LoaderComponent />
           </div>

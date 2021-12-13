@@ -5,6 +5,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import { Get, Post, Put } from "../../Services/privateApiService";
+import { alertError } from "../../Services/alerts/Alerts";
 
 const NewsForm = () => {
   const [categories, setCategories] = useState([]);
@@ -24,16 +25,13 @@ const NewsForm = () => {
       category_id: values.category,
       deleted_at: "2021-11-23T19:19:56.825Z",
     };
-    try {
-      const response = await Post(process.env.REACT_APP_API_NEWS, body);
-      if (response.success) {
-        setMessage("Creado exitosamente");
-      } else {
-        setMessage("Algo salió mal, intente nuevamente");
-      }
-    } catch (error) {
-      setMessage("Algo salió mal, intente nuevamente");
+    const response = await Post(process.env.REACT_APP_API_NEWS, body);
+    if (response.success) {
+      setMessage("Creado exitosamente");
+    } else {
+      alertError("Algo salió mal, intente nuevamente");
     }
+
     setSubmitting(false);
   };
 
@@ -51,17 +49,13 @@ const NewsForm = () => {
       body.image = values.image;
     }
 
-    try {
-      const response = await Put(process.env.REACT_APP_API_NEWS, id, body);
-      console.log(response);
-      if (response.success) {
-        setMessage("Actualizado exitosamente");
-      } else {
-        setMessage("Algo salió mal, intente nuevamente");
-      }
-    } catch (error) {
-      setMessage("Algo salió mal, intente nuevamente");
+    const response = await Put(process.env.REACT_APP_API_NEWS, id, body);
+    if (response.success) {
+      setMessage("Actualizado exitosamente");
+    } else {
+      alertError("Algo salió mal, intente nuevamente");
     }
+
     setSubmitting(false);
   };
 

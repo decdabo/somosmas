@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMembers } from "../../store/slices/aboutSlice";
+import LoaderComponent from "../Loader/Loader";
 import "./styles/members.scss";
 
 const Members = () => {
@@ -14,8 +15,8 @@ const Members = () => {
 
   return (
     <div className="container">
-      {aboutData.loading ? (
-        <div>Loading...</div>
+      {aboutData.loading ? (        
+        <LoaderComponent />
       ) : (
         aboutData.data.map((item) => (
           <div className="card" key={item.id}>

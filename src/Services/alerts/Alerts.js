@@ -29,7 +29,7 @@ export const alertError = (textError = '') => {
   
   Swal.fire({
     type: 'error',
-    title: 'Oops...',
+    title: 'Ups!',
     text: textError,
   })
 }

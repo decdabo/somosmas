@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
+import LoaderComponent from "../Components/Loader/Loader";
+import { alertError } from "../Services/alerts/Alerts";
 import { Get } from "../Services/publicApiService";
 import { SlideComponent } from "./SlideComponent";
-import { alertError } from '../Services/alerts/Alerts'
+
+
+
 
 const settings = {
   dots: true,
@@ -15,20 +19,31 @@ const settings = {
 export const SliderCarouselComponent = ({ URL = "slides", arrayData }) => {
   const [data, setData] = useState([]);
 
+  const [loading, setLoading] = useState(false)
+
+
+
   const getData = async () => {
     try {
       const fetchedData = await Get(URL);
       const { data } = fetchedData;
+      setLoading(true)
       return setData(data);
     } catch (error) {
-      alertError(error);
+      setLoading(null)
+      alertError('Ha ocurrido un problema')
+      
+      
     }
   };
   useEffect(() => {
     getData();
   }, [URL]);
-  return (
+
+
+  return loading !== false ? (
     <>
+      
       <Slider {...settings}>
         {arrayData
           ? arrayData.map((obj) => {
@@ -39,5 +54,5 @@ export const SliderCarouselComponent = ({ URL = "slides", arrayData }) => {
             })}
       </Slider>
     </>
-  );
+  ) : <LoaderComponent />
 };

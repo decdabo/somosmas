@@ -6,6 +6,7 @@ import { membersReducer } from "./reducers/membersReducers";
 import aboutReducer from "./slices/aboutSlice";
 import slidesReducer from "./slices/slidesSlice";
 import activitiesReducer from "./slices/activitiesSlice";
+import usersReducer from "./slices/usersSlice";
 import newsReducer from "./slices/newsSlice";
 // Put reducers here
 const reducers = {
@@ -14,6 +15,7 @@ const reducers = {
   authReducer: authSlice,
   slidesData: slidesReducer,
   activities: activitiesReducer,
+  usersReducer: usersReducer,
   newsData: newsReducer,
 };
 

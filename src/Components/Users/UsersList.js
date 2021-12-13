@@ -1,10 +1,18 @@
 import { Link } from "react-router-dom";
-import "../../styles/components/tableStyles.scss"
+import "../../styles/components/tableStyles.scss";
 import "./UsersStyles.scss";
 import { UsersTable } from "./UsersTable";
+import { fetchUsers } from "../../store/slices/slidesSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 export const UsersList = () => {
-  const { data } = require("../../lib/mock/usersMock.json");
+  const { usersReducer } = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, []);
 
   return (
     <div>
@@ -13,8 +21,9 @@ export const UsersList = () => {
           Regresar
         </Link>
       </div>
-
-      <UsersTable users={data} />
+      {usersReducer.data.map((usersReducer) => {
+        return <UsersTable users={usersReducer} />;
+      })}
     </div>
   );
 };

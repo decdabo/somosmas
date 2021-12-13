@@ -62,7 +62,11 @@ const MembersEdit = () => {
 
   const editForm = async (values) => {
     try {
+<<<<<<< HEAD
+      const response = await Put(process.env.REACT_API_MEMBERS, id, values);
+=======
       const response = await Put(process.env.REACT_APP_API_MEMBERS, id, values);
+>>>>>>> 9d73af52c17cd074420d72d0b71a445cf442be6a
       return console.log(response);
     } catch (err) {
       return alert(err);
@@ -132,6 +136,32 @@ const MembersEdit = () => {
                 }}
               />
             </div>
+<<<<<<< HEAD
+            {errors.name && touched.name ? (
+              <div className="form__message-validation">{errors.name}</div>
+            ) : null}
+
+            <input
+              type="file"
+              name="image"
+              id="image"
+              accept="image/png,image/jpeg"
+              onChange={(event) => {
+                handleChange(event, setFieldValue);
+              }}
+            />
+            {errors.image && touched.image ? (
+              <div className="form__message-validation"> {errors.image}</div>
+            ) : null}
+            <Field
+              className="form__input form__members-input"
+              id="facebookUrl"
+              type="text"
+              name="facebookUrl"
+              placeholder="Facebook Url"
+            />
+
+=======
             {errors.description && touched.description ? (
               <div className="form__message-validation">
                 {errors.description}
@@ -157,6 +187,7 @@ const MembersEdit = () => {
               placeholder="Facebook Url"
             />
 
+>>>>>>> 9d73af52c17cd074420d72d0b71a445cf442be6a
             {errors.facebookUrl && touched.facebookUrl ? (
               <div className="form__message-validation">
                 {errors.facebookUrl}

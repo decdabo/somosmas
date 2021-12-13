@@ -7,13 +7,13 @@ export const AboutMain = ({
 }) => {
   return (
     <>
-      <div className="title">
+      <div className="about__imported-title">
         <Title title={"Nosotros"} image={logo} />
       </div>
-      <div className="text-container">
-        <h3 className="container__title">Sobre Nosotros:</h3>
+      <div className="about__wrapper">
+        <h3 className="about__title">Sobre Nosotros:</h3>
 
-        <div className="container__text">{about}</div>
+        <div className="about__text">{about}</div>
       </div>
     </>
   );

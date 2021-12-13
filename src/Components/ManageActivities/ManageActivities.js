@@ -1,15 +1,14 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { FormEditActivities } from "../../backoffice/FormEditActivities";
 import apiDateToText from "../../helpers/apiDateToText";
+import { Get } from "../../Services/privateApiService";
 
 import "./ManageActivities.scss";
 
-const activitiesMock = require("../../lib/mock/activities.json");
-
 const ManageActivities = () => {
-  const [activities, setActivities] = useState(activitiesMock);
+  const [activities, setActivities] = useState([]);
   const [message, setMessage] = useState("");
   const [editingActivity, setEditingActivity] = useState(NaN); // will change to the id of the activity to edit
 
@@ -30,6 +29,17 @@ const ManageActivities = () => {
     setMessage("");
     setEditingActivity(NaN);
   };
+
+  const fetchApiData = async () => {
+    const response = await Get(process.env.REACT_APP_API_ACTIVITIES);
+    if (response.success) {
+      setActivities(response.data);
+    }
+  };
+
+  useEffect(() => {
+    fetchApiData();
+  }, []);
 
   return (
     <div className="manage-activities-container">

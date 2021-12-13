@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "../../styles/components/tableStyles.scss";
 import "./UsersStyles.scss";
 import { UsersTable } from "./UsersTable";
-import { fetchUsers } from "../../store/slices/slidesSlice";
+import { fetchUsers } from "../../store/slices/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 

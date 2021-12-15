@@ -6,7 +6,6 @@ import "../../../styles/components/detailsStyles.scss";
 import { alertError } from "../../../Services/alerts/Alerts";
 import { useDispatch } from "react-redux";
 import { fetchActivities } from "../../../store/slices/activitiesSlice";
-import { SkeletonLoader } from "../../Loader/SkeletonLoader";
 import ActivitySkeleton from "../Skeletons/ActivitySkeleton";
 
 /*

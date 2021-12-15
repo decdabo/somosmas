@@ -6,12 +6,17 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import { Get, Post, Put } from "../../Services/privateApiService";
 import { alertError } from "../../Services/alerts/Alerts";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCategories } from "../../store/slices/categoriesSlice";
 
 const NewsForm = () => {
-  const [categories, setCategories] = useState([]);
+  // const [categories, setCategories] = useState([]);
   const [existingNew, setExistingNew] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [message, setMessage] = useState("");
+
+  const dispatch = useDispatch()
+  const categoriesData = useSelector(state => state.categoriesData)
 
   const { id } = useParams();
 
@@ -62,8 +67,9 @@ const NewsForm = () => {
   //   load categories and existing article data if editting
   const loadApiData = useCallback(async () => {
     try {
-      const categories = await Get("categories");
-      setCategories(categories.data);
+      dispatch(fetchCategories())
+      // const categories = await Get("categories");
+      // setCategories(categories.data);
       if (id) {
         const newData = await Get(process.env.REACT_APP_API_NEWS, id);
         if (newData.success) {
@@ -163,7 +169,7 @@ const NewsForm = () => {
                   Seleccionar categoría
                 </option>,
               ].concat(
-                categories.map((category) => (
+                categoriesData.data.map((category) => (
                   <option value={category.id} key={category.id}>
                     {category.name}
                   </option>

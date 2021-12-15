@@ -1,11 +1,16 @@
 @import "../../../styles/variables.scss";
 
 .about {
-  &__imported-title {
+  &__container {
+    margin: 92px;
+    margin-top: 10px;
+  }
+  &__title-imported{
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 
     margin: 2rem;
     & img {

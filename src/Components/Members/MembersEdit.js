@@ -4,7 +4,7 @@ import { Get } from "../../Services/publicApiService";
 import { Put } from "../../Services/privateApiService";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
-import { Progress } from "../Progress/Progress";
+
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 

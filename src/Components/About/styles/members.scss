@@ -27,6 +27,23 @@
     
 }
 
+.card{
+    &__container {
+        padding: 15px;
+        text-align: center;
+    }
+
+    &__description {
+        line-height: 1.5;
+        color: #6a6a6a;
+    }
+
+    &__title {
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+}
+
 
 
 .card:hover{
@@ -39,35 +56,6 @@
     object-fit: cover;    
 }
 
-.content {
-    padding: 15px;
-    text-align: center;
-}
-
-.content-description {
-    line-height: 1.5;
-    color: #6a6a6a;
-}
-
-.content-title{
-    font-weight: 600;
-    margin-bottom: 15px;
-}
-
-.content-button{
-    margin-top: 30px;
-    color: #0a5c6b;
-    border: 1px solid #0a5c6b;
-    padding: 10px;
-    border-radius: 4px;
-    transition: all 400ms ease;
-    font-weight: 700;
-}
-.content-button:hover{
-    background: #0a5c6b;
-    color: #fff;
-    cursor: pointer;
-}
 
 .links{
     display: flex;
@@ -75,14 +63,14 @@
     flex-direction: column;
 }
 
-.link{
+.links a{
     text-decoration: none;
     color: #0a5c6b;
     font-weight: 700;
     transition: all 300ms ease;
 }
 
-.link:hover{
+.links a:hover{
     color: #93cbd4;
 }
 

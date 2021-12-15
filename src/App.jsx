@@ -100,6 +100,7 @@ function App() {
             component={OrganizationData}
           />
           <Route exact path="/about/members" component={Members} />
+          
           <Route exact path="/" component={Home} />
         </Switch>
       </BrowserRouter>

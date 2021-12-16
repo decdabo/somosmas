@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { alertError } from "../../Services/alerts/Alerts";
 import { Get } from "../../Services/publicApiService";
+import LeafletMap from "../LeafletMap/LeafletMap";
 import { Title } from "../Title/Title";
 
 import "./Contact.scss";
@@ -52,6 +53,8 @@ const Contact = () => {
             <i className="fas fa-phone-alt"></i>
             {contactData.cellphone}
           </div>
+
+          <LeafletMap />
         </div>
       ) : (
         <div>Loading...</div>

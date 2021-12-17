@@ -17,33 +17,33 @@ import FooterPublic from "../../Components/Footer/FooterPublic";
 // -------------timer---------------
 
 const CountDownTimer = () => {
-    // timer to 31 december at 17:30
-    const remainingTime = (+new Date("2021-12-31T17:30:59") - +new Date()) / 1000;
+  // timer to 31 december at 17:30
+  const remainingTime = (+new Date("2021-12-31T17:30:59") - +new Date()) / 1000;
 
-    const [time, setTime] = useState(remainingTime);
+  const [time, setTime] = useState(remainingTime);
 
-    useEffect(() => {
-        const timerId = setInterval(() => {
-            setTime((prevState) => prevState - 1);
-        }, 1000);
-        return () => clearInterval(timerId);
-    });
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setTime((prevState) => prevState - 1);
+    }, 1000);
+    return () => clearInterval(timerId);
+  });
 
-    // format seconds to DD HH:MM:SS
-    const formatTime = (seconds) => {
-        const days = Math.floor(seconds / 86400);
-        seconds = seconds % 86400;
-        const hours = Math.floor(seconds / 3600);
-        seconds = seconds % 3600;
-        const minutes = Math.floor(seconds / 60);
-        seconds = seconds % 60;
+  // format seconds to DD HH:MM:SS
+  const formatTime = (seconds) => {
+    const days = Math.floor(seconds / 86400);
+    seconds = seconds % 86400;
+    const hours = Math.floor(seconds / 3600);
+    seconds = seconds % 3600;
+    const minutes = Math.floor(seconds / 60);
+    seconds = seconds % 60;
 
-        return `${ days } DÍAS Y ${ hours.toString().padStart(2, "0") }:${ minutes
-            .toString()
-            .padStart(2, "0") }:${ seconds.toFixed(0).toString().padStart(2, "0") }`;
-    };
+    return `${days} DÍAS Y ${hours.toString().padStart(2, "0")}:${minutes
+      .toString()
+      .padStart(2, "0")}:${seconds.toFixed(0).toString().padStart(2, "0")}`;
+  };
 
-    return <div>{ formatTime(time) }</div>;
+  return <div>{formatTime(time)}</div>;
 };
 
 // ------------component-----------------

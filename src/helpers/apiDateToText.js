@@ -14,13 +14,13 @@ RETURNS: {
 */
 
 const apiDateToText = (apiDate) => {
-  const dateAndTime = apiDate.split("T");
-  const date = dateAndTime[0];
-  const time = dateAndTime[1].split(".")[0];
-  return {
-    date: date,
-    time: time,
-  };
+	const dateAndTime = apiDate.split("T");
+	const date = dateAndTime[0];
+	const time = dateAndTime[1].split(".")[0];
+	return {
+		date: date,
+		time: time,
+	};
 };
 
 export default apiDateToText;

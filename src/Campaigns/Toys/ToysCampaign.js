@@ -9,7 +9,7 @@ import KidsImage from "../../assets/images/kids.png";
 import ToysBackground from "../../assets/images/toys-content.jpg";
 import { ReactComponent as WavesRed } from "../../assets/waves-red.svg";
 import { ReactComponent as WavesBlue } from "../../assets/waves-blue.svg";
-import "../../Components/Footer/FooterPublic.scss"
+import "../../Components/Footer/FooterPublic.scss";
 import { useEffect, useState } from "react";
 import FooterPublic from "../../Components/Footer/FooterPublic";
 
@@ -49,43 +49,43 @@ const CountDownTimer = () => {
 // ------------component-----------------
 
 const ToysCampaign = () => {
-    return (
-        <>
-                <div className="toys__container">
-                    <div className="toys__title">
-                        <div>Colecta de juguetes</div>
-                        <div className="toys__title-images">
-                            <img src={ Toy1 } alt="toy icon 1"/>
-                            <img src={ Toy2 } alt="toy icon 2"/>
-                            <img src={ Toy3 } alt="toy icon 3"/>
-                            <img src={ Toy4 } alt="toy icon 4"/>
-                            <img src={ Toy5 } alt="toy icon 5"/>
-                            <img src={ Toy6 } alt="toy icon 6"/>
-                        </div>
-                    </div>
-                    <WavesBlue className="toys__waves-blue"/>
-                    <div className="toys__content">
-                        <div>
-                            <div>Trae tu donativo</div>
-                            <div className="toys__date">30 de Diciembre</div>
-                            <div className="toys__hour">17:30 horas</div>
-                            <div className="toys__place">Sede SomosMas</div>
-                            <div className="toys__counter">
-                                <CountDownTimer/>
-                            </div>
-                        </div>
+	return (
+		<>
+			<div className="toys__container">
+				<div className="toys__title">
+					<div>Colecta de juguetes</div>
+					<div className="toys__title-images">
+						<img src={ Toy1 } alt="toy icon 1"/>
+						<img src={ Toy2 } alt="toy icon 2"/>
+						<img src={ Toy3 } alt="toy icon 3"/>
+						<img src={ Toy4 } alt="toy icon 4"/>
+						<img src={ Toy5 } alt="toy icon 5"/>
+						<img src={ Toy6 } alt="toy icon 6"/>
+					</div>
+				</div>
+				<WavesBlue className="toys__waves-blue"/>
+				<div className="toys__content">
+					<div>
+						<div>Trae tu donativo</div>
+						<div className="toys__date">30 de Diciembre</div>
+						<div className="toys__hour">17:30 horas</div>
+						<div className="toys__place">Sede SomosMas</div>
+						<div className="toys__counter">
+							<CountDownTimer/>
+						</div>
+					</div>
 
-                        <div className="toys__images-container">
-                            <img src={ KidsImage } alt="kids"/>
-                        </div>
-                    </div>
+					<div className="toys__images-container">
+						<img src={ KidsImage } alt="kids"/>
+					</div>
+				</div>
 
-                    <img src={ ToysBackground } alt="background"/>
-                    <WavesRed className="toys__waves-red"/>
-                </div>
-            <FooterPublic/>
-        </>
-    );
+				<img src={ ToysBackground } alt="background"/>
+				<WavesRed className="toys__waves-red"/>
+			</div>
+			<FooterPublic/>
+		</>
+	);
 };
 
 export default ToysCampaign;

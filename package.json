@@ -21,7 +21,7 @@
     "react-loader-spinner": "^4.0.0",
     "react-pdf": "^5.6.0",
     "react-redux": "^7.2.6",
-    "react-router-dom": "^5.2.0",
+    "react-router-dom": "^5.3.0",
     "react-router-transition": "github:finnmerlett/react-router-transition#build",
     "react-scripts": "^4.0.3",
     "react-slick": "^0.28.1",
@@ -37,10 +37,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src/",
+    "lint-fix": "eslint src/ --fix"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": [
     ">0.2%",

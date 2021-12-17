@@ -9,50 +9,50 @@ import { SlideComponent } from "./SlideComponent";
 
 
 const settings = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1,
+	dots: true,
+	infinite: true,
+	speed: 500,
+	slidesToShow: 1,
+	slidesToScroll: 1,
 };
 
 export const SliderCarouselComponent = ({ URL = "slides", arrayData }) => {
-  const [data, setData] = useState([]);
+	const [data, setData] = useState([]);
 
-  const [loading, setLoading] = useState(false)
+	const [loading, setLoading] = useState(false);
 
 
 
-  const getData = async () => {
-    try {
-      const fetchedData = await Get(URL);
-      const { data } = fetchedData;
-      setLoading(true)
-      return setData(data);
-    } catch (error) {
-      setLoading(null)
-      alertError('Ha ocurrido un problema')
+	const getData = async () => {
+		try {
+			const fetchedData = await Get(URL);
+			const { data } = fetchedData;
+			setLoading(true);
+			return setData(data);
+		} catch (error) {
+			setLoading(null);
+			alertError("Ha ocurrido un problema");
       
       
-    }
-  };
-  useEffect(() => {
-    getData();
-  }, [URL]);
+		}
+	};
+	useEffect(() => {
+		getData();
+	}, [URL]);
 
 
-  return loading !== false ? (
-    <>
+	return loading !== false ? (
+		<>
       
-      <Slider {...settings}>
-        {arrayData
-          ? arrayData.map((obj) => {
-              return <SlideComponent key={obj.id} data={obj} />;
-            })
-          : data.map((obj) => {
-              return <SlideComponent key={obj.id} data={obj} />;
-            })}
-      </Slider>
-    </>
-  ) : <LoaderComponent />
+			<Slider {...settings}>
+				{arrayData
+					? arrayData.map((obj) => {
+						return <SlideComponent key={obj.id} data={obj} />;
+					})
+					: data.map((obj) => {
+						return <SlideComponent key={obj.id} data={obj} />;
+					})}
+			</Slider>
+		</>
+	) : <LoaderComponent />;
 };

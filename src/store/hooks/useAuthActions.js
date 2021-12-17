@@ -1,9 +1,9 @@
 import { useDispatch } from "react-redux";
 import {
-  validateAuth,
-  getUserInfo,
-  logout,
-  registerUser,
+	validateAuth,
+	getUserInfo,
+	logout,
+	registerUser,
 } from "../slices/authSlice";
 
 /**
@@ -16,9 +16,9 @@ import {
  */
 
 const useAuthActions = () => {
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-  /**
+	/**
    * Function that validates user data.
    * @author Julian Kominovic
    * @name useAuthActions
@@ -28,23 +28,23 @@ const useAuthActions = () => {
    * @async
    *
    */
-  const validateUserLogin = async (email, password) => {
-    await dispatch(validateAuth({ email: email, password: password }));
-    await dispatch(getUserInfo());
-  };
+	const validateUserLogin = async (email, password) => {
+		await dispatch(validateAuth({ email: email, password: password }));
+		await dispatch(getUserInfo());
+	};
 
-  /**
+	/**
    * Function to logout. Clears the auth store.
    * @author Julian Kominovic
    * @name useAuthActions
    * @function
    *
    */
-  const logginOut = () => {
-    dispatch(logout());
-  };
+	const logginOut = () => {
+		dispatch(logout());
+	};
 
-  /**
+	/**
    * Function to register a new user.
    * @author Julian Kominovic
    * @name useAuthActions
@@ -55,14 +55,14 @@ const useAuthActions = () => {
    * @param {string} registrationData.password User password
    *
    */
-  const registerUserData = (registrationData) => {
-    dispatch(registerUser(registrationData));
-  };
+	const registerUserData = (registrationData) => {
+		dispatch(registerUser(registrationData));
+	};
 
-  return {
-    validateUserLogin,
-    logginOut,
-    registerUserData,
-  };
+	return {
+		validateUserLogin,
+		logginOut,
+		registerUserData,
+	};
 };
 export default useAuthActions;

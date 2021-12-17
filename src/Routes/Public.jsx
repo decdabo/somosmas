@@ -22,43 +22,49 @@ import { ThanksGreet } from "../Components/Donations/ThanksGreet";
 import Members from "../Components/About/Members";
 import Home from "../Home/Home";
 import Contact from "../Components/Contact/Contact";
+import PageNotFound from "../Components/PageNotFound/PageNotFound";
 
 function Public() {
-    return (
-        <>
-            <BrowserRouter>
-                <AnimatedSwitch
-                    atEnter={{ opacity: 0 }}
-                    atLeave={{ opacity: 0 }}
-                    atActive={{ opacity: 1 }}
-                    className="switch-wrapper"
-                    mapStyles={mapStyles}
-                >
-                    <Route exact path="/create-activity" component={ActivitiesForm} />
-                    <Route exact path="/create-category" component={CategoriesForm} />
-                    <Route exact path="/create-news" component={NewsForm} />
-                    <Route exact path="/create-testimonials" component={TestimonialForm} />
-                    <Route exact path="/create-user" component={UserForm} />
-                    <Route exact path="/edit-user/:id" component={UserForm} />
-                    <Route exact path="/school-campaign" component={SchoolCampaign} />
-                    <Route exact path="/toys-campaign" component={ToysCampaign} />
-                    <Route exact path="/create-member" component={MembersForm} />
-                    <Route exact path="/create-project" component={ProjectsForm} />
-                    <Route exact path="/about" component={AboutMain} />
-                    <Route exact path="/contact-form" component={ContactForm} />
-                    <Route exact path="/register-form" component={RegisterForm} />
-                    <Route exact path="/login-form" component={LoginForm} />
-                    <Route exact path="/actividades" component={ActivitiesList} />
-                    <Route exact path="/actividades/:id" component={ActivityInfo} />
-                    <Route exact path="/donar" component={DonationsGreet} />
-                    <Route exact path="/gracias" component={ThanksGreet} />
-                    <Route exact path="/about/members" component={Members} />
-                    <Route exact path="/contacto" component={Contact} />
+	return (
+		<>
+			<BrowserRouter>
+				<AnimatedSwitch
+					atEnter={{ opacity: 0 }}
+					atLeave={{ opacity: 0 }}
+					atActive={{ opacity: 1 }}
+					className="switch-wrapper"
+					mapStyles={mapStyles}
+				>
+					<Route exact path="/create-activity" component={ActivitiesForm} />
+					<Route exact path="/create-category" component={CategoriesForm} />
+					<Route exact path="/create-news" component={NewsForm} />
+					<Route
+						exact
+						path="/create-testimonials"
+						component={TestimonialForm}
+					/>
+					<Route exact path="/create-user" component={UserForm} />
+					<Route exact path="/edit-user/:id" component={UserForm} />
+					<Route exact path="/school-campaign" component={SchoolCampaign} />
+					<Route exact path="/toys-campaign" component={ToysCampaign} />
+					<Route exact path="/create-member" component={MembersForm} />
+					<Route exact path="/create-project" component={ProjectsForm} />
+					<Route exact path="/about" component={AboutMain} />
+					<Route exact path="/contact-form" component={ContactForm} />
+					<Route exact path="/register-form" component={RegisterForm} />
+					<Route exact path="/login-form" component={LoginForm} />
+					<Route exact path="/actividades" component={ActivitiesList} />
+					<Route exact path="/actividades/:id" component={ActivityInfo} />
+					<Route exact path="/donar" component={DonationsGreet} />
+					<Route exact path="/gracias" component={ThanksGreet} />
+					<Route exact path="/about/members" component={Members} />
+					<Route exact path="/contacto" component={Contact} />
 
-                    <Route exact path="/" component={Home} />
-                </AnimatedSwitch>
-            </BrowserRouter>
-        </>
-    );
+					<Route exact path="/" component={Home} />
+					<Route component={PageNotFound} />
+				</AnimatedSwitch>
+			</BrowserRouter>
+		</>
+	);
 }
 export default Public;

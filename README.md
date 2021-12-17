@@ -25,7 +25,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### 'Progress.js'
 
-A simple react progress bar loader component already customized, you can default import and run with the implementation of hooks.
+Un loader progress bar customizable que puede importarse por default y e implementarse con hooks.
 Si se utilizan dentro de un botón tiene que ser una arrow function:
 
 ```
@@ -38,3 +38,8 @@ Ejemplo de uso en un catch:
 catch (error) { alertError(error) }
 
 ```
+
+### Cambios en extensión Prettier para evitar la colision con la nueva configuración de Eslint:
+
+Ir a pestañas de extensiones, buscar Prettier, en icono de ajustes / Extension settings y finalmente bajar y marcar donde dice Prettier Use tabs
+para indentar de la misma manera que eslint.

@@ -1,0 +1,39 @@
+.slide {
+  overflow: hidden;
+
+  &__container {
+    width: 100vw;
+  }
+  &__image {
+    margin: auto;
+    width: 100vw;
+    @media (min-width: 760px) {
+      height: 55vh;
+    }
+    @media (min-width: 1023px) {
+      width: 85vw;
+      height: 55vh;
+    }
+    @media (min-width: 1280px) {
+      width: 55vw;
+      height: 50vh;
+    }
+
+    @media (min-width: 1600px) {
+      width: 50vw;
+      height: 40vh;
+    }
+    @media (min-width: 2000px) {
+      width: 40vw;
+      height: 70vh;
+    }
+  }
+  &__quote {
+    display: none;
+
+    @media (min-width: 960px) {
+      display: block;
+      text-align: center;
+    }
+  }
+}

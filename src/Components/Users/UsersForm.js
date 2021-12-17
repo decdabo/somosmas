@@ -116,7 +116,6 @@ const UserForm = () => {
         initialValues={{ name, email, role_id, password, profile_image }}
         onSubmit={(values) => {
           submitForm(values);
-          console.log(values);
         }}
         validationSchema={ErrorSchema}
         enableReinitialize={true}

@@ -1,3 +1,5 @@
+@import "../../styles//variables.scss";
+
 .slide {
   overflow: hidden;
 
@@ -7,23 +9,23 @@
   &__image {
     margin: auto;
     width: 100vw;
-    @media (min-width: 760px) {
+    @media (min-width: $breakpoint-tablet) {
       height: 55vh;
     }
-    @media (min-width: 1023px) {
+    @media (min-width: $breakpoint-laptop) {
       width: 85vw;
       height: 55vh;
     }
-    @media (min-width: 1280px) {
+    @media (min-width: $breakpoint-lg-laptop) {
       width: 55vw;
       height: 50vh;
     }
 
-    @media (min-width: 1600px) {
+    @media (min-width: $breakpoint-tv) {
       width: 50vw;
       height: 40vh;
     }
-    @media (min-width: 2000px) {
+    @media (min-width: $breakpoint-lg-tv) {
       width: 40vw;
       height: 70vh;
     }
@@ -31,7 +33,7 @@
   &__quote {
     display: none;
 
-    @media (min-width: 960px) {
+    @media (min-width: $breakpoint-laptop) {
       display: block;
       text-align: center;
     }

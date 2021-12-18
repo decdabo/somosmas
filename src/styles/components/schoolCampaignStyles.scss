@@ -1,0 +1,83 @@
+.campaign{
+    &__container{
+        align-items: center;
+        background-color: rgba(255, 235, 205, 0);
+        display: flex;
+        justify-content: center;
+        width: 100%;
+
+        @media (min-width: $breakpoint-lg-laptop){
+            background-color: rgba(255, 235, 205, 0.384);
+        }
+    }
+    &__box{
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 60vh;
+        width: 100%;
+    }
+
+    &__countdown{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 85%;
+    }
+
+    &__description{
+        font-size: medium;
+        margin-bottom: 5%;
+        width: 90%;
+
+        @media (min-width: $breakpoint-tv){
+            font-size: xx-large;
+        }
+        @media (min-width: $breakpoint-lg-laptop){
+            font-size: x-large;
+        }
+        @media (min-width: $breakpoint-tablet){    
+            width: 80%;        
+        }
+    }
+    &__img-container{
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+    }
+    &__img{
+        display: none;
+
+        @media (min-width: $breakpoint-lg-laptop){
+            max-width: 250px;
+        }
+        @media (min-width: $breakpoint-laptop){
+            display: block;
+            max-width: 150px;
+        }
+    }
+}
+
+.countdown{
+    &__text{
+        display: none;
+        align-self: center;
+
+        @media (min-width: $breakpoint-tablet){    
+            display: block;
+        }
+    }
+    &__container{
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+    }
+    &__img-left{
+        transform: rotate(13deg);
+    }
+    &__img-right{
+        transform: rotate(-13deg);
+    }
+}
+

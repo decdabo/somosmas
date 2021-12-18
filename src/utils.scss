@@ -50,20 +50,23 @@
 .gap-20px {
   gap: 20px;
 }
-.flex{
+.flex {
   display: flex;
 }
 
-.flex-column-center{
+.flex-column-center {
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 
-.align-center{
+.align-center {
   align-items: center;
 }
+.justify-center {
+  justify-content: center;
+}
 
-.justify-around{
+.justify-around {
   justify-content: space-around;
 }

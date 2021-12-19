@@ -43,7 +43,7 @@ export const SliderCarouselComponent = ({ URL = "slides", arrayData, dots = fals
       <Slider {...settings} dots={dots}>
         {loading ?
           (<LoaderComponent />)
-          : (data.map(obj => { return <SlideComponent key={obj.id} data={obj}  /> }))
+          : (data.map(obj => { return <SlideComponent key={obj.id} data={obj} /> }))
         }
       </Slider>
     </>

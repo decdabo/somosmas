@@ -3,15 +3,15 @@ import { Get, Post } from "../../Services/publicApiService";
 import { Put } from "../../Services/privateApiService";
 import * as Yup from "yup";
 import { Field, Form, Formik } from "formik";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { alertError } from "../../Services/alerts/Alerts";
+import getBase64FromUrl from "../../helpers/imageToBase64";
 
 const TestimonialForm = () => {
 
     const {push} = useHistory();
-
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -46,17 +46,22 @@ const TestimonialForm = () => {
                 await Get(process.env.REACT_APP_API_TESTIMONIALS, id)
                     .then(res => {
                         const {data: {name, description, image}} = res
+                        getBase64FromUrl(image).then(imagen64 => {
+                            setImage(imagen64)
+                        })
                         setName(name);
                         setDescription(description)
-                        setImage(image);
                         setCreate(false);
+
+
                     })
             } catch (error) {
-                alertError(error)
+                alertError("Usuario inexistente");
+                push(`/${ process.env.REACT_APP_API_TESTIMONIALS }/create`);
             }
         } else {
-            alertError('Testimonio inexistente. Cree uno, porfavor!');
-            push(`/${ process.env.REACT_APP_API_TESTIMONIALS }/create`);
+            // alertError('Testimonio inexistente. Cree uno, porfavor!');
+            // push(`/${ process.env.REACT_APP_API_TESTIMONIALS }/create`);
         }
     }
 
@@ -77,11 +82,13 @@ const TestimonialForm = () => {
                 propsFormik.setFieldValue("image", e.target.result);
             }
             reader.readAsDataURL(e.currentTarget.files[0]);
+
         }
     }
-    const handleChangeDescription = (event, editor) => {
-        const data = editor.getData();
-        setDescription(data)
+
+    const handleChangeDescription = (event, editor, props) => {
+        const data = editor.getData()
+        props.setFieldValue("description", data)
     }
 
     return (
@@ -92,6 +99,7 @@ const TestimonialForm = () => {
                     } }
                     validationSchema={ ErrorSchema }
                     enableReinitialize={ true }
+                    validateOnMount={ !create }
             >
                 {
                     (props) => {
@@ -101,31 +109,53 @@ const TestimonialForm = () => {
                                     <h3 className="txt-center">Testimonial Form</h3>
                                     <label>Name: </label>
                                     <Field name={ 'name' } type={ 'text' } className="form__input"/>
-                                    <small className="form__message-validation">{ props.errors.name }</small>
+                                    <small
+                                        className="form__message-validation">{ props.errors.name }</small>
+
                                     <label>Description: </label>
                                     <CKEditor
                                         name={ "description" }
                                         editor={ ClassicEditor }
                                         data={ description }
                                         onChange={ (event, editor) => {
-                                            handleChangeDescription(event, editor)
+                                            handleChangeDescription(event, editor, props)
                                         } }
+
                                     />
                                     <small className="form__message-validation">{ props.errors.description }</small>
-                                    <label>Image: </label>
-                                    <input
-                                        type="file"
-                                        name="image"
-                                        accept="image/png,image/jpeg"
-                                        onChange={ (event) => {
-                                            handleChange(event, props)
-                                        } }
-                                    />
-                                    <small className="form__message-validation">{ props.errors.image }</small>
-                                    <button type={ 'submit' }
-                                            disabled={ !(props.isValid && props.dirty) || props.isSubmitting }
-                                            className="form__btn-primary mx-auto"> Send
-                                    </button>
+                                    <label>Image:
+                                        <input
+                                            className="form__image-input"
+                                            type="file"
+                                            name="image"
+                                            accept="image/png,image/jpeg"
+                                            onChange={ (event) => {
+                                                handleChange(event, props)
+                                            } }
+
+                                        />
+                                        <div className="form__image-container">
+                                            <img
+                                                src={ props.values.image }
+                                                alt="article"
+                                                onError={ (e) => {
+                                                    e.target.src =
+                                                        "https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png";
+                                                } }
+                                            />
+                                        </div>
+                                    </label>
+                                    <small
+                                        className="form__message-validation">{ props.errors.image }</small>
+
+                                    { !create ? <button type={ 'submit' }
+                                                        disabled={ !(props.isValid) || props.isSubmitting }
+                                                        className="form__btn-primary mx-auto"> Send
+                                        </button> :
+                                        <button type={ 'submit' }
+                                                disabled={ !(props.isValid && props.dirty) || props.isSubmitting }
+                                                className="form__btn-primary mx-auto"> Send
+                                        </button> }
                                 </div>
                             </Form>
                         )

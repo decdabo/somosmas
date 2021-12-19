@@ -1,0 +1,26 @@
+@import "../../styles//variables.scss";
+.slick {
+	&-slider {
+		height: 35vh;
+		width: 90vw;
+		@media screen and (min-width: $breakpoint-tv) {
+			height: 50vh;
+		}
+	}
+}
+
+.slide {
+	&__image {
+		height: 25vh;
+		width: 55vh;
+		margin: auto;
+		@media screen and (min-width: $breakpoint-tv) {
+			width: 55vw;
+			height: 46vh;
+		}
+		&__quote {
+			display: flex;
+			justify-content: center;
+		}
+	}
+}

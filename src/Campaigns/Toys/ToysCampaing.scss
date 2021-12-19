@@ -69,6 +69,9 @@
 		font-size: 30px;
 		margin-bottom: 10vw;
 		text-align: center;
+		@media screen and (min-width: $breakpoint-tv) {
+			margin-bottom: 2vw;
+		}
 	}
 
 	&__counter {
@@ -103,6 +106,9 @@
 
 	&__waves-red {
 		transform: rotate(180deg) scaleX(-1);
+		@media screen and (min-width: $breakpoint-tv) {
+			margin-top: 4rem;
+		}
 	}
 
 	&__waves-blue {

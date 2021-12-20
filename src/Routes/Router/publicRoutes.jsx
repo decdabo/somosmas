@@ -32,7 +32,7 @@ export const ProjectsForm = lazy(() =>
 	import("../../Components/Projects/ProjectsForm")
 );
 
-export const { AboutMain } = lazy(() =>
+export const AboutMain = lazy(() =>
 	import("../../Components/About/AboutMain")
 );
 

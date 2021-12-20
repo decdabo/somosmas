@@ -26,6 +26,7 @@
     "react-router-transition": "github:finnmerlett/react-router-transition#build",
     "react-scripts": "^4.0.3",
     "react-slick": "^0.28.1",
+    "react-social-plugins": "^2.1.0",
     "react-top-loading-bar": "^2.1.0",
     "reactjs-popup": "^2.0.5",
     "redux": "^4.1.2",

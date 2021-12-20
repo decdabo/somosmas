@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ItemList } from "./ItemList";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSlides } from "../../store/slices/slidesSlice";
+import { SkeletonLoader } from "../../Components/Loader/SkeletonLoader";
 
 export const ScreenSliderList = () => {
 	const { slidesData } = useSelector((state) => state);

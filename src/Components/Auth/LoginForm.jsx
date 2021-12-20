@@ -1,21 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import '../../styles/components/formStyles.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-//import { alertConfirmation } from '../../Services/alerts/Alerts';
 
 
 const LoginForm = () => {
+    
+
     const [initialValues, setInitialValues] = useState({
         email: '',
         password: ''
-    });
-    
-
-   
-
-    
+    });   
 
     const [formEnviado, setFormEnviado] = useState(false)
+
+ 
 
 
     return (
@@ -68,6 +66,7 @@ const LoginForm = () => {
                 })
                 
                 setFormEnviado(true)
+               
                 setTimeout(() => {
                     setFormEnviado(false)
                 }, 10000);
@@ -78,6 +77,7 @@ const LoginForm = () => {
                     `
                 )
                 resetForm()
+                
             }}
         
         >
@@ -120,15 +120,7 @@ const LoginForm = () => {
                     >
                         Log In
                     </button>
-                    {/* <button
-                        className="form__btn-primary"
-                        type="submit"
-                        onClick={()=>alertConfirmation('','peticion realiada cone zto')}
-                        
-                    >
-                        Probar alerta
-                    </button> */}
-                    
+                   
                     {
                         formEnviado && <p className="form__message-success">Log in successfull</p>
                     }

@@ -1,0 +1,26 @@
+@import "../../styles/variables.scss";
+
+.navbar {
+    background-color: transparent;
+    border-bottom: 1px solid #fff;
+}
+
+.nav-link{
+    padding: 7px 13px !important;
+    border-radius: 3px !important;
+}
+.nav-link:hover {
+    background: $accent-color !important;
+    transition: .2s;
+    color: #fff !important;
+    
+}
+
+.nav-link.active{
+    background: $accent-color !important;
+    transition: .2s;
+    color: #fff !important;
+}
+
+
+

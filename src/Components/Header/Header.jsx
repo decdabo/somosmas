@@ -3,6 +3,8 @@ import Menu from '../../assets/images/menu.svg'
 import '../Header/Header.scss'
 import { SideBar } from './SideBar';
 
+
+
 const Header = () => {
     const [open, setOpen] = useState(false);
     return (

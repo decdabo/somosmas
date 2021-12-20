@@ -25,9 +25,7 @@ export const Put = async (endPoint, id, body) => {
 
 	try {
 		const response = await axios.put(url, body, {
-			headers: {
-				Authorization: `Bearer ${tempToken}`,
-			},
+			headers: getToken(),
 		});
 
 		return response.data;
@@ -41,9 +39,7 @@ export const Get = async (endPoint, id) => {
 
 	try {
 		const response = await axios.get(url, {
-			headers: {
-				Authorization: `Bearer ${tempToken}`,
-			},
+			headers: getToken(),
 		});
 
 		return response.data;
@@ -57,9 +53,7 @@ export const Delete = async (endPoint, id) => {
 
 	try {
 		const { data } = await axios.delete(url, {
-			headers: {
-				Authorization: tempToken,
-			},
+			headers: getToken(),
 		});
 
 		return data;
@@ -73,9 +67,7 @@ export const Post = async (endPoint, body) => {
 
 	return axios
 		.post(url, body, {
-			headers: {
-				Authorization: `Bearer ${tempToken}`,
-			},
+			headers: getToken(),
 		})
 		.then((res) => res.data)
 		.catch((err) => {
@@ -88,9 +80,7 @@ export const Patch = async (endPoint, id, body) => {
 
 	try {
 		const response = await axios.patch(url, body, {
-			headers: {
-				Authorization: `Bearer ${tempToken}`,
-			},
+			headers: getToken(),
 		});
 
 		return response.data;

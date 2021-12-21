@@ -13,6 +13,7 @@ import "../../Components/Footer/FooterPublic.scss";
 import { useEffect, useState } from "react";
 import FooterPublic from "../../Components/Footer/FooterPublic";
 import Slider from "./Slider";
+import Header from "./Header";
 
 // -------------timer---------------
 
@@ -51,6 +52,7 @@ const CountDownTimer = () => {
 const ToysCampaign = () => {
 	return (
 		<>
+			<Header />
 			<div className="toys__container">
 				<div className="toys__title">
 					<div>Colecta de juguetes</div>

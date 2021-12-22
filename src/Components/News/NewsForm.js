@@ -166,7 +166,7 @@ const NewsForm = () => {
 							className="form__select"
 							children={[
 								<option value="" disabled key={0}>
-									Seleccionar categoría
+									Seleccionar categoría Seleccionar categoría
 								</option>,
 							].concat(
 								categoriesData.data.map((category) => (

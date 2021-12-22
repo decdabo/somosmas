@@ -1,11 +1,12 @@
 import FooterPublic from "../Footer/FooterPublic";
+import HeaderWeb from "../Header/HeaderWeb";
 
 import "./LayoutPublic.scss";
 
 const LayoutPublic = ({ children }) => {
 	return (
 		<div>
-			<div className="layoutPublic__temp-header">TEMP HEADER</div>
+			<HeaderWeb />
 			<main className="layoutPublic__main">{children}</main>
 			<FooterPublic />
 		</div>

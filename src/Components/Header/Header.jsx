@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Menu from '../../assets/images/menu.svg'
-import '../Header/Header.scss'
+import '../Header/header.scss'
 import { SideBar } from './SideBar';
 
 

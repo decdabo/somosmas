@@ -1,16 +1,17 @@
 import { Link } from "react-router-dom";
+import { alertError, alertInformation } from "../../Services/alerts/Alerts";
 import { Delete } from "../../Services/privateApiService";
 
 export const UsersTable = ({ users }) => {
 
-	const handleDelete = async (id, user) => {
+	const handleDelete = async ( user) => {
 		const userDelete = await Delete("users", user.id);
 
 		if (userDelete.message) {
-			alert(userDelete.message);
+			alertInformation(userDelete.message);
         
 		} else { 
-			alert("El usuario no existe");
+			alertError("El usuario no existe");
 
 		}
 	};
@@ -25,7 +26,7 @@ export const UsersTable = ({ users }) => {
 						<th>Actions</th>
 					</tr>
 				</thead>
-				{users?.map((user, id) => (
+				{users?.data.map((user, id) => (
 					<tbody key={id}>
 						<tr className="table__rows">
 							<td>{user.name || ""}</td>
@@ -33,7 +34,7 @@ export const UsersTable = ({ users }) => {
 							<td className="table__actions">
 								<button
 									className="table__buttons"
-									onClick={() => handleDelete(id, user)}
+									onClick={() => handleDelete(user)}
 								>
 									<i className="fas fa-trash-alt" />
 								</button>

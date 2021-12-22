@@ -10,6 +10,7 @@ export const UsersList = () => {
 	const { usersReducer } = useSelector((state) => state);
 	const dispatch = useDispatch();
 
+
 	useEffect(() => {
 		dispatch(fetchUsers());
 	}, []);
@@ -21,9 +22,7 @@ export const UsersList = () => {
           Regresar
 				</Link>
 			</div>
-			{usersReducer.data.map((usersReducer, i) => {
-				return <UsersTable users={usersReducer} key={i} />;
-			})}
+				 <UsersTable users={usersReducer} />;
 		</div>
 	);
 };

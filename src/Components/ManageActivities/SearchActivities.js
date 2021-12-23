@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Formik } from 'formik';
-import axios from 'axios';
+import { Get } from '../../Services/publicApiService';
 
-export const SearchActivities = () => {
-    const [activitiesList, setActivitiesList] = useState([]);
-    
+export const SearchActivities = ({ setActivities }) => {
+
     const GetSearch = async (value) => {
         try {
-            const dataSearch = await axios.get(`${process.env.REACT_APP_API}/activities?seach=${value}`)
-            return dataSearch;
+            const dataSearch = await Get(`activities?search=${value}`)
+            return dataSearch.data;
         } catch (error) {
             console.log(error)
         }
@@ -18,10 +17,9 @@ export const SearchActivities = () => {
         handleChange(e);
         const { value } = values;
         const searchName = value.toLowerCase()
-
         try {
             GetSearch(searchName)
-                .then(res => setActivitiesList(res))
+                .then(res => { setActivities(res) })
                 .catch(e => console.log(e));
         } catch (error) {
             console.log(error)
@@ -33,15 +31,8 @@ export const SearchActivities = () => {
             initialValues={{
                 searchText: '',
             }}
-            validate={(values) => {
-                let errors = {}
-                if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.searchText)) {
-                    errors.searchText = 'El nombre del héroe solo debe contener letras'
-                }
-                return errors;
-            }}
         >
-            {({ values, handleChange, errors }) => (
+            {({ values, handleChange }) => (
                 <div className="container h-25 my-5">
                     <div className="row w-100">
                         <hr />
@@ -56,17 +47,10 @@ export const SearchActivities = () => {
                             aria-label=".form-control-lg example"
                             onChange={(e) => handleInputChange(e, handleChange, e.target)}
                         />
-                        {errors.searchText && <h4 className="fs-6 text-danger">{errors.searchText}</h4>}
                         <hr />
                     </div>
-                    {
-                        (activitiesList.status === 200 && !errors.searchText)
-                            ? (<h1>Sexo</h1>)
-                            : (<h4 className="fs-6 text-danger">{activitiesList.error}</h4>)
-                    }
                 </div>
             )}
-
         </Formik>
     );
 }

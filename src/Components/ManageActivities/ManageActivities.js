@@ -1,15 +1,14 @@
-import { useState, Fragment, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { FormEditActivities } from "../../backoffice/FormEditActivities";
-import apiDateToText from "../../helpers/apiDateToText";
 import { Get } from "../../Services/privateApiService";
-
-import "./ManageActivities.scss";
 import { SearchActivities } from "./SearchActivities";
+import { ActivityItem } from "./ActivityItem";
+import "./ManageActivities.scss";
 
 const ManageActivities = () => {
 	const [activities, setActivities] = useState([]);
+	const [status, setStatus] = useState('Buscando actividades...')
 	const [message, setMessage] = useState("");
 	const [editingActivity, setEditingActivity] = useState(NaN); // will change to the id of the activity to edit
 
@@ -42,12 +41,25 @@ const ManageActivities = () => {
 		fetchApiData();
 	}, []);
 
+	const handleErrorMsg = () => {
+		if (!activities[0]) {
+			setTimeout(() => {
+				setStatus('No se han encontrado actividades')
+			}, 3500);
+		}else{
+			setStatus('Buscando actividades...')
+		}
+	}
+	useEffect(() => {
+		handleErrorMsg();
+	}, [activities])
+
 	return (
 		<div className="manage-activities-container">
 			<Link to="/backoffice/activities/create" className="new-activity-link">
 				Create New Activity
 			</Link>
-			<SearchActivities />
+			<SearchActivities setActivities={setActivities} />
 			{activities.length ? (
 				<>
 					<table className="table-container">
@@ -61,43 +73,14 @@ const ManageActivities = () => {
 						</thead>
 						<tbody>
 							{activities.map((activity) => (
-								<Fragment key={activity.id}>
-									<tr>
-										<td className="activity-table-data">{activity.name}</td>
-										<td className="activity-table-data">
-											<img
-												className="activity-image"
-												src={activity.image || ""}
-												alt="descripcion"
-												onError={(e) => {
-													e.target.src =
-														"https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png";
-												}}
-											/>
-										</td>
-										<td className="activity-table-data">
-											{apiDateToText(activity.created_at).date}
-										</td>
-										<td className="activity-table-data">
-											<button onClick={() => handleEditActivity(activity.id)}>
-												Editar
-											</button>
-											<button onClick={() => handleDeleteActivity(activity.id)}>
-												Eliminar
-											</button>
-										</td>
-									</tr>
-									<tr>
-										{editingActivity === activity.id && (
-											<td colSpan="4" className="activity-table-data-form">
-												<div className="form-container">
-													<FormEditActivities activities={activity} />
-													<button onClick={handleCancelEdit}>Cancelar</button>
-												</div>
-											</td>
-										)}
-									</tr>
-								</Fragment>
+								<ActivityItem
+									key={activity.id}
+									activity={activity}
+									handleEditActivity={handleEditActivity}
+									handleDeleteActivity={handleDeleteActivity}
+									handleCancelEdit={handleCancelEdit}
+									editingActivity={editingActivity}
+								/>
 							))}
 						</tbody>
 					</table>
@@ -110,7 +93,7 @@ const ManageActivities = () => {
 					</div>
 				</>
 			) : (
-				<div>Loading...</div>
+				<div>{status}</div>
 			)}
 		</div>
 	);

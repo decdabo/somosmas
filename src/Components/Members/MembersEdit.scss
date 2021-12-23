@@ -1,43 +1,53 @@
-// @import "../../styles//variables.scss";
-// .form {
-//   &__container {
-//     min-height: 100vh !important;
-//   }
+@import "../../styles//variables.scss";
 
-//   &__input {
-//     margin: 0.7rem;
-//   }
+.form {
+	&__members-container {
+		// margin: 2rem auto;
+		width: 70%;
+		background-color: $bg-primary-color;
+		border: 1px solid $primary-color;
+		display: flex;
+		flex-direction: column;
+		padding: 30px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	&__members-input {
+		margin: 0.7rem;
+	}
+	&__member-image-container {
+		margin: 2rem;
+	}
+}
+
+// &__members-input[type="file"] {
+// 	border: 0;
+// 	clip: rect(0, 0, 0, 0);
+// 	height: 1px;
+// 	overflow: hidden;
+// 	padding: 0;
+// 	position: absolute !important;
+// 	white-space: nowrap;
+// 	width: 1px;
 // }
 
-// input[type="file"] {
-//   border: 0;
-//   clip: rect(0, 0, 0, 0);
-//   height: 1px;
-//   overflow: hidden;
-//   padding: 0;
-//   position: absolute !important;
-//   white-space: nowrap;
-//   width: 1px;
-// }
-// .ck-editor {
-//   width: 40%;
-// }
-
-// label {
-//   margin: 1rem;
-
-//   width: auto;
-//   cursor: pointer;
-//   color: $bg-primary-color;
-//   display: inline-block;
-//   background: #313839;
-//   font-size: 16px;
-//   padding: 8px 20px;
-//   transition: 0.15s;
-//   border: none;
-// }
-
-// label:hover {
-//   background: #748185;
-//   transition: 0.15s;
+// &__members-label {
+// 	margin: 2rem auto;
+// 	width: 30%;
+// 	cursor: pointer;
+// 	color: $bg-primary-color;
+// 	display: inline-block;
+// 	background: #313839;
+// 	font-size: 16px;
+// 	padding: 8px 20px;
+// 	transition: 0.15s;
+// 	border: none;
+// 	text-align: center;
+// 	&:hover {
+// 		background: #748185;
+// 		transition: 0.15s;
+// 	}
 // }

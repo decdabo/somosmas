@@ -6,6 +6,7 @@ import apiDateToText from "../../helpers/apiDateToText";
 import { Get } from "../../Services/privateApiService";
 
 import "./ManageActivities.scss";
+import { SearchActivities } from "./SearchActivities";
 
 const ManageActivities = () => {
 	const [activities, setActivities] = useState([]);
@@ -31,7 +32,7 @@ const ManageActivities = () => {
 	};
 
 	const fetchApiData = async () => {
-		const response = await Get(process.env.REACT_APP_API_ACTIVITIES);
+		const response = await Get('activities');
 		if (response.success) {
 			setActivities(response.data);
 		}
@@ -44,8 +45,9 @@ const ManageActivities = () => {
 	return (
 		<div className="manage-activities-container">
 			<Link to="/backoffice/activities/create" className="new-activity-link">
-        Create New Activity
+				Create New Activity
 			</Link>
+			<SearchActivities />
 			{activities.length ? (
 				<>
 					<table className="table-container">
@@ -69,7 +71,7 @@ const ManageActivities = () => {
 												alt="descripcion"
 												onError={(e) => {
 													e.target.src =
-                            "https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png";
+														"https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png";
 												}}
 											/>
 										</td>
@@ -78,10 +80,10 @@ const ManageActivities = () => {
 										</td>
 										<td className="activity-table-data">
 											<button onClick={() => handleEditActivity(activity.id)}>
-                        Editar
+												Editar
 											</button>
 											<button onClick={() => handleDeleteActivity(activity.id)}>
-                        Eliminar
+												Eliminar
 											</button>
 										</td>
 									</tr>

@@ -16,7 +16,6 @@ import {
 	Home,
 	LoginForm,
 	Members,
-	MembersForm,
 	NewsForm,
 	PageNotFound,
 	ProjectsForm,
@@ -51,7 +50,6 @@ function Public() {
 					<Route exact path="/edit-user/:id" component={UserForm} />
 					<Route exact path="/school-campaign" component={SchoolCampaign} />
 					<Route exact path="/toys-campaign" component={ToysCampaign} />
-					<Route exact path="/create-member" component={MembersForm} />
 					<Route exact path="/create-project" component={ProjectsForm} />
 					<Route exact path="/about" component={AboutMain} />
 					<Route exact path="/contact-form" component={ContactForm} />

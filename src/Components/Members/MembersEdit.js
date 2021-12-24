@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Get } from "../../Services/publicApiService";
-import { Put } from "../../Services/privateApiService";
+import { Post, Put } from "../../Services/privateApiService";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import getBase64FromUrl from "../../helpers/imageToBase64";
@@ -9,7 +9,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import "./MembersEdit.scss";
-
+import { alertError } from "../../Services/alerts/Alerts";
 const validUrl =
 	/((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/;
 const linkedInUrl =
@@ -41,94 +41,99 @@ const MembersEdit = () => {
 	const [image, setImage] = useState("");
 	const [facebookUrl, setFacebookUrl] = useState("");
 	const [linkedinUrl, setLinkedinUrl] = useState("");
+	const [isLoading, setIsLoading] = useState(true);
 
 	const { id } = useParams();
-
 	const getMember = async () => {
-		try {
-			await Get(process.env.REACT_APP_API_MEMBERS, id).then((res) => {
-				const {
-					data: { name, description, image, facebookUrl, linkedinUrl },
-				} = res;
-				getBase64FromUrl(image).then((imagen64) => {
-					setImage(imagen64);
-				});
-				setName(name);
-				setDescription(description);
-				setFacebookUrl(facebookUrl);
-				setLinkedinUrl(linkedinUrl);
-			});
-		} catch (err) {
-			alert(err);
+		await Get(process.env.REACT_APP_API_MEMBERS, id).then((res) => {
+			const {
+				data: { name, description, image, facebookUrl, linkedinUrl },
+			} = res;
+			setName(name);
+			setDescription(description);
+			setImage(image);
+			setFacebookUrl(facebookUrl);
+			setLinkedinUrl(linkedinUrl);
+		});
+		setIsLoading(false);
+	};
+
+	const submitEdit = async (values) => {
+		const body = { ...values };
+		if (image == values.image) {
+			delete body.image;
+		}
+		const response = await Put(process.env.REACT_APP_API_MEMBERS, id, body);
+
+		if (!response.success) {
+			alertError("Algo salio mal");
 		}
 	};
 
-	const editForm = async (values) => {
-		try {
-			const response = await Put(process.env.REACT_APP_API_MEMBERS, id, values);
-			return alert(JSON.stringify(response));
-		} catch (err) {
-			return alert(err);
+	const SubmitNew = async (values) => {
+		const response = await Post(process.env.REACT_APP_API_MEMBERS, values);
+		if (!response.success) {
+			alertError("Algo salio mal");
 		}
 	};
 
 	useEffect(() => {
-		getMember();
+		if (id) {
+			getMember();
+		} else {
+			setIsLoading(false);
+		}
 	}, []);
 
-	const handleChange = (e, setFieldValue) => {
+	const handleImageChange = (e, setFieldValue) => {
 		if (e.currentTarget.files && e.currentTarget.files[0]) {
 			const reader = new FileReader();
+
 			reader.onload = function (e) {
 				setFieldValue("image", e.target.result);
 			};
+
 			reader.readAsDataURL(e.currentTarget.files[0]);
 		}
 	};
 
-	const handleChangeDescription = (event, editor, setFieldValue) => {
-		const data = editor.getData();
-		setFieldValue("description", data);
-	};
-
+	if (isLoading) {
+		return <div>Loading...</div>;
+	}
 	return (
-		<Formik
-			initialValues={{
-				name,
-				description,
-				image,
-				facebookUrl,
-				linkedinUrl,
-			}}
-			validationSchema={SignupSchema}
-			enableReinitialize={true}
-			onSubmit={(values) => {
-				editForm(values);
-			}}
-		>
-			{({ errors, touched, setFieldValue, values }) => (
-				<Form className=" form__members-container">
-					<h3 className="txt-center">Members Edit Form</h3>
-					<Field
-						className="form__input form__members-input"
-						type="text"
-						id="name"
-						name="name"
-						placeholder="Nuevo nombre"
-					/>
-					{errors.name && touched.name ? (
+		<>
+			<Formik
+				initialValues={{
+					name,
+					description,
+					image,
+					facebookUrl,
+					linkedinUrl,
+				}}
+				validationSchema={SignupSchema}
+				onSubmit={id ? submitEdit : SubmitNew}
+			>
+				{({ errors, setFieldValue, values }) => (
+					<Form className="form__container">
+						<h3 className="txt-center">Members Edit Form</h3>
+						<Field
+							className="form__input form__members-input"
+							type="text"
+							id="name"
+							name="name"
+							placeholder="Nuevo nombre"
+						/>
 						<div className="form__message-validation">{errors.name}</div>
-					) : null}
-					<div className="ck-editor">
+
 						<CKEditor
-							id="description"
-							name="description"
 							editor={ClassicEditor}
-							data={description}
+							data={values.description}
 							onChange={(event, editor) => {
-								handleChangeDescription(event, editor, setFieldValue);
+								const data = editor.getData();
+								setFieldValue("description", data);
 							}}
 							config={{
+								placeholder: "Nueva descripción",
 								cloudServices: {
 									tokenUrl:
 										"https://85122.cke-cs.com/token/dev/63f1e5122f7b89374a44f0ba134c7a670437bab84212188ac1b17d829d92",
@@ -136,64 +141,55 @@ const MembersEdit = () => {
 								},
 							}}
 						/>
-					</div>
-					{errors.description && touched.description ? (
+
 						<div className="form__message-validation">{errors.description}</div>
-					) : null}
-
-					<label>
-						Image:
-						<input
-							className="form__image-input"
-							type="file"
-							name="image"
-							accept="image/png,image/jpeg"
-							onChange={(event) => {
-								handleChange(event, props);
-							}}
-						/>
-						<div className="form__image-container">
-							<img
-								src={values.image}
-								alt="article"
-								onError={(e) => {
-									e.target.src =
-										"https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png";
-								}}
+						<label>
+							<input
+								className="form__image-input"
+								type="file"
+								accept="image/*"
+								onChange={(e) => handleImageChange(e, setFieldValue)}
 							/>
-						</div>
-					</label>
 
-					{errors.image && touched.image ? (
-						<div className="form__message-validation"> {errors.image}</div>
-					) : null}
-					<Field
-						className="form__input form__members-input"
-						id="facebookUrl"
-						type="text"
-						name="facebookUrl"
-						placeholder="Facebook Url"
-					/>
+							<div className="form__image-container">
+								<img
+									src={values.image}
+									alt="article"
+									onError={(e) => {
+										e.target.src =
+											"https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png";
+									}}
+								/>
+							</div>
+						</label>
+						<div className="form__message-validation">{errors.image}</div>
+						<Field
+							className="form__input form__members-input"
+							id="facebookUrl"
+							type="text"
+							name="facebookUrl"
+							placeholder="Facebook Url"
+						/>
 
-					{errors.facebookUrl && touched.facebookUrl ? (
 						<div className="form__message-validation">{errors.facebookUrl}</div>
-					) : null}
-					<Field
-						className="form__input form__members-input"
-						id="linkedinUrl"
-						type="text"
-						name="linkedinUrl"
-						placeholder="LinkedIn Url"
-					/>
-					{errors.linkedinUrl && touched.linkedinUrl ? (
+
+						<Field
+							className="form__input form__members-input"
+							id="linkedinUrl"
+							type="text"
+							name="linkedinUrl"
+							placeholder="LinkedIn Url"
+						/>
+
 						<div className="form__message-validation">{errors.linkedinUrl}</div>
-					) : null}
-					<button className="form__btn-primary" type="submit">
-						Editar
-					</button>
-				</Form>
-			)}
-		</Formik>
+
+						<button className="form__btn-primary" type="submit">
+							Editar
+						</button>
+					</Form>
+				)}
+			</Formik>
+		</>
 	);
 };
 

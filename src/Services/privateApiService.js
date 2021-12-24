@@ -65,14 +65,15 @@ export const Delete = async (endPoint, id) => {
 export const Post = async (endPoint, body) => {
 	const url = `${baseUrl}/${endPoint}`;
 
-	return axios
-		.post(url, body, {
+	try {
+		const response = await axios.post(url, body, {
 			headers: getToken(),
-		})
-		.then((res) => res.data)
-		.catch((err) => {
-			return { success: false, err };
 		});
+
+		return response.data;
+	} catch (error) {
+		return { success: false, error };
+	}
 };
 
 export const Patch = async (endPoint, id, body) => {

@@ -34,6 +34,11 @@ function Backoffice() {
 				/>
 				<Route
 					exact
+					path="/backoffice/members/create"
+					component={MembersEdit}
+				/>
+				<Route
+					exact
 					path="/backoffice/organization/edit"
 					component={OrganizationForm}
 				/>

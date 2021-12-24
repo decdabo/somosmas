@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Redirect } from "react-router-dom";
 import { Field, Form, Formik } from "formik";
 import Popup from "reactjs-popup";
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
@@ -12,11 +12,12 @@ import { Put } from "../../Services/privateApiService";
 
 import LoaderComponent from "../Loader/Loader";
 import termsConditions from "../../assets/files/TyC.pdf";
-
 import { alertError, alertInformation } from "../../Services/alerts/Alerts";
+import useAuthActions from "../../store/hooks/useAuthActions";
 
 const UserForm = () => {
 	const { push } = useHistory();
+	const { isLogged } = useAuthActions();
 
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
@@ -108,118 +109,122 @@ const UserForm = () => {
 
 	return (
 		<div>
-			<Formik
-				initialValues={{ name, email, role_id, password, profile_image }}
-				onSubmit={(values) => {
-					submitForm(values);
-				}}
-				validationSchema={ErrorSchema}
-				enableReinitialize={true}
-			>
-				{(props) => {
-					return (
-						<Form className="form__user">
-							<div className="form__container">
-								<h3 className="txt-center">User Form</h3>
-								<label>Name: </label>
-								<Field name={"name"} type={"text"} className="form__input" />
-								<small className="form__message-validation">
-									{props.errors.name}
-								</small>
-								<label>Email: </label>
-								<Field name={"email"} type={"email"} className="form__input" />
-								<small className="form__message-validation">
-									{props.errors.email}
-								</small>
-								<label>Password: </label>
-								<Field
-									name={"password"}
-									type={"password"}
-									className="form__input"
-								/>
-								<small className="form__message-validation">
-									{props.errors.password}
-								</small>
-								<label>Role: </label>
-								<Field name={"role_id"} as="select" className="form__select">
-									<option value="">-- Select role --</option>
-									<option value="0">User</option>
-									<option value="1">Administrator</option>
-								</Field>
-								<small className="form__message-validation">
-									{props.errors.role_id}
-								</small>
-								<label>Image: </label>
-								<input
-									type="file"
-									name="profile_image"
-									accept="image/png,image/jpeg"
-									onChange={(event) => {
-										handleChange(event, props);
-									}}
-								/>
-								<small className="form__message-validation">
-									{props.errors.profile_image}
-								</small>
-								<div className="my-10px text-center ">
-									<Popup
-										trigger={
-											<button
-												type="button"
-												className="form__btn-primary my-10px"
-												id="termsConditions"
-											>
-												Terminos y Condiciones
-											</button>
-										}
-										position="top left"
-										modal
-									>
-										{(close) => (
-											<div>
-												<Document
-													file={termsConditions}
-													loading={
-														<div className="flex align-center">
-															<LoaderComponent />
-														</div>
-													}
+		{isLogged ? (<Redirect to="/login-form"/>)
+			: (
+				<Formik
+					initialValues={{ name, email, role_id, password, profile_image }}
+					onSubmit={(values) => {
+						submitForm(values);
+					}}
+					validationSchema={ErrorSchema}
+					enableReinitialize={true}
+				>
+					{(props) => {
+						return (
+							<Form className="form__user">
+								<div className="form__container">
+									<h3 className="txt-center">User Form</h3>
+									<label>Name: </label>
+									<Field name={"name"} type={"text"} className="form__input" />
+									<small className="form__message-validation">
+										{props.errors.name}
+									</small>
+									<label>Email: </label>
+									<Field name={"email"} type={"email"} className="form__input" />
+									<small className="form__message-validation">
+										{props.errors.email}
+									</small>
+									<label>Password: </label>
+									<Field
+										name={"password"}
+										type={"password"}
+										className="form__input"
+									/>
+									<small className="form__message-validation">
+										{props.errors.password}
+									</small>
+									<label>Role: </label>
+									<Field name={"role_id"} as="select" className="form__select">
+										<option value="">-- Select role --</option>
+										<option value="0">User</option>
+										<option value="1">Administrator</option>
+									</Field>
+									<small className="form__message-validation">
+										{props.errors.role_id}
+									</small>
+									<label>Image: </label>
+									<input
+										type="file"
+										name="profile_image"
+										accept="image/png,image/jpeg"
+										onChange={(event) => {
+											handleChange(event, props);
+										}}
+									/>
+									<small className="form__message-validation">
+										{props.errors.profile_image}
+									</small>
+									<div className="my-10px text-center ">
+										<Popup
+											trigger={
+												<button
+													type="button"
+													className="form__btn-primary my-10px"
+													id="termsConditions"
 												>
-													<Page pageNumber={1} canvasBackground={"#f2f2f2"} />
-												</Document>
-												<div className="width-50 m-auto ">
-													<div className="flex justify-around my-10px">
-														<button
-															className="form__btn-primary"
-															onClick={() => handleTerms(true, close)}
-														>
-															Aceptar
-														</button>
-														<button
-															className="form__btn-secondary"
-															onClick={() => handleTerms(false, close)}
-														>
-															Cancelar
-														</button>
+													Terminos y Condiciones
+												</button>
+											}
+											position="top left"
+											modal
+										>
+											{(close) => (
+												<div>
+													<Document
+														file={termsConditions}
+														loading={
+															<div className="flex align-center">
+																<LoaderComponent />
+															</div>
+														}
+													>
+														<Page pageNumber={1} canvasBackground={"#f2f2f2"} />
+													</Document>
+													<div className="width-50 m-auto ">
+														<div className="flex justify-around my-10px">
+															<button
+																className="form__btn-primary"
+																onClick={() => handleTerms(true, close)}
+															>
+																Aceptar
+															</button>
+															<button
+																className="form__btn-secondary"
+																onClick={() => handleTerms(false, close)}
+															>
+																Cancelar
+															</button>
+														</div>
 													</div>
 												</div>
-											</div>
-										)}
-									</Popup>
+											)}
+										</Popup>
+									</div>
+									<button
+										type="submit"
+										disabled={!props.isValid && !terms}
+										className="form__btn-primary mx-auto"
+									>
+										{" "}
+										Send
+									</button>
 								</div>
-								<button
-									type="submit"
-									disabled={!props.isValid && !terms}
-									className="form__btn-primary mx-auto"
-								>
-									{" "}
-									Send
-								</button>
-							</div>
-						</Form>
-					);
-				}}
-			</Formik>
+							</Form>
+						);
+					}}
+				</Formik>
+			)
+		}
 		</div>
 	);
 };

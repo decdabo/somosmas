@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
 	validateAuth,
 	getUserInfo,
@@ -18,7 +18,15 @@ import {
 const useAuthActions = () => {
 	const dispatch = useDispatch();
 	const isLogged = localStorage.getItem("token");
+	const { role_id } = useSelector((state) => state.authReducer);
 
+	const onInit = async () => {
+		isLogged && (await dispatch(getUserInfo()));
+	};
+
+	const getRoleId = () => {
+		return role_id;
+	};
 	/**
 	 * Function that validates user data.
 	 * @author Julian Kominovic
@@ -61,10 +69,12 @@ const useAuthActions = () => {
 	};
 
 	return {
+		onInit,
 		validateUserLogin,
 		logginOut,
 		registerUserData,
 		isLogged,
+		getRoleId,
 	};
 };
 export default useAuthActions;

@@ -61,12 +61,17 @@ const registerUser = createAsyncThunk(
 
 export const authSlice = createSlice({
 	name: "auth",
+	// ROLES IDs
+	// 0 = Default - not set
+	// 1 = Admin
+	// 2 = Standard
 	initialState: {
 		isAuth: false,
 		id: 0,
 		userName: "",
 		userEmail: "",
 		token: "",
+		role_id: 0,
 	},
 	reducers: {
 		logout: (state) => {
@@ -77,6 +82,7 @@ export const authSlice = createSlice({
 				userName: "",
 				userEmail: "",
 				token: "",
+				role_id: 0,
 			};
 		},
 	},
@@ -85,7 +91,8 @@ export const authSlice = createSlice({
 
 		// ASYNC THUNK REGISTER USER
 		builder.addCase(registerUser.fulfilled, (state, action) => {
-			const { name, email, id } = action.payload.data.user;
+			if (action.payload.error) return { ...state };
+			const { name, email, id, role_id } = action.payload.data.user;
 			const token = action.payload.data.token;
 
 			return {
@@ -95,6 +102,7 @@ export const authSlice = createSlice({
 				userName: name,
 				id: id,
 				token: token,
+				role_id: role_id,
 			};
 		});
 
@@ -109,16 +117,17 @@ export const authSlice = createSlice({
 			if (!response.success) {
 				return { ...state, isAuth: false };
 			}
-			const { id, name, email } = response.data.user;
+			const { id, name, email, role_id } = response.data.user;
 			return {
 				...state,
 				isAuth: true,
 				userEmail: email,
 				userName: name,
 				id: id,
+				role_id: role_id,
 			};
 		});
-		builder.addCase(getUserInfo.rejected, (state, action) => {
+		builder.addCase(getUserInfo.rejected, (state) => {
 			return {
 				...state,
 				isAuth: false,
@@ -140,8 +149,8 @@ export const authSlice = createSlice({
 				token: response.data.token,
 			};
 		});
-		builder.addCase(validateAuth.rejected, (state, action) => {
-			return { ...state, isAuth: false, token: "" };
+		builder.addCase(validateAuth.rejected, (state) => {
+			return { ...state, isAuth: false, token: "", role_id: 0 };
 		});
 	},
 });

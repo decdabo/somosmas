@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { Get } from "../../Services/publicApiService";
-
+import urlQueryParams from "../../helpers/urlQueryParams";
 const initialState = {
 	loading: false,
 	error: false,
@@ -9,8 +9,10 @@ const initialState = {
 
 export const fetchUsers = createAsyncThunk(
 	"users/fetchUsers",
-	async (_, { rejectWithValue }) => {
-		const response = await Get("users");
+	async (searchParams, { rejectWithValue }) => {
+		const response = await Get(
+			urlQueryParams("users", searchParams.search, searchParams.limit)
+		);
 		if (response.success) {
 			return response.data;
 		}

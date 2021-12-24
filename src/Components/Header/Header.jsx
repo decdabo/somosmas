@@ -1,11 +1,7 @@
-import React, { useState } from "react";
-import Menu from "../../assets/images/menu.svg";
-import "../Header/header.scss";
-import { SideBar } from "./SideBar";
-
-
-
-
+import React, { useState } from 'react';
+import Menu from '../../assets/images/menu.svg'
+import '../Header/header.scss'
+import { SideBar } from './SideBar';
 
 const Header = () => {
 	const [open, setOpen] = useState(false);

@@ -13,6 +13,7 @@ import { ScreenSliderList } from "../backoffice/SlidesScreen/ScreenSliderList";
 import HomeDashboard from "../Components/HomeDashboard/HomeDashboard";
 import OrganizationData from "../backoffice/Organization/OrganizationData";
 import LayoutBackoffice from "../backoffice/Layouts/LayoutBackoffice";
+import MembersList from "./../Components/Members/MembersList";
 import PageNotFound from "../Components/PageNotFound/PageNotFound";
 
 function Backoffice() {
@@ -29,9 +30,16 @@ function Backoffice() {
 				<Route exact path="/backoffice/home" component={HomeForm} />
 				<Route
 					exact
+					path="/backoffice/members/create"
+					component={MembersEdit}
+				/>
+				<Route
+					exact
 					path="/backoffice/members/edit/:id"
 					component={MembersEdit}
 				/>
+				<Route exact path="/backoffice/members" component={MembersList} />
+
 				<Route
 					exact
 					path="/backoffice/members/create"

@@ -6,10 +6,13 @@ import { withRouter } from "react-router";
 import { AuthLogout } from "./AuthLogout";
 import "./headerWeb.scss";
 import logo from "../../assets/images/logo.png";
+import Donate from "./Donate/Donate";
+
 import { AuthLogin } from "./AuthLogin";
 import useAuthActions from "../../store/hooks/useAuthActions";
 
 const HeaderWeb = () => {
+	const { isAuth } = useSelector((state) => state.authReducer);
 	const { isLogged } = useAuthActions();
 
 	const data = [
@@ -63,6 +66,7 @@ const HeaderWeb = () => {
 						))}
 						{isLogged ? <AuthLogout /> : <AuthLogin />}
 					</ul>
+					{isAuth && <Donate />}
 				</div>
 			</div>
 		</nav>

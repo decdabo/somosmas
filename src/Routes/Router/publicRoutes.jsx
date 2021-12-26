@@ -48,11 +48,11 @@ export const ActivityInfo = lazy(() =>
 	import("../../Components/Activities/Detail/ActivityInfo")
 );
 
-export const { DonationsGreet } = lazy(() =>
+export const DonationsGreet = lazy(() =>
 	import("../../Components/Donations/DonationsGreet")
 );
 
-export const { ThanksGreet } = lazy(() =>
+export const ThanksGreet = lazy(() =>
 	import("../../Components/Donations/ThanksGreet")
 );
 

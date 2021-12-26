@@ -10,7 +10,7 @@ const Header = () => {
 			<div className="headerLogo">
 				<button className="headerLogo__btn" onClick={() => setOpen(!open)}>
 					<img src={Menu} alt="Menu" className="headerLogo__img" />
-				</button>
+				</button>n
 			</div>
 			<SideBar isOpen={open} />
 		</>

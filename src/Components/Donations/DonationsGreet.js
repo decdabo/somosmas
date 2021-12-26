@@ -1,6 +1,7 @@
 import "./styles/donations.scss";
+import mercadoPago from "../../assets/mercado-pago.svg";
 
-export const DonationsGreet = ({
+const DonationsGreet = ({
 	title = "Se parte del cambio para las familias de La Cava",
 }) => {
 	return (
@@ -15,6 +16,7 @@ export const DonationsGreet = ({
 						rel="noreferrer"
 					>
 						$100
+						<img src={mercadoPago} />
 					</a>
 				</div>
 				<div>
@@ -25,6 +27,7 @@ export const DonationsGreet = ({
 						rel="noreferrer"
 					>
 						$500
+						<img src={mercadoPago} />
 					</a>
 				</div>
 				<div>
@@ -35,6 +38,7 @@ export const DonationsGreet = ({
 						rel="noreferrer"
 					>
 						$1000
+						<img src={mercadoPago} />
 					</a>
 				</div>
 				<div>
@@ -45,6 +49,7 @@ export const DonationsGreet = ({
 						rel="noreferrer"
 					>
 						$2000
+						<img src={mercadoPago} />
 					</a>
 				</div>
 
@@ -56,9 +61,12 @@ export const DonationsGreet = ({
 						rel="noreferrer"
 					>
 						$5000
+						<img src={mercadoPago} />
 					</a>
 				</div>
 			</div>
 		</div>
 	);
 };
+
+export default DonationsGreet;

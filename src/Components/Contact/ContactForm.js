@@ -51,83 +51,66 @@ function ContactForm() {
 	});
 
 	return (
-		<div className="form__container">
-			<h1> Formulario de contacto </h1>
-			<form onSubmit={formik.handleSubmit}>
-				<div className="form-control form__control">
-					<label htmlFor="name">Nombre</label>
-					<br />
-					<input
-						type="text"
-						id="name"
-						name="name"
-						className="form__input "
-						onChange={formik.handleChange}
-						onBlur={formik.handleBlur}
-						value={formik.values.name}
-					/>
-					{formik.touched.name && formik.errors.name ? (
-						<div className="error form__message-validation">
-							{formik.errors.name}
-						</div>
-					) : null}
+		<div>
+			<form onSubmit={formik.handleSubmit} className="form__container">
+				<input
+					type="text"
+					id="name"
+					name="name"
+					className="form__input "
+					placeholder="Nombre"
+					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
+					value={formik.values.name}
+				/>
+
+				<div className="error form__message-validation">
+					{formik.errors.name}
 				</div>
-				<div className="form-control form__control">
-					<label htmlFor="email">Email</label>
-					<br />
-					<input
-						type="text"
-						id="email"
-						name="email"
-						className="form__input"
-						onChange={formik.handleChange}
-						onBlur={formik.handleBlur}
-						value={formik.values.email}
-					/>
-					{formik.touched.email && formik.errors.email ? (
-						<div className="error form__message-validation">
-							{formik.errors.email}
-						</div>
-					) : null}
+				<input
+					type="text"
+					placeholder="Email"
+					id="email"
+					name="email"
+					className="form__input"
+					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
+					value={formik.values.email}
+				/>
+
+				<div className="error form__message-validation">
+					{formik.errors.email}
 				</div>
-				<div className="form-control form__control">
-					<label htmlFor="phone">Teléfono</label>
-					<br />
-					<input
-						type="number"
-						id="phone"
-						name="phone"
-						className="form__input"
-						onChange={formik.handleChange}
-						onBlur={formik.handleBlur}
-						value={formik.values.phone}
-					/>
-					{formik.touched.phone && formik.errors.phone ? (
-						<div className="error form__message-validation">
-							{formik.errors.phone}
-						</div>
-					) : null}
+				<input
+					type="number"
+					placeholder="Teléfono"
+					id="phone"
+					name="phone"
+					className="form__input"
+					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
+					value={formik.values.phone}
+				/>
+
+				<div className="error form__message-validation">
+					{formik.errors.phone}
 				</div>
-				<div className="form-control form__control">
-					<label htmlFor="message">Mensaje</label>
-					<br />
-					<textarea
-						type="text"
-						id="message"
-						className="form__textarea"
-						name="message"
-						onChange={formik.handleChange}
-						onBlur={formik.handleBlur}
-						value={formik.values.message}
-					/>
-					{formik.touched.message && formik.errors.message ? (
-						<div className="error form__message-validation">
-							{formik.errors.message}
-						</div>
-					) : null}
+				<textarea
+					placeholder="Escribe tu consulta..."
+					type="text"
+					id="message"
+					className="form__textarea"
+					name="message"
+					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
+					value={formik.values.message}
+				/>
+
+				<div className="error form__message-validation">
+					{formik.errors.message}
 				</div>
 				<button type="submit" className="form__btn-primary">
-          Submit
+					Enviar
 				</button>
 			</form>
 		</div>

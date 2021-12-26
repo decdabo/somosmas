@@ -79,6 +79,7 @@
 		font-family: "Open Sans", sans-serif;
 		font-weight: bold;
 		cursor: pointer;
+		white-space: nowrap;
 
 		&-primary {
 			@extend .form__btn;

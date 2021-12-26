@@ -1,0 +1,37 @@
+.news {
+	&__container {
+		display: flex;
+		// justify-content: space-evenly;
+		width: 100%;
+		overflow-x: auto;
+		scroll-behavior: smooth;
+		& div {
+			margin-right: 20px;
+		}
+	}
+}
+.card {
+	&__container {
+		background-color: #dddddd;
+		padding: 10px;
+		width: 235px;
+		margin: auto;
+	}
+	&__image {
+		height: 140px;
+		width: 215px;
+		object-fit: cover;
+	}
+
+	&__title {
+		text-align: center;
+		font-weight: bold;
+	}
+
+	&__text {
+		text-align: center;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+}

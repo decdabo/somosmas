@@ -7,7 +7,11 @@
 }
 
 .layoutPublic__main {
-	padding: 50px 10%;
+	// padding: 50px 10%;
 	min-height: calc(100vh - 29vh - 100px); //visible height - footer - header
 	margin-bottom: 50px;
+
+	& section {
+		padding: 2% 5%;
+	}
 }

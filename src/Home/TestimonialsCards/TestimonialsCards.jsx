@@ -29,7 +29,10 @@ const TestimonialsCards = () => {
 								}}
 							/>
 							<p className="card__title">{item.name}</p>
-							<p className="card__text">{item.description}</p>
+							<p
+								className="card__text"
+								dangerouslySetInnerHTML={{ __html: item.description }}
+							></p>
 						</div>
 				  ))
 				: null}

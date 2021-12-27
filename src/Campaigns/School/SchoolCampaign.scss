@@ -1,41 +1,43 @@
 @import "../../styles//variables.scss";
 
-.slide {
-  overflow: hidden;
+.school__container {
+	.slide {
+		overflow: hidden;
 
-  &__container {
-    width: 100vw;
-  }
-  &__image {
-    margin: auto;
-    width: 100vw;
-    @media (min-width: $breakpoint-tablet) {
-      height: 55vh;
-    }
-    @media (min-width: $breakpoint-laptop) {
-      width: 85vw;
-      height: 55vh;
-    }
-    @media (min-width: $breakpoint-lg-laptop) {
-      width: 55vw;
-      height: 50vh;
-    }
+		&__container {
+			width: 100vw;
+		}
+		&__image {
+			margin: auto;
+			width: 100vw;
+			@media (min-width: $breakpoint-tablet) {
+				height: 55vh;
+			}
+			@media (min-width: $breakpoint-laptop) {
+				width: 85vw;
+				height: 55vh;
+			}
+			@media (min-width: $breakpoint-lg-laptop) {
+				width: 55vw;
+				height: 50vh;
+			}
 
-    @media (min-width: $breakpoint-tv) {
-      width: 50vw;
-      height: 40vh;
-    }
-    @media (min-width: $breakpoint-lg-tv) {
-      width: 40vw;
-      height: 70vh;
-    }
-  }
-  &__quote {
-    display: none;
+			@media (min-width: $breakpoint-tv) {
+				width: 50vw;
+				height: 40vh;
+			}
+			@media (min-width: $breakpoint-lg-tv) {
+				width: 40vw;
+				height: 70vh;
+			}
+		}
+		&__quote {
+			display: none;
 
-    @media (min-width: $breakpoint-laptop) {
-      display: block;
-      text-align: center;
-    }
-  }
+			@media (min-width: $breakpoint-laptop) {
+				display: block;
+				text-align: center;
+			}
+		}
+	}
 }

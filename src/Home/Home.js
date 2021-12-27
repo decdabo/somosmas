@@ -41,12 +41,10 @@ const Home = () => {
 			<section className="home__section-news">
 				<h1 className="home__subtitle">ULTIMAS NOVEDADES</h1>
 				<NewsCards />
-				<button className="form__btn-primary">Ver Todas</button>
 			</section>
 			<section className="home__section-testimonials">
 				<h1 className="home__subtitle">TESTIMONIOS</h1>
 				<TestimonialsCards />
-				<button className="form__btn-primary">Ver Todos</button>
 			</section>
 			<section className="home__section-contact">
 				<ContactForm />

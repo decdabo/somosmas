@@ -27,7 +27,10 @@ const NewsCards = () => {
 								}}
 							/>
 							<p className="card__title">{item.name}</p>
-							<p className="card__text">{item.content}</p>
+							<p
+								className="card__text"
+								dangerouslySetInnerHTML={{ __html: item.content }}
+							></p>
 						</div>
 				  ))
 				: null}

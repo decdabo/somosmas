@@ -133,6 +133,10 @@ const NewsForm = () => {
 			{({ isSubmitting, values, setFieldValue, errors }) => {
 				return (
 					<Form className="form__container">
+						<h3 className="text__title-tertiary">
+							{id ? "Editar noticia" : "Crear noticia"}
+						</h3>
+
 						<Field
 							type="text"
 							name="title"
@@ -151,11 +155,6 @@ const NewsForm = () => {
 							}}
 							config={{
 								placeholder: "Contenido",
-								cloudServices: {
-									tokenUrl:
-										"https://85122.cke-cs.com/token/dev/63f1e5122f7b89374a44f0ba134c7a670437bab84212188ac1b17d829d92",
-									uploadUrl: "https://85122.cke-cs.com/easyimage/upload/",
-								},
 							}}
 						/>
 						<div className="form__message-validation">{errors.content}</div>
@@ -204,7 +203,7 @@ const NewsForm = () => {
 							type="submit"
 							disabled={isSubmitting}
 						>
-							Send
+							Enviar
 						</button>
 						<div
 							className={

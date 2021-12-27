@@ -1,135 +1,172 @@
 import { useEffect, useState } from "react";
 
-import { useFormik } from "formik";
+import { Formik } from "formik";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-
 
 import { validate } from "./helpers/slideValidations";
 import { Get, Post } from "../../Services/publicApiService";
 import { Put } from "../../Services/privateApiService";
 import "../../styles/components/formStyles.scss";
 import "./slidesForm.scss";
+import { useParams } from "react-router-dom";
+import LoadingSpinner from "../Spinner/LoadingSpinner";
 
-const id = 632;
+const SlidesForm = () => {
+	const [slide, setSlide] = useState({});
+	const [message, setMessage] = useState("");
+	const [isLoading, setIsLoading] = useState(true);
 
-const SlidesForm = ({ data }) => {
-	const [slides, setslides] = useState([]);
-	const [imagePreview, setImagePreview] = useState("");
+	const { id } = useParams();
 
-	const image = (e) => {
-		const file = e.target.files[0];
-		const reader = new FileReader();
-		reader.readAsDataURL(file);
-		reader.onloadend = () => {
-			setImagePreview(reader.result);
-		};
+	const handleImageChange = (e, setFieldValue) => {
+		if (e.currentTarget.files && e.currentTarget.files[0]) {
+			const reader = new FileReader();
+
+			reader.onload = function (e) {
+				setFieldValue("image", e.target.result);
+			};
+
+			reader.readAsDataURL(e.currentTarget.files[0]);
+		}
 	};
-
 	useEffect(() => {
-		Get().then((r) => setslides(r));
+		if (id) {
+			Get(`slides/${id}`).then((r) => {
+				if (r.success) {
+					setSlide(r.data);
+				}
+				setIsLoading(false);
+			});
+		}
 	}, []);
 
-	const formik = useFormik({
-		initialValues: {
-			name: "",
-			description: "",
-			order: "",
-			image: "",
-		},
-		validate,
-		onSubmit: (values) => {
-			if (slides.findIndex((x) => x.id === Number(values.order)) > 0) {
-				formik.setFieldError("order", "El order debe ser unico.");
-			} else {
-				if (!data) {
-					Post("slides", formik)
-						.then(({ status }) =>
-							alert(JSON.stringify(`Status: ${status}, POST`))
-						)
-						.catch((err) => console.log(err));
-					formik.resetForm();
-				} else {
-					Put("slides", id, formik)
-						.then(({ status }) =>
-							alert(JSON.stringify(`Status: ${status}, PUT`))
-						)
-						.catch((err) => console.log(err));
-				}
-			}
-		},
-	});
+	if (isLoading) {
+		return <LoadingSpinner />;
+	}
 
 	return (
-		<form className="form__container" onSubmit={formik.handleSubmit}>
-			<label htmlFor="name">Nombre:</label>
-			<input
-				id="name"
-				className="form__input"
-				type="text"
-				name="name"
-				onChange={formik.handleChange}
-				onBlur={formik.handleBlur}
-				value={formik.values.name || data?.name || ""}
-				placeholder="Slide Title"
-				autoComplete="off"
-			/>
+		<Formik
+			initialValues={{
+				name: slide.name || "",
+				description: slide.description || "",
+				order: slide.order || "",
+				image: slide.image || "",
+			}}
+			onSubmit={async (values, { setFieldError, resetForm }) => {
+				// if (slide.findIndex((x) => x.id === Number(values.order)) > 0) {
+				// 	setFieldError("order", "El order debe ser unico.");
+				// } else {
+				if (!id) {
+					const response = await Post("slides", values);
+					if (response.success) {
+						setMessage("Creado exitosamente");
+					}
 
-			{formik.touched.name && formik.errors.name ? (
-				<div className="error-msg">{formik.errors.name}</div>
-			) : null}
-			<label htmlFor="description">Descripcion:</label>
-			<CKEditor
-				className="form__input"
-				id="description"
-				editor={ClassicEditor}
-				data={data?.description || formik.values.description || ""}
-				onChange={(e, editor) => {
-					formik.setFieldValue("description", editor.getData());
-				}}
-			/>
-			{formik.touched.description && formik.errors.description ? (
-				<div className="error-msg">{formik.errors.description}</div>
-			) : null}
-			<label htmlFor="order">Orden:</label>
-			<input
-				className="form__input"
-				type="text"
-				name="order"
-				id="order"
-				onChange={formik.handleChange}
-				onBlur={formik.handleBlur}
-				value={formik.values.order || data?.order || ""}
-				placeholder="0"
-				autoComplete="off"
-			/>
-			{formik.touched.order && formik.errors.order ? (
-				<div className="error-msg">{formik.errors.order}</div>
-			) : null}
-			<label htmlFor="image">Imagen:</label>
-			<input
-				type="file"
-				id="image"
-				name="image"
-				onChange={(e) => {
-					formik.handleChange(e);
-					image(e);
-				}}
-				onBlur={formik.handleBlur}
-				value={formik.values.image || data?.image || ""}
-				placeholder="Write the description"
-				autoComplete="off"
-			/>
-			<div className="form__image-container">
-				{imagePreview ? <img src={imagePreview} alt="..." /> : null}
-				{formik.touched.image && formik.errors.image ? (
-					<div className="error-msg">{formik.errors.image}</div>
-				) : null}
-			</div>
-			<button className="form__btn-primary" type="submit">
-        Send
-			</button>
-		</form>
+					resetForm();
+				} else {
+					const body = { ...values };
+					if (values.image === slide.image) {
+						delete body.image;
+					}
+					const response = await Put("slides", id, body);
+					if (response.success) {
+						setMessage("Editado exitosamente");
+					}
+				}
+				// }
+			}}
+			validate={validate}
+		>
+			{({
+				values,
+				errors,
+				handleSubmit,
+				handleChange,
+				handleBlur,
+				setFieldValue,
+			}) => {
+				return (
+					<form className="form__container" onSubmit={handleSubmit}>
+						<h3 className="text__title-tertiary">
+							{id ? "Editar slides" : "Crear slides"}
+						</h3>
+						<input
+							id="name"
+							className="form__input"
+							type="text"
+							name="name"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							value={values.name}
+							placeholder="Nombre"
+							autoComplete="off"
+						/>
+
+						<div className="form__message-validation">{errors.name}</div>
+						<CKEditor
+							className="form__input"
+							id="description"
+							editor={ClassicEditor}
+							data={values.description}
+							onChange={(e, editor) => {
+								setFieldValue("description", editor.getData());
+							}}
+							config={{
+								placeholder: "Descripción",
+							}}
+						/>
+						<div className="form__message-validation">{errors.description}</div>
+						<input
+							className="form__input"
+							type="text"
+							name="order"
+							id="order"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							value={values.order}
+							placeholder="Orden"
+							autoComplete="off"
+						/>
+						<div className="form__message-validation">{errors.order}</div>
+						<label>
+							<input
+								className="form__image-input"
+								type="file"
+								accept="image/*"
+								onChange={(e) => handleImageChange(e, setFieldValue)}
+								onBlur={handleBlur}
+							/>
+
+							<div className="form__image-container">
+								<img
+									src={values.image}
+									alt="slide"
+									onError={(e) => {
+										e.target.src =
+											"https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png";
+									}}
+								/>
+							</div>
+						</label>
+
+						<div className="form__message-validation">{errors.image}</div>
+						<button className="form__btn-primary" type="submit">
+							Enviar
+						</button>
+						<div
+							className={
+								message.includes("mal")
+									? "form__message-fail"
+									: "form__message-success"
+							}
+						>
+							{message}
+						</div>
+					</form>
+				);
+			}}
+		</Formik>
 	);
 };
 

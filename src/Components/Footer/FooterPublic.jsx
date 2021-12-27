@@ -14,6 +14,8 @@ const FooterPublic = () => {
 	const [instagram_url, setInstagram_url] = useState("");
 	const [twitter_url, setTwitter_url] = useState("");
 
+	const rol = localStorage.getItem("rol");
+
 	const getInfoFooterPublic = () => {
 		Get("organization").then((r) => {
 			const { data } = r;
@@ -48,10 +50,13 @@ const FooterPublic = () => {
 						{" "}
 						Nosotros
 					</Link>
-					<Link to={"/toys-campaign"} className="footer__grid__hide show-tv">
-						{" "}
-						Contacto
-					</Link>
+
+					{rol !== "admin" ? (
+						<Link to={"/toys-campaign"} className="footer__grid__hide show-tv">
+							{" "}
+							Contacto
+						</Link>
+					) : null}
 				</div>
 				<div className="footer__icons iconos-rrss">
 					<div>

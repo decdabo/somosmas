@@ -1,38 +1,39 @@
 @import "../../styles//variables.scss";
 
-    .headerSchool{
-        display: flex;
-        justify-content: center;
-        @media (min-width:  $breakpoint-tablet){
-            justify-content: space-around;
-        }
-        @media (min-width:  $breakpoint-lg-tv){
-            background-color: rgba($secondary-color, $alpha: 0.2);
-        }
-        &__logos {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            align-items: center;
-            padding-bottom: 15px;
-        }
-        &__logoONG{
-            display: none;
-            @media (min-width:  $breakpoint-tablet){
-                display: block;
-                margin-left: 25px;
-                width: 150px;
-            }
-        }
-        &__logoCampaña {
-            height: 100px;
-        }
-        &__slogan{
-            display: none;
-            @media (min-width:  $breakpoint-lg-laptop){
-                display: block;
-                width: 40vw;
-                padding-top: 25px;
-            }
-        }
-    }
+.headerSchool {
+	display: flex;
+	justify-content: center;
+	@media (min-width: $breakpoint-tablet) {
+		justify-content: space-around;
+	}
+	@media (min-width: $breakpoint-lg-tv) {
+		background-color: rgba($secondary-color, $alpha: 0.2);
+	}
+	&__logos {
+		display: flex;
+		justify-content: center;
+		margin-top: 20px;
+		align-items: center;
+		padding-bottom: 15px;
+	}
+	&__logoONG {
+		display: none;
+		@media (min-width: $breakpoint-tablet) {
+			display: block;
+			margin-left: 25px;
+			width: 150px;
+		}
+	}
+	&__logoCampaña {
+		height: 100px;
+	}
+	&__slogan {
+		display: none;
+		@media (min-width: $breakpoint-lg-laptop) {
+			display: block;
+			width: 40vw;
+			padding-top: 25px;
+			text-align: center;
+		}
+	}
+}

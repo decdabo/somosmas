@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import Menu from '../../assets/images/menu.svg'
-import '../Header/header.scss'
-import { SideBar } from './SideBar';
+import React, { useState } from "react";
+import Menu from "../../assets/images/menu.svg";
+import "../Header/header.scss";
+import { SideBar } from "./SideBar";
 
 const Header = () => {
 	const [open, setOpen] = useState(false);
@@ -10,7 +10,7 @@ const Header = () => {
 			<div className="headerLogo">
 				<button className="headerLogo__btn" onClick={() => setOpen(!open)}>
 					<img src={Menu} alt="Menu" className="headerLogo__img" />
-				</button>n
+				</button>
 			</div>
 			<SideBar isOpen={open} />
 		</>

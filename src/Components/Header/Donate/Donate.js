@@ -9,7 +9,7 @@ function Donate() {
 			<Link to="/donar">
 				<button className="donate__button">
 					Donar
-					<BiDonateHeart />
+					<BiDonateHeart size="1.6rem" />
 				</button>
 			</Link>
 		</div>

@@ -10,7 +10,7 @@ import { AuthLogin } from "./AuthLogin";
 import useAuthActions from "../../store/hooks/useAuthActions";
 
 const HeaderWeb = () => {
-	const { isLogged } = useAuthActions();
+	const { isLogged, getRoleId } = useAuthActions();
 
 	const [menuIsOpen, setMenuIsOpen] = useState(false);
 
@@ -40,6 +40,10 @@ const HeaderWeb = () => {
 			link: "/school-campaign",
 		},
 	];
+
+	if (getRoleId() === 1) {
+		data.splice(2, 1);
+	}
 
 	return (
 		<nav className="header__container">

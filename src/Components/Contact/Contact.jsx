@@ -9,8 +9,7 @@ import { Title } from "../Title/Title";
 import "./Contact.scss";
 
 const Contact = () => {
-	const { isLogged } = useAuthActions();
-	const admin = localStorage.getItem("rol");
+	const { getRoleId } = useAuthActions();
 
 	const [contactData, setContactData] = useState({
 		cellphone: "",
@@ -35,8 +34,8 @@ const Contact = () => {
 
 	return (
 		<>
-			{isLogged && admin === "admin" ? (
-				<Redirect to="/backoffice" />
+			{getRoleId() ===  1 ? (
+				<Redirect to="/" />
 			) : (
 				<div className="contact__container">
 					<Title title="Contacto" />

@@ -6,6 +6,7 @@ import twitterIcon from "../../assets/images/twitter.ico";
 import instagramIcon from "../../assets/images/instagram.ico";
 import facebookIcon from "../../assets/images/facebook.ico";
 import "./FooterPublic.scss";
+import useAuthActions from "../../store/hooks/useAuthActions";
 
 const FooterPublic = () => {
 	const [logo, setLogo] = useState("");
@@ -13,6 +14,8 @@ const FooterPublic = () => {
 	const [linkedin_url, setLinkedin_url] = useState("");
 	const [instagram_url, setInstagram_url] = useState("");
 	const [twitter_url, setTwitter_url] = useState("");
+
+	const { getRoleId } = useAuthActions();
 
 	const getInfoFooterPublic = async () => {
 		const response = await Get(process.env.REACT_APP_API_ORGANIZATION);
@@ -37,7 +40,7 @@ const FooterPublic = () => {
 			<div className="footer__links">
 				<Link to={"/toys-campaign"}>Actividades</Link>
 				<Link to={"/toys-campaign"}>Nosotros</Link>
-				<Link to={"/toys-campaign"}>Contacto</Link>
+				{getRoleId() === 1 ? null : <Link to={"/toys-campaign"}>Contacto</Link> }
 			</div>
 			<div className="flex-column-center logo-nombre">
 				<Link to={"/"}>

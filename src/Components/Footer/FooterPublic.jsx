@@ -6,6 +6,7 @@ import twitterIcon from "../../assets/images/twitter.ico";
 import instagramIcon from "../../assets/images/instagram.ico";
 import facebookIcon from "../../assets/images/facebook.ico";
 import "./FooterPublic.scss";
+import useAuthActions from "../../store/hooks/useAuthActions";
 
 const FooterPublic = () => {
 	const [logo, setLogo] = useState("");
@@ -14,9 +15,12 @@ const FooterPublic = () => {
 	const [instagram_url, setInstagram_url] = useState("");
 	const [twitter_url, setTwitter_url] = useState("");
 
-	const getInfoFooterPublic = () => {
-		Get("organization").then((r) => {
-			const { data } = r;
+	const { getRoleId } = useAuthActions();
+
+	const getInfoFooterPublic = async () => {
+		const response = await Get(process.env.REACT_APP_API_ORGANIZATION);
+		if (response.success) {
+			const { data } = response;
 			const { logo, facebook_url, linkedin_url, instagram_url, twitter_url } =
 				data;
 			setLogo(logo);
@@ -24,7 +28,7 @@ const FooterPublic = () => {
 			setLinkedin_url(linkedin_url);
 			setInstagram_url(instagram_url);
 			setTwitter_url(twitter_url);
-		});
+		}
 	};
 
 	useEffect(() => {
@@ -32,77 +36,34 @@ const FooterPublic = () => {
 	}, []);
 
 	return (
-		<div className="footer">
-			<div className="footer__grid">
-				<div className="flex-column-center logo-nombre">
-					<Link to={"/"}>
-						<img src={logo} alt="logo_footer" />
-					</Link>
-				</div>
-				<div className="campanas">
-					<Link to={"/toys-campaign"} className="footer__grid__hide show-tv">
-						{" "}
-						Actividades
-					</Link>
-					<Link to={"/toys-campaign"} className="footer__grid__hide show-tv">
-						{" "}
-						Nosotros
-					</Link>
-					<Link to={"/toys-campaign"} className="footer__grid__hide show-tv">
-						{" "}
-						Contacto
-					</Link>
-				</div>
-				<div className="footer__icons iconos-rrss">
-					<div>
-						<a
-							href={`https://${facebook_url}`}
-							target="_blank"
-							rel="noreferrer"
-						>
-							<img
-								src={facebookIcon}
-								alt="facebookIcon"
-								className="footer__w-icon"
-							/>
-						</a>
-					</div>
-					<div>
-						<a
-							href={`https://${linkedin_url}`}
-							target="_blank"
-							rel="noreferrer"
-						>
-							<img
-								src={linkedinIcon}
-								alt="linkedinIcon"
-								className="footer__w-icon"
-							/>
-						</a>
-					</div>
-					<div>
-						<a
-							href={`https://${instagram_url}`}
-							target="_blank"
-							rel="noreferrer"
-						>
-							<img
-								src={instagramIcon}
-								alt="instagramIcon"
-								className="footer__w-icon"
-							/>
-						</a>
-					</div>
-					<div>
-						<a href={`https://${twitter_url}`} target="_blank" rel="noreferrer">
-							<img
-								src={twitterIcon}
-								alt="twitterIcon"
-								className="footer__w-icon"
-							/>
-						</a>
-					</div>
-				</div>
+		<div className="footer__container">
+			<div className="footer__links">
+				<Link to={"/toys-campaign"}>Actividades</Link>
+				<Link to={"/toys-campaign"}>Nosotros</Link>
+				{getRoleId() === 1 ? null : <Link to={"/toys-campaign"}>Contacto</Link> }
+			</div>
+			<div className="flex-column-center logo-nombre">
+				<Link to={"/"}>
+					<img src={logo} alt="logo footer" className="footer__logo" />
+				</Link>
+			</div>
+			<div className="footer__icons">
+				<a href={`https://${facebook_url}`} target="_blank" rel="noreferrer">
+					<img src={facebookIcon} alt="facebookIcon" className="footer__icon" />
+				</a>
+				<a href={`https://${linkedin_url}`} target="_blank" rel="noreferrer">
+					<img src={linkedinIcon} alt="linkedinIcon" className="footer__icon" />
+				</a>
+				<a href={`https://${instagram_url}`} target="_blank" rel="noreferrer">
+					<img
+						src={instagramIcon}
+						alt="instagramIcon"
+						className="footer__icon"
+					/>
+				</a>
+				<a href={`https://${twitter_url}`} target="_blank" rel="noreferrer">
+					<img src={twitterIcon} alt="twitterIcon" className="footer__icon" />
+				</a>
 			</div>
 		</div>
 	);

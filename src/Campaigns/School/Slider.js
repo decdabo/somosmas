@@ -19,7 +19,7 @@ const Slider = () => {
 	};
 
 	return (
-		<div className="slide">
+		<div className="school__container slide">
 			<Slides {...settings}>
 				<div className="slide__container">
 					<img src={slide1} alt="" className="slide__image" />

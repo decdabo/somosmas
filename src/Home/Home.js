@@ -1,27 +1,54 @@
 import React from "react";
-import {SliderCarouselComponent} from "../slideHome/SliderCarouselComponent.js";
+import { Link } from "react-router-dom";
+import { SliderCarouselComponent } from "../slideHome/SliderCarouselComponent.js";
 import "../styles/components/home.scss";
+import Arrow1 from "../assets/images/arrow-1.png";
+import Hand from "../assets/images/hand-heart.png";
+
+import "./Home.scss";
+import ContactForm from "../Components/Contact/ContactForm.js";
+import TestimonialsCards from "./TestimonialsCards/TestimonialsCards.jsx";
+import NewsCards from "./NewsCards/NewsCards.jsx";
 
 const Home = () => {
-	return(
+	return (
 		<>
-			<div className="container">
-				<div className="container__welcomeMsj">
-					<div>
-						<h1 className="container__title">Bienvenidos!</h1>
-						<hr className="container__hr"/>
+			<section className="home__section-main">
+				<div className="home__presentationContainer">
+					<h1 className="home__title">Bienvenidos!</h1>
+					<p className="home__presentationText">
+						Simply dummy text of the printing and typesetting industry. Lorem
+						Ipsum has been the industry's standard dummy text ever since the
+						1500s, when an unknown printer
+					</p>
+
+					<div className="home__donateContainer">
+						<img src={Arrow1} alt="curved arrow" className="home__arrowImage" />
+						<img
+							src={Hand}
+							alt="hand with a heart"
+							className="home__handImage"
+						/>
+						<Link to="/donar">
+							<button className="form__btn-primary">DONAR AHORA</button>
+						</Link>
 					</div>
-					<div className="container__text">
-						<p>Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also t</p> 
-					</div>
 				</div>
-				<div className="container__carousel">
-					<SliderCarouselComponent/>
+				<div className="home__carousel">
+					<SliderCarouselComponent />
 				</div>
-				<div>
-					{/* COMPONENTE LISTADO DE NOVEDADES */}
-				</div>
-			</div>
+			</section>
+			<section className="home__section-news">
+				<h1 className="home__subtitle">ULTIMAS NOVEDADES</h1>
+				<NewsCards />
+			</section>
+			<section className="home__section-testimonials">
+				<h1 className="home__subtitle">TESTIMONIOS</h1>
+				<TestimonialsCards />
+			</section>
+			<section className="home__section-contact">
+				<ContactForm />
+			</section>
 		</>
 	);
 };

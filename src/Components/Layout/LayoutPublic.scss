@@ -1,13 +1,8 @@
-.layoutPublic__temp-header {
-	height: 100px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: rgb(219, 219, 219);
-}
-
 .layoutPublic__main {
-	padding: 50px 10%;
-	min-height: calc(100vh - 29vh - 100px); //visible height - footer - header
-	margin-bottom: 50px;
+  min-height: calc(100vh - 29vh - 100px); //visible height - footer - header
+  margin-bottom: 50px;
+
+  & section {
+    padding: 30px 5%;
+  }
 }

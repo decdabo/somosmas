@@ -44,10 +44,12 @@ const Content = ({ event = 20000 * 4324 }) => {
 					/>
 				</div>
 				<p className="campaign__description">
-					Zúmbale mambo pa que mis gatas prendan los motores Zúmbale mambo pa
-					que mis gatas prendan los motores Zúmbale mambo pa que mis gatas
-					prendan los motores Que se preparen que lo que viene es pa que le den
-					(¡duro!)
+					El espacio de apoyo escolar es el corazón del área educativa.
+					Actualmente se encuentran inscriptos a este programa 150 niños y niñas
+					de 6 a 15 años y 50 adolescentes entre 13 y 20 años. Tambien contamos
+					con un programa de tutorías destinado a jóvenes a partir del tercer
+					año de secundaria, cuyo objetivo es garantizar su permanencia en la
+					escuela y construir un proyecto de vida que da sentido al colegio.
 				</p>
 				<div className="campaign__img-container">
 					<img

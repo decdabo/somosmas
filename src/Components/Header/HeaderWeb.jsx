@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { withRouter } from "react-router";
 
 import { AuthLogout } from "./AuthLogout";
 import "./headerWeb.scss";
 import logo from "../../assets/images/logo.png";
+
 import { AuthLogin } from "./AuthLogin";
 import useAuthActions from "../../store/hooks/useAuthActions";
 
 const HeaderWeb = () => {
-	const { isLogged } = useAuthActions();
+	const { isLogged, getRoleId } = useAuthActions();
+
+	const [menuIsOpen, setMenuIsOpen] = useState(false);
+
+	const showMenu = () => {
+		setMenuIsOpen((prev) => !prev);
+	};
 
 	const data = [
 		{
@@ -35,34 +41,34 @@ const HeaderWeb = () => {
 		},
 	];
 
+	if (getRoleId() === 1) {
+		data.splice(2, 1);
+	}
+
 	return (
-		<nav className="navbar navbar-expand-lg navbar-light">
-			<div className="container-fluid">
-				<Link className="navbar-brand" to="/">
-					<img src={logo} alt="logo" width={130} />
-				</Link>
-				<button
-					className="navbar-toggler"
-					type="button"
-					data-bs-toggle="collapse"
-					data-bs-target="#navbarNav"
-					aria-controls="navbarNav"
-					aria-expanded="false"
-					aria-label="Toggle navigation"
-				>
-					<span className="navbar-toggler-icon"></span>
-				</button>
-				<div className="collapse navbar-collapse" id="navbarNav">
-					<ul className="navbar-nav ms-auto">
-						{data.map((item, index) => (
-							<li className="nav-item mb-2 mb-lg-0" key={index}>
-								<NavLink className="nav-link me-3" to={item.link} exact>
-									{item.text}
-								</NavLink>
-							</li>
-						))}
-						{isLogged ? <AuthLogout /> : <AuthLogin />}
-					</ul>
+		<nav className="header__container">
+			<Link to="/">
+				<img src={logo} alt="logo" width={130} className="header__logo" />
+			</Link>
+
+			<button
+				className="header__menuBtn form__btn-secondary"
+				onClick={showMenu}
+			>
+				MENU
+			</button>
+			<div className={`header__menuPanel ${menuIsOpen && "active"}`}>
+				<ul className="header__navbar">
+					{data.map((item, index) => (
+						<li key={index}>
+							<NavLink to={item.link} exact className="header__link">
+								{item.text}
+							</NavLink>
+						</li>
+					))}
+				</ul>
+				<div className="header__btnContainer">
+					{isLogged ? <AuthLogout /> : <AuthLogin />}
 				</div>
 			</div>
 		</nav>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik } from 'formik';
 import { Get } from '../../Services/publicApiService';
+import { alertError } from '../../Services/alerts/Alerts';
 
 export const SearchActivities = ({ setActivities }) => {
 
@@ -9,7 +10,7 @@ export const SearchActivities = ({ setActivities }) => {
             const dataSearch = await Get(`activities?search=${value}`)
             return dataSearch.data;
         } catch (error) {
-            console.log(error)
+            alertError(error);
         }
     }
 
@@ -20,9 +21,9 @@ export const SearchActivities = ({ setActivities }) => {
         try {
             GetSearch(searchName)
                 .then(res => { setActivities(res) })
-                .catch(e => console.log(e));
+                .catch(e => alertError(e));
         } catch (error) {
-            console.log(error)
+            alertError(error);
         }
     }
 

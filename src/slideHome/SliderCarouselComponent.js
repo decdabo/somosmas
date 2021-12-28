@@ -5,12 +5,16 @@ import LoaderComponent from "../Components/Loader/Loader";
 import { alertError } from "../Services/alerts/Alerts";
 import { Get } from "../Services/publicApiService";
 import { SlideComponent } from "./SlideComponent";
+import "./slidehome.scss";
 
 const settings = {
-	speed: 500,
+	className: "slide__center",
+	centerMode: true,
 	infinite: true,
 	slidesToShow: 1,
-	slidesToScroll: 1,
+	speed: 500,
+	// slidesToScroll: 1,
+	centerPadding: "60px",
 };
 
 export const SliderCarouselComponent = ({
@@ -44,16 +48,14 @@ export const SliderCarouselComponent = ({
 	}, []);
 
 	return (
-		<>
-			<Slider {...settings} dots={dots}>
-				{loading ? (
-					<LoaderComponent />
-				) : (
-					data.map((obj) => {
-						return <SlideComponent key={obj.id} data={obj} />;
-					})
-				)}
-			</Slider>
-		</>
+		<Slider {...settings} dots={dots}>
+			{loading ? (
+				<LoaderComponent />
+			) : (
+				data.map((obj) => {
+					return <SlideComponent key={obj.id} data={obj} />;
+				})
+			)}
+		</Slider>
 	);
 };

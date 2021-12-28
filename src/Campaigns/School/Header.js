@@ -8,7 +8,6 @@ const Header = () => {
 		<div className="headerSchool">
 			<div className="headerSchool__logos">
 				<img src={LogoCampaña} alt="" className="headerSchool__logoCampaña" />
-				<img src={LogoONG} alt="" className="headerSchool__logoONG" />
 			</div>
 			<div className="headerSchool__slogan">
 				<h3>Nuestra misión</h3>
@@ -18,6 +17,9 @@ const Header = () => {
 					cada individuo a través de la educación, salud, trabajo, deporte,
 					responsabilidad y compromiso
 				</p>
+			</div>
+			<div className="headerSchool__logos">
+				<img src={LogoONG} alt="" className="headerSchool__logoONG" />
 			</div>
 		</div>
 	);

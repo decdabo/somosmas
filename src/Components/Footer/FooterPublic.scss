@@ -1,70 +1,52 @@
 @import "../../styles//variables.scss";
-.body {
-  min-height: 75vh;
-}
 
 .footer {
-  background-color: $accent-color;
-  height: 29vh;
+	&__container {
+		padding-bottom: 20px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 
-  &__w-icon {
-    width: 52px;
-    height: 52px;
-  }
+		@media screen and (min-width: $breakpoint-tablet) {
+			flex-direction: row;
+			justify-content: center;
+		}
+	}
 
-  &__icons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-  }
+	&__logo {
+		height: 100px;
+		width: 150px;
+		object-fit: cover;
+	}
 
-  .flex-column-center{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+	&__links {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		@media screen and (min-width: $breakpoint-tablet) {
+			flex-direction: row;
+			justify-content: space-evenly;
+			margin-bottom: 0;
+			width: 33%;
+		}
 
+		& a {
+			color: black;
+			text-decoration: none;
+		}
+	}
 
-  &__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    &__hide {
-      display: none;
-    }
-    @media (min-width:$breakpoint-mobile){
-      .campanas{
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        justify-content: space-evenly;
-      }
-      .show-tv {
-        display: block;
-      }
-      grid-template-columns: 1fr 1fr;
-      .iconos-rrss {
-        grid-column-start: span 2;
-        @media (min-width:$breakpoint-tablet){
-          grid-column-start: span 1;
-          display: flex;
-          align-items: center;
-        }
-      }
-      .show-tablet {
-        display: block;
-      }
-      .links-campanas {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-    }
+	&__icons {
+		width: 100%;
+		display: flex;
+		justify-content: space-evenly;
+		@media screen and (min-width: $breakpoint-tablet) {
+			width: 33%;
+		}
+	}
 
-    @media (min-width: $breakpoint-tablet){
-      grid-template-columns: 1fr 1fr 1fr;
-      .show-pc {
-        display: block;
-      }
-    }
-  }
+	&__icon {
+		width: 30px;
+		height: 30px;
+	}
 }

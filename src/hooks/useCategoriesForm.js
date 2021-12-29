@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import getBase64FromUrl from "../helpers/imageToBase64";
 
 const useCategoriesForm = (categoryParam) => {
 	//FOR IMAGE PREVIEW
@@ -12,17 +11,14 @@ const useCategoriesForm = (categoryParam) => {
 
 	const imageInputRef = useRef();
 	//   FOR SENDING THE IMAGE IN BASE64 and also previewing it on the frontend
-	const [imagePreview, setImagePreview] = useState("");
+	const [imagePreview, setImagePreview] = useState(categoryParam.image);
 	// API INTERACTION STATUS
 	const [status, setStatus] = useState("");
 
 	//TRY TO SAVE THE IMAGE OF THE CATEGORY OBJECT WHICH COMES FROM COMPONENT PARAMS
 	useEffect(() => {
-		if (categoryParam !== undefined)
-			getBase64FromUrl(categoryParam.image)
-				.then((res) => setImagePreview(res))
-				.catch((err) => console.log(err));
-	}, [categoryParam]);
+		setImagePreview(categoryParam.image);
+	}, [categoryParam.image]);
 
 	//HIDE THE MESSAGE IN 4 SECONDS
 	// CLEANUP TO PREVENT ERROR DISMOUNTING COMPONENT

@@ -38,6 +38,8 @@ const SlidesForm = () => {
 				}
 				setIsLoading(false);
 			});
+		} else {
+			setIsLoading(false);
 		}
 	}, []);
 
@@ -53,10 +55,7 @@ const SlidesForm = () => {
 				order: slide.order || "",
 				image: slide.image || "",
 			}}
-			onSubmit={async (values, { setFieldError, resetForm }) => {
-				// if (slide.findIndex((x) => x.id === Number(values.order)) > 0) {
-				// 	setFieldError("order", "El order debe ser unico.");
-				// } else {
+			onSubmit={async (values, { resetForm }) => {
 				if (!id) {
 					const response = await Post("slides", values);
 					if (response.success) {
@@ -74,7 +73,6 @@ const SlidesForm = () => {
 						setMessage("Editado exitosamente");
 					}
 				}
-				// }
 			}}
 			validate={validate}
 		>

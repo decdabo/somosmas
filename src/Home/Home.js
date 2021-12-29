@@ -15,7 +15,7 @@ const Home = () => {
 		<>
 			<section className="home__section-main">
 				<div className="home__presentationContainer">
-					<h1 className="home__title">Bienvenidos!</h1>
+					<h1 className="text__title-primary">Bienvenidos!</h1>
 					<p className="home__presentationText">
 						Simply dummy text of the printing and typesetting industry. Lorem
 						Ipsum has been the industry's standard dummy text ever since the
@@ -39,14 +39,15 @@ const Home = () => {
 				</div>
 			</section>
 			<section className="home__section-news">
-				<h1 className="home__subtitle">ULTIMAS NOVEDADES</h1>
+				<h2 className="text__title-secondary">ULTIMAS NOVEDADES</h2>
 				<NewsCards />
 			</section>
 			<section className="home__section-testimonials">
-				<h1 className="home__subtitle">TESTIMONIOS</h1>
+				<h2 className="text__title-secondary">TESTIMONIOS</h2>
 				<TestimonialsCards />
 			</section>
 			<section className="home__section-contact">
+				<h2 className="text__title-secondary">CONTACTO</h2>
 				<ContactForm />
 			</section>
 		</>

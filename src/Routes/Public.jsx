@@ -9,7 +9,6 @@ import {
 	ActivitiesForm,
 	ActivitiesList,
 	ActivityInfo,
-	CategoriesForm,
 	Contact,
 	ContactForm,
 	DonationsGreet,
@@ -23,7 +22,6 @@ import {
 	TestimonialForm,
 	ThanksGreet,
 	ToysCampaign,
-	UserForm,
 } from "./Router/publicRoutes";
 
 function Public() {
@@ -38,15 +36,12 @@ function Public() {
 					mapStyles={mapStyles}
 				>
 					<Route exact path="/create-activity" component={ActivitiesForm} />
-					<Route exact path="/create-category" component={CategoriesForm} />
 					<Route exact path="/create-news" component={NewsForm} />
 					<Route
 						exact
 						path="/create-testimonials"
 						component={TestimonialForm}
 					/>
-					<Route exact path="/create-user" component={UserForm} />
-					<Route exact path="/edit-user/:id" component={UserForm} />
 					<Route exact path="/school-campaign" component={SchoolCampaign} />
 					<Route exact path="/toys-campaign" component={ToysCampaign} />
 					<Route exact path="/about" component={AboutMain} />

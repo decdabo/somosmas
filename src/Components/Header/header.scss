@@ -1,50 +1,52 @@
 .headerBackoffice {
-  &.header__container {
-    background-color: white;
-    position: relative;
-    padding-bottom: 10px;
+	&.header__container {
+		background-color: white;
+		position: relative;
+		padding-bottom: 10px;
 
-    &::before {
-      content: "backoffice";
-      padding-left: 60px;
-      position: absolute;
-      width: 170px;
-      bottom: 0;
-      left: 0;
-      border-bottom: 2px solid black;
-    }
-    &::after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      bottom: 0;
-      left: 170px;
-      border-bottom: 2px dashed black;
-    }
-  }
+		&::before {
+			content: "backoffice";
+			padding-left: 60px;
+			position: absolute;
+			width: 170px;
+			bottom: 0;
+			left: 0;
+			border-bottom: 2px solid black;
+		}
+		&::after {
+			content: "";
+			position: absolute;
+			width: calc(100% - 170px);
+			bottom: 0;
+			left: 170px;
+			border-bottom: 2px dashed black;
+		}
+	}
 
-  & .pencilIcon {
-    position: absolute;
-    bottom: 3%;
-    z-index: 1;
-    font-size: 20px;
-    left: 170px;
-  }
+	& .pencilIcon {
+		position: absolute;
+		bottom: 3%;
+		z-index: 1;
+		font-size: 20px;
+		left: 170px;
+	}
 
-  & .header {
-    &__navbar {
-      width: 80%;
-    }
+	& .header {
+		&__navbar {
+			@media screen and (min-width: 1020px) {
+				width: 80%;
+			}
+		}
 
-    &__btnContainer {
-      & a:first-child {
-        @media screen and (min-width: 1020px) {
-          margin-right: 0;
-        }
-        @media screen and (min-width: 1100px) {
-          margin-right: 0;
-        }
-      }
-    }
-  }
+		&__btnContainer {
+			& a:first-child {
+				@media screen and (min-width: 1020px) {
+					margin-right: 0;
+				}
+				@media screen and (min-width: 1100px) {
+					margin-right: 0;
+				}
+			}
+		}
+	}
 }

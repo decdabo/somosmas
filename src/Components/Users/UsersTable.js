@@ -3,16 +3,13 @@ import { alertError, alertInformation } from "../../Services/alerts/Alerts";
 import { Delete } from "../../Services/privateApiService";
 
 export const UsersTable = ({ users }) => {
-
-	const handleDelete = async ( user) => {
+	const handleDelete = async (user) => {
 		const userDelete = await Delete("users", user.id);
 
 		if (userDelete.message) {
 			alertInformation(userDelete.message);
-        
-		} else { 
+		} else {
 			alertError("El usuario no existe");
-
 		}
 	};
 
@@ -39,7 +36,7 @@ export const UsersTable = ({ users }) => {
 									<i className="fas fa-trash-alt" />
 								</button>
 								<Link
-									to={`/edit-user/${user.id}`}
+									to={`/backoffice/users/edit/${user.id}`}
 									className="table__buttons edit-button"
 								>
 									<i className="fas fa-edit"></i>

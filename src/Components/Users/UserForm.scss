@@ -1,18 +1,18 @@
-.form{
-  &__user{
-    display: block;
-    margin:  5rem auto;
-    width: 70%;
-  }
+.form {
+	&__user {
+		display: block;
+		margin: 5rem auto;
+		width: 70%;
+	}
 }
 
-
-
-#termsConditions{
-  padding-bottom: 50px;
-  margin-bottom: 50px;
-}
-
-canvas.react-pdf__Page__canvas, .react-pdf__message div {
-  margin: auto ;
+.userForm__document {
+	background-color: #eee;
+	border: 1px solid black;
+	height: 790px;
+	width: 505px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }

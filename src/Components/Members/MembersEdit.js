@@ -4,7 +4,6 @@ import { Get } from "../../Services/publicApiService";
 import { Post, Put } from "../../Services/privateApiService";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
-import getBase64FromUrl from "../../helpers/imageToBase64";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 

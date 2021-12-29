@@ -1,29 +1,29 @@
+import { useState } from "react";
 import HomeCards from "../HomeCards/HomeCards";
 import "./HomeDashboard.scss";
-import { useState } from "react";
-import Header from "../Header/Header";
+import cardsInfo from "../../lib/mock/BackofficeDashboard.json";
 
 const HomeDashboard = () => {
-  const cardsInfo = require("../../lib/mock/BackofficeDashboard.json");
-  const [usuario, setUsuario] = useState("");
+	const [usuario, setUsuario] = useState("");
 
-  return (
-    <>
-      <h1 className="text-center">Bienvenido/a {usuario}</h1>
-      <div className="dashboard-grid my-5">
-        {cardsInfo.map((card, index) => {
-          return (
-            <HomeCards
-              title={card.title}
-              image={card.image}
-              key={index}
-              description={card.description}
-            />
-          );
-        })}
-      </div>
-    </>
-  );
+	return (
+		<div className="dashboard__container">
+			<h1 className="text__title-secondary">Bienvenido/a {usuario}</h1>
+			<div className="dashboard-grid">
+				{cardsInfo.map((card, index) => {
+					return (
+						<HomeCards
+							title={card.title}
+							image={card.image}
+							key={index}
+							description={card.description}
+							link={card.link}
+						/>
+					);
+				})}
+			</div>
+		</div>
+	);
 };
 
 export default HomeDashboard;

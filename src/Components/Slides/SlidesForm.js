@@ -85,83 +85,87 @@ const SlidesForm = () => {
 				setFieldValue,
 			}) => {
 				return (
-					<form className="form__container" onSubmit={handleSubmit}>
-						<h3 className="text__title-tertiary">
+					<>
+						<h2 className="text__title-secondary">
 							{id ? "Editar slides" : "Crear slides"}
-						</h3>
-						<input
-							id="name"
-							className="form__input"
-							type="text"
-							name="name"
-							onChange={handleChange}
-							onBlur={handleBlur}
-							value={values.name}
-							placeholder="Nombre"
-							autoComplete="off"
-						/>
-
-						<div className="form__message-validation">{errors.name}</div>
-						<CKEditor
-							className="form__input"
-							id="description"
-							editor={ClassicEditor}
-							data={values.description}
-							onChange={(e, editor) => {
-								setFieldValue("description", editor.getData());
-							}}
-							config={{
-								placeholder: "Descripción",
-							}}
-						/>
-						<div className="form__message-validation">{errors.description}</div>
-						<input
-							className="form__input"
-							type="text"
-							name="order"
-							id="order"
-							onChange={handleChange}
-							onBlur={handleBlur}
-							value={values.order}
-							placeholder="Orden"
-							autoComplete="off"
-						/>
-						<div className="form__message-validation">{errors.order}</div>
-						<label>
+						</h2>
+						<form className="form__container" onSubmit={handleSubmit}>
 							<input
-								className="form__image-input"
-								type="file"
-								accept="image/*"
-								onChange={(e) => handleImageChange(e, setFieldValue)}
+								id="name"
+								className="form__input"
+								type="text"
+								name="name"
+								onChange={handleChange}
 								onBlur={handleBlur}
+								value={values.name}
+								placeholder="Nombre"
+								autoComplete="off"
 							/>
 
-							<div className="form__image-container">
-								<img
-									src={values.image}
-									alt="slide"
-									onError={(e) => {
-										e.target.src =
-											"https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png";
-									}}
-								/>
+							<div className="form__message-validation">{errors.name}</div>
+							<CKEditor
+								className="form__input"
+								id="description"
+								editor={ClassicEditor}
+								data={values.description}
+								onChange={(e, editor) => {
+									setFieldValue("description", editor.getData());
+								}}
+								config={{
+									placeholder: "Descripción",
+								}}
+							/>
+							<div className="form__message-validation">
+								{errors.description}
 							</div>
-						</label>
+							<input
+								className="form__input"
+								type="text"
+								name="order"
+								id="order"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								value={values.order}
+								placeholder="Orden"
+								autoComplete="off"
+							/>
+							<div className="form__message-validation">{errors.order}</div>
+							<label>
+								<input
+									className="form__image-input"
+									type="file"
+									accept="image/*"
+									onChange={(e) => handleImageChange(e, setFieldValue)}
+									onBlur={handleBlur}
+								/>
 
-						<div className="form__message-validation">{errors.image}</div>
-						<button className="form__btn-primary" type="submit">
-							Enviar
-						</button>
-						<div
-							className={
-								message.includes("mal")
-									? "form__message-fail"
-									: "form__message-success"
-							}
-						>
-							{message}
-						</div>
-					</form>
+								<div className="form__image-container">
+									<img
+										src={values.image}
+										alt="slide"
+										onError={(e) => {
+											e.target.src =
+												"https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png";
+										}}
+									/>
+								</div>
+							</label>
+
+							<div className="form__message-validation">{errors.image}</div>
+							<button className="form__btn-primary" type="submit">
+								Enviar
+							</button>
+							<div
+								className={
+									message.includes("mal")
+										? "form__message-fail"
+										: "form__message-success"
+								}
+							>
+								{message}
+							</div>
+						</form>
+					</>
 				);
 			}}
 		</Formik>

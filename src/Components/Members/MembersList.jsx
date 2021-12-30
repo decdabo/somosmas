@@ -1,10 +1,10 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Get, Delete } from "../../Services/privateApiService";
 import LoadingSpinner from "../Spinner/LoadingSpinner";
 import SearchBar from "./SearchBar";
-import "./MembersList.scss";
 import { alertError } from "../../Services/alerts/Alerts";
+import MemberCard from "./MemberCard";
 
 const MembersList = () => {
 	const [members, setMembers] = useState([]);
@@ -18,14 +18,13 @@ const MembersList = () => {
 		setIsLoading(false);
 	};
 
-	const handleDeleteActivity = async (id) => {
+	const handleDeleteMember = async (id) => {
 		setMessage("");
 		const response = await Delete(process.env.REACT_APP_API_MEMBERS, id);
 		if (response.success) {
 			setMembers((prevState) =>
 				prevState.filter((activity) => +activity.id !== +id)
 			);
-			setMessage("Eliminado exitosamente");
 		} else {
 			alertError("Algo salió mal, intente nuevamente");
 		}
@@ -36,52 +35,30 @@ const MembersList = () => {
 	}, []);
 
 	return (
-		<div className="membersList__container">
-			<Link to="/backoffice/members/create" className="membersList__title">
-				Create New Member +
-			</Link>
-			<SearchBar setSerachResult={setMembers} />
+		<div className="backofficeLists__container">
+			<h2 className="text__title-secondary">Lista de miembros</h2>
+			<div className="backofficeLists__searchContainer">
+				<SearchBar setSerachResult={setMembers} />
+				<Link to="/backoffice/members/create">
+					<button className="form__btn-secondary">Crear nuevo +</button>
+				</Link>
+			</div>
 			{isLoading ? (
 				<LoadingSpinner />
 			) : members.length ? (
-				<>
-					<div>
-						{members.map((member) => (
-							<Fragment key={member.id}>
-								<div className="membersList__card">
-									<img
-										className="membersList__image"
-										src={member.image || ""}
-										alt="descripcion"
-										onError={(e) => {
-											e.target.src =
-												"https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png";
-										}}
-									/>
-
-									<div className="membersList__content">
-										<div>{member.name}</div>
-										<div className="membersList__btn-container">
-											<Link to={`/backoffice/members/edit/${member.id}`}>
-												<button className="form__btn-secondary">Editar</button>
-											</Link>
-											<button
-												className="form__btn-secondary"
-												onClick={() => handleDeleteActivity(member.id)}
-											>
-												Eliminar
-											</button>
-										</div>
-									</div>
-								</div>
-							</Fragment>
-						))}
-					</div>
-					<div className={"form__message-success"}>{message}</div>
-				</>
+				<div>
+					{members.map((member) => (
+						<MemberCard
+							member={member}
+							key={member.id}
+							deleteMember={handleDeleteMember}
+						/>
+					))}
+				</div>
 			) : (
-				<div>Sin resultados</div>
+				<div className="backofficeLists__emptyCard">No hay resultados...</div>
 			)}
+			<div className={"form__message-success"}>{message}</div>
 		</div>
 	);
 };

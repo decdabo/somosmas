@@ -104,7 +104,10 @@ const UserForm = () => {
 	}
 
 	return (
-		<div>
+		<>
+			<h2 className="text__title-secondary">
+				{id ? "Editar usuario" : "Crear usuario"}
+			</h2>
 			{isLogged ? (
 				<Redirect to="/login-form" />
 			) : (
@@ -119,9 +122,6 @@ const UserForm = () => {
 					{(props) => {
 						return (
 							<Form className="form__container">
-								<h3 className="text__title-tertiary">
-									{id ? "Editar usuario" : "Crear usuario"}
-								</h3>
 								<Field
 									name="name"
 									type="text"
@@ -245,7 +245,7 @@ const UserForm = () => {
 					}}
 				</Formik>
 			)}
-		</div>
+		</>
 	);
 };
 

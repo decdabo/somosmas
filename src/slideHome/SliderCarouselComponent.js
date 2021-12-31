@@ -13,6 +13,7 @@ const settings = {
 	infinite: true,
 	slidesToShow: 1,
 	speed: 500,
+	autoplay: true,
 	// slidesToScroll: 1,
 	centerPadding: "60px",
 };

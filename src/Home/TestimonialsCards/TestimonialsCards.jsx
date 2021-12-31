@@ -21,7 +21,7 @@ const TestimonialsCards = () => {
 						<div className="card__container" key={item.id}>
 							<img
 								className="card__image"
-								src={item.image}
+								src={item.image || ""}
 								alt="user"
 								onError={(e) => {
 									e.target.src =

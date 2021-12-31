@@ -30,6 +30,7 @@
 .width-10 {
 	width: 10%;
 }
+
 // HEIGHT
 .max-height-30 {
 	max-height: 30%;
@@ -90,4 +91,10 @@
 
 .text-d-none {
 	text-decoration: none;
+}
+
+//IMAGE
+.image-300px {
+	width: 300px;
+	object-fit: contain;
 }

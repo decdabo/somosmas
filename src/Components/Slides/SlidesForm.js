@@ -11,10 +11,10 @@ import "../../styles/components/formStyles.scss";
 import "./slidesForm.scss";
 import { useParams } from "react-router-dom";
 import LoadingSpinner from "../Spinner/LoadingSpinner";
+import { alertError, alertInformation } from "../../Services/alerts/Alerts";
 
 const SlidesForm = () => {
 	const [slide, setSlide] = useState({});
-	const [message, setMessage] = useState("");
 	const [isLoading, setIsLoading] = useState(true);
 
 	const { id } = useParams();
@@ -59,7 +59,9 @@ const SlidesForm = () => {
 				if (!id) {
 					const response = await Post("slides", values);
 					if (response.success) {
-						setMessage("Creado exitosamente");
+						alertInformation("Creado exitosamente");
+					} else {
+						alertError("Algo ha fallado, intente nuevamente");
 					}
 
 					resetForm();
@@ -70,7 +72,9 @@ const SlidesForm = () => {
 					}
 					const response = await Put("slides", id, body);
 					if (response.success) {
-						setMessage("Editado exitosamente");
+						alertInformation("Editado exitosamente");
+					} else {
+						alertError("Algo ha fallado, intente nuevamente");
 					}
 				}
 			}}
@@ -155,15 +159,6 @@ const SlidesForm = () => {
 							<button className="form__btn-primary" type="submit">
 								Enviar
 							</button>
-							<div
-								className={
-									message.includes("mal")
-										? "form__message-fail"
-										: "form__message-success"
-								}
-							>
-								{message}
-							</div>
 						</form>
 					</>
 				);

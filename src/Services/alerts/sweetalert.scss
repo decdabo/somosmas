@@ -1,0 +1,17 @@
+@import "../../styles/variables.scss";
+.alert {
+	&__popup {
+		margin-top: 120px;
+		border: 1px solid black;
+		border-radius: 0;
+	}
+}
+
+.swal2-timer-progress-bar-container {
+	border-radius: 0;
+	background-color: #eee;
+}
+
+.swal2-timer-progress-bar {
+	background-color: $accent-color;
+}

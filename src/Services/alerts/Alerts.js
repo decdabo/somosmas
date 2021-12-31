@@ -1,8 +1,7 @@
 import Swal from "sweetalert2";
-//import '../../styles/variables.scss'
+import "./sweetalert.scss";
 
 export const alertConfirmation = (textConfirmation = "", textSuccess = "") => {
-  
 	Swal.fire({
 		title: "Está seguro que desea confirmar?",
 		text: textConfirmation,
@@ -11,33 +10,48 @@ export const alertConfirmation = (textConfirmation = "", textSuccess = "") => {
 		confirmButtonColor: "#3085d6",
 		cancelButtonColor: "#dc817e",
 		cancelButtonText: "Cancelar",
-		confirmButtonText: "Si, confirmar!"
+		confirmButtonText: "Si, confirmar!",
 	}).then((result) => {
-    
 		if (result.value === true) {
-			Swal.fire(
-				"Confirmado!",
-				`${textSuccess}`,
-				"success",
-        
-			);
+			Swal.fire("Confirmado!", `${textSuccess}`, "success");
 		}
 	});
 };
 
-export const alertError = (textError = "") => {
-  
+export const alertError = (textInformation = "") => {
 	Swal.fire({
-		type: "error",
-		title: "Ups!",
-		text: textError,
+		toast: true,
+		position: "top-end",
+		showConfirmButton: false,
+		timer: 2500,
+		timerProgressBar: true,
+		didOpen: (toast) => {
+			toast.addEventListener("mouseenter", Swal.stopTimer);
+			toast.addEventListener("mouseleave", Swal.resumeTimer);
+		},
+		icon: "error",
+		title: textInformation,
+		customClass: {
+			popup: "alert__popup",
+		},
 	});
 };
+
 export const alertInformation = (textInformation = "") => {
 	Swal.fire({
-		type: "info",
-		title: "Información",
-		text: textInformation,
+		toast: true,
+		position: "top-end",
+		showConfirmButton: false,
+		timer: 2500,
+		timerProgressBar: true,
+		didOpen: (toast) => {
+			toast.addEventListener("mouseenter", Swal.stopTimer);
+			toast.addEventListener("mouseleave", Swal.resumeTimer);
+		},
+		icon: "success",
+		title: textInformation,
+		customClass: {
+			popup: "alert__popup",
+		},
 	});
 };
-  

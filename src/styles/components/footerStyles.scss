@@ -1,171 +1,175 @@
 .school__footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 
-  padding-bottom: 40px;
+	padding-bottom: 60px;
+	gap: 30px;
+	background-color: #fff;
 
-  background-color: #eeeeee;
+	@media screen and (min-width: $breakpoint-tablet) {
+		gap: 100px;
+		padding-top: 40px;
+		flex-direction: row;
+	}
 
-  @media screen and (min-width: $breakpoint-tablet) {
-    gap: 50px;
-    flex-direction: row;
-  }
+	@media screen and (min-width: $breakpoint-notebook) {
+		justify-content: space-evenly;
+		padding-top: 80px;
+		padding-bottom: 0;
+	}
 
-  @media screen and (min-width: $breakpoint-notebook) {
-    justify-content: space-evenly;
-    align-items: flex-end;
-    padding-top: 40px;
-    padding-bottom: 80px;
-  }
+	@media screen and (min-width: $breakpoint-desktop) {
+		align-items: flex-start;
+		padding-bottom: 0;
+	}
 
-  @media screen and (min-width: $breakpoint-desktop) {
-    align-items: flex-start;
-  }
+	.footer {
+		&__social {
+			display: flex;
+			justify-content: center;
+			gap: 20px;
+			@media screen and (min-width: $breakpoint-notebook) {
+				flex-direction: column;
+			}
+			@media screen and (min-width: $breakpoint-desktop) {
+				justify-content: space-between;
+			}
 
-  .footer {
-    &__social {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      @media screen and (min-width: $breakpoint-notebook) {
-        flex-direction: column;
-      }
-      @media screen and (min-width: $breakpoint-desktop) {
-        justify-content: space-between;
-      }
+			& .social__item {
+				cursor: pointer;
+				color: black;
+				text-decoration: none;
+				@media screen and (min-width: $breakpoint-notebook) {
+					display: flex;
+					align-items: flex-end;
+					gap: 10px;
+					flex-direction: row;
+				}
 
-      & .social__item {
-        cursor: pointer;
-        color: black;
-        text-decoration: none;
-        @media screen and (min-width: $breakpoint-notebook) {
-          display: flex;
-          align-items: flex-end;
-          gap: 10px;
-          flex-direction: row;
-        }
+				& .item__logo {
+					font-size: 48px;
+					border-radius: 50%;
+					color: #fff;
+					background-color: #000;
+					padding: 10px;
+				}
+				& .item__name {
+					display: none;
+					position: relative;
+					z-index: 1;
+					overflow: hidden;
+					@media screen and (min-width: $breakpoint-notebook) {
+						display: block;
+					}
+					&::before {
+						content: "";
+						z-index: -1;
+						position: absolute;
+						bottom: 0;
+						left: 0;
+						width: 100%;
+						height: 2px;
+						transform: translateX(-101%);
 
-        & .item__logo {
-          font-size: 48px;
-          border-radius: 50%;
-          color: #fff;
-          background-color: #000;
-          padding: 10px;
-        }
-        & .item__name {
-          display: none;
-          position: relative;
-          z-index: 1;
-          overflow: hidden;
-          @media screen and (min-width: $breakpoint-notebook) {
-            display: block;
-          }
-          &::before {
-            content: "";
-            z-index: -1;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            transform: translateX(-101%);
+						background-color: #000;
+						transition: transform 0.3s ease-in-out;
+					}
+					&:hover {
+						transition: transform 0.3s ease-in-out;
+						&::before {
+							transform: translateX(0);
+						}
+					}
+				}
+			}
+		}
 
-            background-color: #000;
-            transition: transform 0.3s ease-in-out;
-          }
-          &:hover {
-            transition: transform 0.3s ease-in-out;
-            &::before {
-              transform: translateX(0);
-            }
-          }
-        }
-      }
-    }
+		&__logo {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-self: center;
+			@media screen and (min-width: $breakpoint-tablet) {
+				flex-direction: row;
+				gap: 50px;
+			}
+			@media screen and (min-width: $breakpoint-notebook) {
+				flex-direction: column;
+				gap: 0;
+				justify-content: center;
+			}
+			& > img {
+				height: 180px;
+				margin-top: -20px;
+				margin-bottom: -20px;
+			}
+			& .logo__onglink {
+				display: none;
+				@media screen and (min-width: $breakpoint-tablet) {
+					display: none;
+				}
+				@media screen and (min-width: $breakpoint-notebook) {
+					display: block;
+				}
+				& > a {
+					display: block;
+					text-decoration: none;
+					color: #000;
+					border: 2px solid black;
+					padding: 6px;
+					font-size: 16px;
+					transition: background-color 0.2s ease-in-out;
+					position: relative;
 
-    &__logo {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-self: center;
-      @media screen and (min-width: $breakpoint-tablet) {
-        flex-direction: row;
-        gap: 50px;
-      }
-      @media screen and (min-width: $breakpoint-notebook) {
-        flex-direction: column;
-        gap: 0;
-        justify-content: center;
-      }
-      & > img {
-        height: 180px;
-        margin-top: -20px;
-        margin-bottom: -20px;
-      }
-      & .logo__onglink {
-        display: none;
-        @media screen and (min-width: $breakpoint-tablet) {
-          display: block;
-        }
-        & > a {
-          display: block;
-          text-decoration: none;
-          color: #000;
-          border: 2px solid black;
-          padding: 6px;
-          font-size: 16px;
-          transition: background-color 0.2s ease-in-out;
-          position: relative;
+					&:hover {
+						transition: background-color 0.2s ease-in-out;
+						background-color: black;
+						color: white;
+					}
+				}
+			}
+		}
+		&__campaigns {
+			display: none;
+			text-align: end;
+			@media screen and (min-width: $breakpoint-desktop) {
+				display: block;
+			}
+			& > ul {
+				list-style: none;
+				& > li {
+					& a {
+						display: block;
+						text-decoration: none;
+						color: black;
+						position: relative;
+						z-index: 1;
+						overflow: hidden;
+						&::before {
+							content: "";
+							z-index: -1;
+							position: absolute;
+							bottom: 0;
+							left: 0;
+							width: 100%;
+							height: 2px;
+							transform: translateX(101%);
+							border-radius: 10px;
 
-          &:hover {
-            transition: background-color 0.2s ease-in-out;
-            background-color: black;
-            color: white;
-          }
-        }
-      }
-    }
-    &__campaigns {
-      display: none;
-      text-align: end;
-      @media screen and (min-width: $breakpoint-desktop) {
-        display: block;
-      }
-      & > ul {
-        list-style: none;
-        & > li {
-          & a {
-            display: block;
-            text-decoration: none;
-            color: black;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-            &::before {
-              content: "";
-              z-index: -1;
-              position: absolute;
-              bottom: 0;
-              left: 0;
-              width: 100%;
-              height: 2px;
-              transform: translateX(101%);
-              border-radius: 10px;
-
-              background-color: #000;
-              transition: transform 0.3s ease-in-out;
-            }
-            &:hover {
-              transition: transform 0.3s ease-in-out;
-              &::before {
-                transform: translateX(0);
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+							background-color: #000;
+							transition: transform 0.3s ease-in-out;
+						}
+						&:hover {
+							transition: transform 0.3s ease-in-out;
+							&::before {
+								transform: translateX(0);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }

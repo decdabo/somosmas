@@ -9,9 +9,8 @@ import KidsImage from "../../assets/images/kids.png";
 import ToysBackground from "../../assets/images/toys-content.jpg";
 import { ReactComponent as WavesRed } from "../../assets/waves-red.svg";
 import { ReactComponent as WavesBlue } from "../../assets/waves-blue.svg";
-import "../../Components/Footer/FooterPublic.scss";
 import { useEffect, useState } from "react";
-import FooterPublic from "../../Components/Footer/FooterPublic";
+import Footer from "../../Campaigns/School/Footer";
 import Slider from "./Slider";
 import Header from "./Header";
 
@@ -52,6 +51,7 @@ const CountDownTimer = () => {
 const ToysCampaign = () => {
 	return (
 		<>
+			<WavesBlue className="toys__waves-blue" />
 			<Header />
 			<div className="toys__container">
 				<div className="toys__title">
@@ -65,7 +65,6 @@ const ToysCampaign = () => {
 						<img src={Toy6} alt="toy icon 6" />
 					</div>
 				</div>
-				<WavesBlue className="toys__waves-blue" />
 				<div className="toys__content">
 					<div>
 						<div>Trae tu donativo</div>
@@ -82,11 +81,11 @@ const ToysCampaign = () => {
 					</div>
 				</div>
 				<Slider />
-
 				<img src={ToysBackground} alt="background" />
-				<WavesRed className="toys__waves-red" />
 			</div>
-			<FooterPublic />
+			<Footer />
+
+			<WavesRed className="toys__waves-red" />
 		</>
 	);
 };

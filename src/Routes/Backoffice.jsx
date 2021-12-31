@@ -19,98 +19,109 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import { CategoriesList } from "../Components/Categories/CategoriesList";
 import CategoriesForm from "../Components/Categories/CategoriesForm";
+import ActivitiesForm from "../Components/Activities/ActivitiesForm";
 
 function Backoffice() {
-	const location = useLocation();
-	return (
-		<LayoutBackoffice>
-			<TransitionGroup>
-				<CSSTransition key={location.key} classNames="fade" timeout={300}>
-					<Switch location={location}>
-						<Route
-							exact
-							path="/backoffice/Slides/edit/:id"
-							component={SlidesForm}
-						/>
-						<Route
-							exact
-							path="/backoffice/Slides/create"
-							component={SlidesForm}
-						/>
-						<Route exact path="/backoffice/home" component={HomeForm} />
-						<Route
-							exact
-							path="/backoffice/members/create"
-							component={MembersEdit}
-						/>
-						<Route
-							exact
-							path="/backoffice/members/edit/:id"
-							component={MembersEdit}
-						/>
-						<Route exact path="/backoffice/members" component={MembersList} />
+  const location = useLocation();
+  return (
+    <LayoutBackoffice>
+      <TransitionGroup>
+        <CSSTransition key={location.key} classNames="fade" timeout={300}>
+          <Switch location={location}>
+            <Route
+              exact
+              path="/backoffice/Slides/edit/:id"
+              component={SlidesForm}
+            />
+            <Route
+              exact
+              path="/backoffice/Slides/create"
+              component={SlidesForm}
+            />
+            <Route exact path="/backoffice/home" component={HomeForm} />
+            <Route
+              exact
+              path="/backoffice/members/create"
+              component={MembersEdit}
+            />
+            <Route
+              exact
+              path="/backoffice/members/edit/:id"
+              component={MembersEdit}
+            />
+            <Route exact path="/backoffice/members" component={MembersList} />
 
-						<Route
-							exact
-							path="/backoffice/members/create"
-							component={MembersEdit}
-						/>
-						<Route
-							exact
-							path="/backoffice/organization/edit"
-							component={OrganizationForm}
-						/>
-						<Route
-							exact
-							path="/backoffice/activities"
-							component={ManageActivities}
-						/>
-						<Route
-							exact
-							path="/backoffice/users/edit/:id"
-							component={UserForm}
-						/>
-						<Route exact path="/backoffice/users/create" component={UserForm} />
-						<Route exact path="/backoffice/users" component={UsersList} />
-						<Route
-							exact
-							path="/backoffice/news/edit/:id"
-							component={NewsForm}
-						/>
-						<Route exact path="/backoffice/news/create" component={NewsForm} />
-						<Route exact path="/backoffice/news" component={NewsList} />
-						<Route
-							exact
-							path="/backoffice/Slides"
-							component={ScreenSliderList}
-						/>
-						<Route
-							exact
-							path="/backoffice/organization"
-							component={OrganizationData}
-						/>
+            <Route
+              exact
+              path="/backoffice/members/create"
+              component={MembersEdit}
+            />
+            <Route
+              exact
+              path="/backoffice/organization/edit"
+              component={OrganizationForm}
+            />
+            <Route
+              exact
+              path="/backoffice/activities"
+              component={ManageActivities}
+            />
+            <Route
+              exact
+              path="/backoffice/activities/edit/:id"
+              component={ActivitiesForm}
+            />
+            <Route
+              exact
+              path="/backoffice/activities/create"
+              component={ActivitiesForm}
+            />
+            <Route
+              exact
+              path="/backoffice/users/edit/:id"
+              component={UserForm}
+            />
+            <Route exact path="/backoffice/users/create" component={UserForm} />
+            <Route exact path="/backoffice/users" component={UsersList} />
+            <Route
+              exact
+              path="/backoffice/news/edit/:id"
+              component={NewsForm}
+            />
+            <Route exact path="/backoffice/news/create" component={NewsForm} />
+            <Route exact path="/backoffice/news" component={NewsList} />
+            <Route
+              exact
+              path="/backoffice/Slides"
+              component={ScreenSliderList}
+            />
+            <Route
+              exact
+              path="/backoffice/organization"
+              component={OrganizationData}
+            />
 
-						<Route
-							exact
-							path="/backoffice/categories/edit/:id"
-							component={CategoriesForm}
-						/>
-						<Route
-							exact
-							path="/backoffice/categories/create"
-							component={CategoriesForm}
-						/>
-						<Route
-							exact
-							path="/backoffice/categories"
-							component={CategoriesList}
-						/>
-						<Route path="/backoffice" exact component={HomeDashboard} />
-						<Route component={PageNotFound} />
-					</Switch>
-				</CSSTransition>
-			</TransitionGroup>
-		</LayoutBackoffice>
-	);
+            <Route
+              exact
+              path="/backoffice/categories/edit/:id"
+              component={CategoriesForm}
+            />
+            <Route
+              exact
+              path="/backoffice/categories/create"
+              component={CategoriesForm}
+            />
+            <Route
+              exact
+              path="/backoffice/categories"
+              component={CategoriesList}
+            />
+            <Route path="/backoffice" exact component={HomeDashboard} />
+            <Route component={PageNotFound} />
+          </Switch>
+        </CSSTransition>
+      </TransitionGroup>
+    </LayoutBackoffice>
+  );
 }
 export default Backoffice;

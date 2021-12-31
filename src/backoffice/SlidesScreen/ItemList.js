@@ -3,7 +3,7 @@ import { CgSpinner } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import apiDateToText from "../../helpers/apiDateToText";
 
-export const ItemList = ({ data, deleteSlide }) => {
+export const ItemList = ({ data, deleteSlide, types="Slides" }) => {
 	const [isDeleting, setIsDeleting] = useState(false);
 	const date = apiDateToText(data.updated_at).date;
 	const order = data.order ? `Order: ${data.order}` : date;
@@ -28,7 +28,7 @@ export const ItemList = ({ data, deleteSlide }) => {
 				<div>{data.name}</div>
 				<div>{order}</div>
 				<div className="backofficeLists__cardBtnsContainer">
-					<Link to={`/backoffice/Slides/edit/${data.id}`}>
+					<Link to={`/backoffice/${types}/edit/${data.id}`}>
 						<button className="form__btn-secondary">Editar</button>
 					</Link>
 					<button onClick={handleDelete} className="form__btn-secondary">

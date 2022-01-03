@@ -24,7 +24,7 @@ const LoginForm = () => {
 	}, [formEnviado]);
 
 	return (
-		<>
+		<div className="login__container">
 			<h1 className="title my-10px txt-center">Login</h1>
 			<Formik
 				initialValues={{
@@ -118,7 +118,7 @@ const LoginForm = () => {
 					</Form>
 				)}
 			</Formik>
-		</>
+		</div>
 	);
 };
 

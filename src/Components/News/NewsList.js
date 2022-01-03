@@ -27,8 +27,8 @@ const NewsList = () => {
 		<div className="news-list">
 			<header className="header">
 				<h1 className="header__title">Listado de Novedades</h1>
-				<Link to={"news/create"} className="header__create-btn">
-					Crear
+				<Link to={"news/create"}>
+					<button className="form__btn-secondary">Crear</button>
 				</Link>
 			</header>
 			<ul className="list">

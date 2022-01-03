@@ -26,13 +26,13 @@ const NewsItem = ({ id, name, image, created_at, setNews }) => {
 				<p className="item__datetime">
 					{date} {time}
 				</p>
-				<div className="flex align-center">
-					<Link to={`news/edit/${id}`} className="item__edit-link">
-						Editar
+				<div className="flex align-center gap-20px">
+					<Link to={`news/edit/${id}`}>
+						<button className="form__btn-secondary">Editar</button>
 					</Link>
 
 					{!deleting ? (
-						<button onClick={handleDelete} className="item__remove-btn">
+						<button onClick={handleDelete} className="form__btn-secondary">
 							Remover
 						</button>
 					) : (

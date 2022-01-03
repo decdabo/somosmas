@@ -4,11 +4,9 @@ import { Get } from "../../Services/publicApiService";
 import { Post, Put } from "../../Services/privateApiService";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
-import getBase64FromUrl from "../../helpers/imageToBase64";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-import "./MembersEdit.scss";
 import { alertError } from "../../Services/alerts/Alerts";
 const validUrl =
 	/((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/;
@@ -102,6 +100,9 @@ const MembersEdit = () => {
 	}
 	return (
 		<>
+			<h2 className="text__title-secondary">
+				{id ? "Editar miembro" : "Nuevo miembro"}
+			</h2>
 			<Formik
 				initialValues={{
 					name,
@@ -115,11 +116,8 @@ const MembersEdit = () => {
 			>
 				{({ errors, setFieldValue, values }) => (
 					<Form className="form__container">
-						<h3 className="text__title-tertiary">
-							{id ? "Editar miembro" : "Nuevo miembro"}
-						</h3>
 						<Field
-							className="form__input form__members-input"
+							className="form__input"
 							type="text"
 							id="name"
 							name="name"
@@ -161,7 +159,7 @@ const MembersEdit = () => {
 						</label>
 						<div className="form__message-validation">{errors.image}</div>
 						<Field
-							className="form__input form__members-input"
+							className="form__input"
 							id="facebookUrl"
 							type="text"
 							name="facebookUrl"
@@ -171,7 +169,7 @@ const MembersEdit = () => {
 						<div className="form__message-validation">{errors.facebookUrl}</div>
 
 						<Field
-							className="form__input form__members-input"
+							className="form__input"
 							id="linkedinUrl"
 							type="text"
 							name="linkedinUrl"

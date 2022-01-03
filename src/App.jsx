@@ -17,8 +17,8 @@ function App() {
 			<Switch>
 				<Route exact path="/school-campaign" component={SchoolCampaign} />
 				<Route exact path="/toys-campaign" component={ToysCampaign} />
-				<Route path="/backoffice" render={Backoffice} />
-				<Route path="/" render={Public} />
+				<Route path="/backoffice" render={() => <Backoffice />} />
+				<Route path="/" render={() => <Public />} />
 			</Switch>
 		</BrowserRouter>
 	);

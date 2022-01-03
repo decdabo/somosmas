@@ -60,7 +60,7 @@ const HeaderWeb = () => {
 			<div className={`header__menuPanel ${menuIsOpen && "active"}`}>
 				<ul className="header__navbar">
 					{data.map((item, index) => (
-						<li key={index}>
+						<li key={"link" + index}>
 							<NavLink to={item.link} exact className="header__link">
 								{item.text}
 							</NavLink>

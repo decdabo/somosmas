@@ -30,6 +30,11 @@
 .width-10 {
 	width: 10%;
 }
+
+.w-100 {
+	width: 100%;
+}
+
 // HEIGHT
 .max-height-30 {
 	max-height: 30%;
@@ -49,7 +54,10 @@
 	padding-top: 8px;
 	padding-bottom: 8px;
 }
-
+.px-16 {
+	padding-left: 16px;
+	padding-right: 16px;
+}
 //TEXT
 .txt-center {
 	text-align: center;
@@ -90,4 +98,14 @@
 
 .text-d-none {
 	text-decoration: none;
+}
+
+//IMAGE
+.image-300px {
+	width: 300px;
+	object-fit: contain;
+}
+
+.object-fit-cover {
+	object-fit: cover;
 }

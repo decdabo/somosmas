@@ -11,10 +11,10 @@ import "../../styles/components/formStyles.scss";
 import "./slidesForm.scss";
 import { useParams } from "react-router-dom";
 import LoadingSpinner from "../Spinner/LoadingSpinner";
+import { alertError, alertInformation } from "../../Services/alerts/Alerts";
 
-const SlidesForm = () => {
+const SlidesForm = ({ type="slides" }) => {
 	const [slide, setSlide] = useState({});
-	const [message, setMessage] = useState("");
 	const [isLoading, setIsLoading] = useState(true);
 
 	const { id } = useParams();
@@ -32,12 +32,14 @@ const SlidesForm = () => {
 	};
 	useEffect(() => {
 		if (id) {
-			Get(`slides/${id}`).then((r) => {
+			Get(`${type}/${id}`).then((r) => {
 				if (r.success) {
 					setSlide(r.data);
 				}
 				setIsLoading(false);
 			});
+		} else {
+			setIsLoading(false);
 		}
 	}, []);
 
@@ -53,14 +55,13 @@ const SlidesForm = () => {
 				order: slide.order || "",
 				image: slide.image || "",
 			}}
-			onSubmit={async (values, { setFieldError, resetForm }) => {
-				// if (slide.findIndex((x) => x.id === Number(values.order)) > 0) {
-				// 	setFieldError("order", "El order debe ser unico.");
-				// } else {
+			onSubmit={async (values, { resetForm }) => {
 				if (!id) {
-					const response = await Post("slides", values);
+					const response = await Post(type, values);
 					if (response.success) {
-						setMessage("Creado exitosamente");
+						alertInformation("Creado exitosamente");
+					} else {
+						alertError("Algo ha fallado, intente nuevamente");
 					}
 
 					resetForm();
@@ -69,12 +70,13 @@ const SlidesForm = () => {
 					if (values.image === slide.image) {
 						delete body.image;
 					}
-					const response = await Put("slides", id, body);
+					const response = await Put(type, id, body);
 					if (response.success) {
-						setMessage("Editado exitosamente");
+						alertInformation("Editado exitosamente");
+					} else {
+						alertError("Algo ha fallado, intente nuevamente");
 					}
 				}
-				// }
 			}}
 			validate={validate}
 		>
@@ -87,83 +89,78 @@ const SlidesForm = () => {
 				setFieldValue,
 			}) => {
 				return (
-					<form className="form__container" onSubmit={handleSubmit}>
-						<h3 className="text__title-tertiary">
-							{id ? "Editar slides" : "Crear slides"}
-						</h3>
-						<input
-							id="name"
-							className="form__input"
-							type="text"
-							name="name"
-							onChange={handleChange}
-							onBlur={handleBlur}
-							value={values.name}
-							placeholder="Nombre"
-							autoComplete="off"
-						/>
-
-						<div className="form__message-validation">{errors.name}</div>
-						<CKEditor
-							className="form__input"
-							id="description"
-							editor={ClassicEditor}
-							data={values.description}
-							onChange={(e, editor) => {
-								setFieldValue("description", editor.getData());
-							}}
-							config={{
-								placeholder: "Descripción",
-							}}
-						/>
-						<div className="form__message-validation">{errors.description}</div>
-						<input
-							className="form__input"
-							type="text"
-							name="order"
-							id="order"
-							onChange={handleChange}
-							onBlur={handleBlur}
-							value={values.order}
-							placeholder="Orden"
-							autoComplete="off"
-						/>
-						<div className="form__message-validation">{errors.order}</div>
-						<label>
+					<>
+						<h2 className="text__title-secondary">
+							{id ? `Editar ${type}` : `Crear ${type}`}
+						</h2>
+						<form className="form__container" onSubmit={handleSubmit}>
 							<input
-								className="form__image-input"
-								type="file"
-								accept="image/*"
-								onChange={(e) => handleImageChange(e, setFieldValue)}
+								id="name"
+								className="form__input"
+								type="text"
+								name="name"
+								onChange={handleChange}
 								onBlur={handleBlur}
+								value={values.name}
+								placeholder="Nombre"
+								autoComplete="off"
 							/>
 
-							<div className="form__image-container">
-								<img
-									src={values.image}
-									alt="slide"
-									onError={(e) => {
-										e.target.src =
-											"https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png";
-									}}
-								/>
+							<div className="form__message-validation">{errors.name}</div>
+							<CKEditor
+								className="form__input"
+								id="description"
+								editor={ClassicEditor}
+								data={values.description}
+								onChange={(e, editor) => {
+									setFieldValue("description", editor.getData());
+								}}
+								config={{
+									placeholder: "Descripción",
+								}}
+							/>
+							<div className="form__message-validation">
+								{errors.description}
 							</div>
-						</label>
+							<input
+								className="form__input"
+								type="text"
+								name="order"
+								id="order"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								value={values.order}
+								placeholder="Orden"
+								autoComplete="off"
+							/>
+							<div className="form__message-validation">{errors.order}</div>
+							<label>
+								<input
+									className="form__image-input"
+									type="file"
+									accept="image/*"
+									onChange={(e) => handleImageChange(e, setFieldValue)}
+									onBlur={handleBlur}
+								/>
 
-						<div className="form__message-validation">{errors.image}</div>
-						<button className="form__btn-primary" type="submit">
-							Enviar
-						</button>
-						<div
-							className={
-								message.includes("mal")
-									? "form__message-fail"
-									: "form__message-success"
-							}
-						>
-							{message}
-						</div>
-					</form>
+								<div className="form__image-container">
+									<img
+										src={values.image}
+										alt={type}
+										onError={(e) => {
+											e.target.src =
+												"https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png";
+										}}
+									/>
+								</div>
+							</label>
+
+							<div className="form__message-validation">{errors.image}</div>
+							<button className="form__btn-primary" type="submit">
+								Enviar
+							</button>
+						</form>
+					</>
 				);
 			}}
 		</Formik>

@@ -5,26 +5,25 @@ import Popup from "reactjs-popup";
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
 import * as Yup from "yup";
 import "./UserForm.scss";
-import "../../utils.scss";
-import { Get, Post } from "../../Services/publicApiService";
-import "../../styles/components/formStyles.scss";
-import { Put } from "../../Services/privateApiService";
+import { Get } from "../../Services/publicApiService";
+import { Put, Post } from "../../Services/privateApiService";
 
-import LoaderComponent from "../Loader/Loader";
 import termsConditions from "../../assets/files/TyC.pdf";
-import { alertError, alertInformation } from "../../Services/alerts/Alerts";
+import { alertError } from "../../Services/alerts/Alerts";
 import useAuthActions from "../../store/hooks/useAuthActions";
+import LoadingSpinner from "../Spinner/LoadingSpinner";
 
 const UserForm = () => {
 	const { push } = useHistory();
 	const { isLogged } = useAuthActions();
+	const [isLoading, setIsLoading] = useState(true);
+	const [message, setMessage] = useState("");
 
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [role_id, setRole_id] = useState("");
 	const [password, setPassword] = useState("");
 	const [profile_image, setProfile_Image] = useState("");
-	const [create, setCreate] = useState(true);
 	const [terms, setTerms] = useState(false);
 
 	const { id } = useParams();
@@ -33,7 +32,6 @@ const UserForm = () => {
 		close();
 		if (accept) {
 			setTerms(true);
-			alertInformation("Has aceptado los términos y condiciones");
 		} else {
 			setTerms(false);
 			alertError("Debes aceptar los términos y condiciones para continuar");
@@ -41,44 +39,38 @@ const UserForm = () => {
 	};
 
 	const submitForm = async (values) => {
-		if (create) {
-			try {
-				const response = await Post("users", values);
-				return alert(response.data.message);
-			} catch (error) {
-				alertError(error);
+		if (id) {
+			const response = await Put("users", id, values);
+			if (response.success) {
+				setMessage("Usuario actualizado");
 			}
 		} else {
-			try {
-				const response = await Put("users", id, values);
-				return alert(response.data.message);
-			} catch (error) {
-				alertError(error);
+			const response = await Post("users", values);
+			if (response.success) {
+				setMessage("Usuario creado");
 			}
 		}
 	};
 
 	const getData = async () => {
 		if (id) {
-			try {
-				await Get("users", id).then((res) => {
-					const {
-						data: { name, email, role_id, password, profile_image },
-					} = res;
-					setName(name);
-					setEmail(email);
-					setRole_id(role_id);
-					setPassword(password);
-					setProfile_Image(profile_image);
-					setCreate(false);
-				});
-			} catch (error) {
-				alertError(error);
+			const res = await Get("users", id);
+			if (res.success) {
+				const {
+					data: { name, email, role_id, password, profile_image },
+				} = res;
+				setName(name);
+				setEmail(email);
+				setRole_id(role_id);
+				setPassword(password);
+				setProfile_Image(profile_image || "");
+			} else {
+				alertError("Algo ha fallado, intente nuevamente");
 			}
 		} else {
-			alertError("usuario inexistente");
 			push("/create-user");
 		}
+		setIsLoading(false);
 	};
 
 	useEffect(() => {
@@ -107,10 +99,18 @@ const UserForm = () => {
 		}
 	};
 
+	if (isLoading) {
+		return <LoadingSpinner />;
+	}
+
 	return (
-		<div>
-		{isLogged ? (<Redirect to="/login-form"/>)
-			: (
+		<>
+			<h2 className="text__title-secondary">
+				{id ? "Editar usuario" : "Crear usuario"}
+			</h2>
+			{isLogged ? (
+				<Redirect to="/login-form" />
+			) : (
 				<Formik
 					initialValues={{ name, email, role_id, password, profile_image }}
 					onSubmit={(values) => {
@@ -121,111 +121,131 @@ const UserForm = () => {
 				>
 					{(props) => {
 						return (
-							<Form className="form__user">
-								<div className="form__container">
-									<h3 className="txt-center">User Form</h3>
-									<label>Name: </label>
-									<Field name={"name"} type={"text"} className="form__input" />
-									<small className="form__message-validation">
-										{props.errors.name}
-									</small>
-									<label>Email: </label>
-									<Field name={"email"} type={"email"} className="form__input" />
-									<small className="form__message-validation">
-										{props.errors.email}
-									</small>
-									<label>Password: </label>
-									<Field
-										name={"password"}
-										type={"password"}
-										className="form__input"
-									/>
-									<small className="form__message-validation">
-										{props.errors.password}
-									</small>
-									<label>Role: </label>
-									<Field name={"role_id"} as="select" className="form__select">
-										<option value="">-- Select role --</option>
-										<option value="0">User</option>
-										<option value="1">Administrator</option>
-									</Field>
-									<small className="form__message-validation">
-										{props.errors.role_id}
-									</small>
-									<label>Image: </label>
+							<Form className="form__container">
+								<Field
+									name="name"
+									type="text"
+									placeholder="Nombre"
+									className="form__input"
+								/>
+								<div className="form__message-validation">
+									{props.errors.name}
+								</div>
+								<Field
+									name="email"
+									type="email"
+									placeholder="Email"
+									className="form__input"
+								/>
+								<div className="form__message-validation">
+									{props.errors.email}
+								</div>
+								<Field
+									name="password"
+									type="password"
+									className="form__input"
+									placeholder="Contraseña"
+								/>
+								<div className="form__message-validation">
+									{props.errors.password}
+								</div>
+								<label>Rol: </label>
+								<Field name="role_id" as="select" className="form__select">
+									<option value="">Seleccionar rol</option>
+									<option value="0">User</option>
+									<option value="1">Administrator</option>
+								</Field>
+								<div className="form__message-validation">
+									{props.errors.role_id}
+								</div>
+								<label>
 									<input
+										className="form__image-input"
 										type="file"
-										name="profile_image"
-										accept="image/png,image/jpeg"
+										accept="image/*"
 										onChange={(event) => {
 											handleChange(event, props);
 										}}
 									/>
-									<small className="form__message-validation">
-										{props.errors.profile_image}
-									</small>
-									<div className="my-10px text-center ">
-										<Popup
-											trigger={
-												<button
-													type="button"
-													className="form__btn-primary my-10px"
-													id="termsConditions"
-												>
-													Terminos y Condiciones
-												</button>
-											}
-											position="top left"
-											modal
-										>
-											{(close) => (
-												<div>
-													<Document
-														file={termsConditions}
-														loading={
-															<div className="flex align-center">
-																<LoaderComponent />
-															</div>
-														}
-													>
-														<Page pageNumber={1} canvasBackground={"#f2f2f2"} />
-													</Document>
-													<div className="width-50 m-auto ">
-														<div className="flex justify-around my-10px">
-															<button
-																className="form__btn-primary"
-																onClick={() => handleTerms(true, close)}
-															>
-																Aceptar
-															</button>
-															<button
-																className="form__btn-secondary"
-																onClick={() => handleTerms(false, close)}
-															>
-																Cancelar
-															</button>
-														</div>
+
+									<div className="form__image-container">
+										<img
+											src={props.values.profile_image}
+											alt="article"
+											onError={(e) => {
+												e.target.src =
+													"https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png";
+											}}
+										/>
+									</div>
+								</label>
+
+								<div className="form__message-validation">
+									{props.errors.profile_image}
+								</div>
+								<div className="my-10px text-center ">
+									<Popup
+										trigger={
+											<button
+												type="button"
+												className="form__btn-primary my-10px"
+												id="termsConditions"
+											>
+												Terminos y Condiciones
+											</button>
+										}
+										position="top left"
+										modal
+									>
+										{(close) => (
+											<Document
+												className="userForm__document"
+												file={termsConditions}
+												loading={
+													<div className="flex align-center">
+														<LoadingSpinner />
+													</div>
+												}
+											>
+												<Page
+													pageNumber={1}
+													canvasBackground="#eee"
+													width={500}
+												/>
+												<div className="width-50 m-auto">
+													<div className="flex justify-around my-10px">
+														<button
+															className="form__btn-secondary"
+															onClick={() => handleTerms(true, close)}
+														>
+															Aceptar
+														</button>
+														<button
+															className="form__btn-tertiary"
+															onClick={() => handleTerms(false, close)}
+														>
+															Cancelar
+														</button>
 													</div>
 												</div>
-											)}
-										</Popup>
-									</div>
-									<button
-										type="submit"
-										disabled={!props.isValid && !terms}
-										className="form__btn-primary mx-auto"
-									>
-										{" "}
-										Send
-									</button>
+											</Document>
+										)}
+									</Popup>
 								</div>
+								<button
+									type="submit"
+									disabled={!terms}
+									className="form__btn-primary mx-auto"
+								>
+									Enviar
+								</button>
+								<div className="form__message-success">{message}</div>
 							</Form>
 						);
 					}}
 				</Formik>
-			)
-		}
-		</div>
+			)}
+		</>
 	);
 };
 

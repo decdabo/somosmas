@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+
 import {
 	validateAuth,
 	getUserInfo,
@@ -18,10 +19,9 @@ import {
 const useAuthActions = () => {
 	const dispatch = useDispatch();
 	const isLogged = localStorage.getItem("token");
-	const { role_id } = useSelector((state) => state.authReducer);
-
+	const { role_id, token, loading } = useSelector((state) => state.authReducer);
 	const onInit = async () => {
-		isLogged && (await dispatch(getUserInfo()));
+		(await isLogged) && (await dispatch(getUserInfo()));
 	};
 
 	const getRoleId = () => {
@@ -39,7 +39,6 @@ const useAuthActions = () => {
 	 */
 	const validateUserLogin = async (email, password) => {
 		await dispatch(validateAuth({ email: email, password: password }));
-		await dispatch(getUserInfo());
 	};
 
 	/**
@@ -64,8 +63,8 @@ const useAuthActions = () => {
 	 * @param {string} registrationData.password User password
 	 *
 	 */
-	const registerUserData = (registrationData) => {
-		dispatch(registerUser(registrationData));
+	const registerUserData = async (registrationData) => {
+		await dispatch(registerUser(registrationData));
 	};
 
 	return {
@@ -75,6 +74,9 @@ const useAuthActions = () => {
 		registerUserData,
 		isLogged,
 		getRoleId,
+		token,
+		role_id,
+		loading,
 	};
 };
 export default useAuthActions;

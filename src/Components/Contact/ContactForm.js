@@ -53,6 +53,7 @@ function ContactForm() {
 	return (
 		<div>
 			<form onSubmit={formik.handleSubmit} className="form__container">
+				<h3 className="text__title-tertiary">Contactate con nosotros</h3>
 				<input
 					type="text"
 					id="name"

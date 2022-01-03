@@ -4,17 +4,11 @@ export const ActivitiesForm = lazy(() =>
 	import("../../Components/Activities/ActivitiesForm")
 );
 
-export const CategoriesForm = lazy(() =>
-	import("../../Components/Categories/CategoriesForm")
-);
-
 export const NewsForm = lazy(() => import("../../Components/News/NewsForm"));
 
 export const TestimonialForm = lazy(() =>
 	import("../../Components/Testimonials/TestimonialsForm")
 );
-
-export const UserForm = lazy(() => import("../../Components/Users/UsersForm"));
 
 export const SchoolCampaign = lazy(() =>
 	import("../../Campaigns/School/SchoolCampaign")

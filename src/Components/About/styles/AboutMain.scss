@@ -2,8 +2,7 @@
 
 .about {
 	&__container {
-		margin: 92px;
-		margin-top: 10px;
+		margin: 10px;
 	}
 	&__title-imported {
 		display: flex;
@@ -30,11 +29,23 @@
 
 	&__text {
 		font-size: 16px;
-		width: 93%;
-		margin: 20px 30px 0px 0px;
-		@media (max-width: $breakpoint-tablet) {
+		width: 60%;
+		margin: 20px auto;
+		@media screen and (max-width: $breakpoint-tablet) {
+			margin: auto;
 			font-size: 13px;
 			width: 86%;
 		}
+	}
+}
+
+#tweet-embed {
+	padding: 0 30px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	justify-content: center;
+	& > div {
+		margin: 0 !important;
 	}
 }

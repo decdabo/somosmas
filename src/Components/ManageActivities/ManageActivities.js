@@ -1,94 +1,63 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { Get } from "../../Services/privateApiService";
+import { Delete, Get } from "../../Services/privateApiService";
 import { SearchActivities } from "./SearchActivities";
-import { ActivityItem } from "./ActivityItem";
+import LoadingSpinner from "../Spinner/LoadingSpinner";
 import "./ManageActivities.scss";
+import { ItemList } from "../../backoffice/SlidesScreen/ItemList";
 
 const ManageActivities = () => {
   const [activities, setActivities] = useState([]);
-  const [status, setStatus] = useState("Buscando actividades...");
-  const [message, setMessage] = useState("");
-  const [editingActivity, setEditingActivity] = useState(0); // will change to the id of the activity to edit
-
-  const handleEditActivity = (id) => {
-    setMessage("");
-    setEditingActivity(id);
-  };
+  const [loading, setLoading] = useState(true);
 
   const handleDeleteActivity = async (id) => {
-    setMessage("");
-    setActivities((prevState) =>
-      prevState.filter((activity) => +activity.id !== +id)
-    );
-    setMessage("Eliminado exitosamente");
-  };
-
-  const handleCancelEdit = () => {
-    setMessage("");
-    setEditingActivity(0);
+		const deleteData = await Delete("activities", id);
+		if (!deleteData.success) {
+			alertError(deleteData.error);
+		} else {
+      fetchApiData();
+		}
   };
 
   const fetchApiData = async () => {
     const response = await Get("activities");
     if (response.success) {
       setActivities(response.data);
+      setLoading(false);
     }
   };
-
   useEffect(() => {
     fetchApiData();
   }, []);
 
-  const handleErrorMsg = () => {
-    if (!activities[0]) {
-      setTimeout(() => {
-        setStatus("No se han encontrado actividades");
-      }, 3500);
-    } else {
-      setStatus("Buscando actividades...");
-    }
-  };
-  useEffect(() => {
-    handleErrorMsg();
-  }, [activities]);
-
   return (
-    <div className="manage__activities-container">
-      <Link to="/backoffice/activities/create" className="manage__link">
-        Create New Activity
-      </Link>
+    <div className="backofficeLists__container">
+      <h2 className="text__title-secondary">Lista de slides</h2>
+      <div className="backofficeLists__searchContainer">
+        <Link to="/backoffice/activities/create" className="manage__link">
+          <button className="form__btn-secondary">Create New Activity</button>
+        </Link>
+      </div>
       <SearchActivities setActivities={setActivities} />
-      {activities.length ? (
-        <>
-          <div className="w-75">
-            <section>
-              {activities.map((activity) => (
-                <ActivityItem
-                  key={activity.id}
-                  activity={activity}
-                  handleEditActivity={handleEditActivity}
-                  handleDeleteActivity={handleDeleteActivity}
-                  handleCancelEdit={handleCancelEdit}
-                  editingActivity={editingActivity}
-                />
-              ))}
-            </section>
-          </div>
-          <div
-            className={
-              message.includes("mal") ? "error-message" : "success-message"
-            }
-          >
-            {message}
-          </div>
-        </>
+      {loading ? (
+        <LoadingSpinner />
+      ) : activities.length ? (
+        activities.map((activity) => (
+          <ItemList 
+          key={activity.id} 
+          data={activity} 
+          deleteSlide={handleDeleteActivity} 
+          types="activities"
+          />
+        ))
       ) : (
-        <div>{status}</div>
+        <div className="backofficeLists__emptyCard">No hay resultados...</div>
       )}
     </div>
   );
 };
 
 export default ManageActivities;
+
+// ) : (<h1>sexo</h1>)}

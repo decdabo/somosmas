@@ -39,7 +39,7 @@ export const CategoriesTable = ({ category }) => {
 									<i className="fas fa-trash-alt" />
 								</button>
 								<Link
-									to={`/edit-category/${category.id}`}
+									to={`/backoffice/categories/edit/${category.id}`}
 									className="table__buttons edit-button"
 								>
 									<i className="fas fa-edit"></i>

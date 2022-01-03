@@ -1,45 +1,36 @@
-@import '../../styles/variables.scss';
-
+@import "../../styles/variables.scss";
 
 .headerToys {
-    background-color: transparent;
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 30px;
-    @media screen and (min-width: $breakpoint-tablet) {
-        justify-content: space-evenly;        
-    }
-    @media screen and (min-width: $breakpoint-laptop) {
-        justify-content: space-evenly;
-    }
-    @media screen and (min-width: $breakpoint-tv) {
-        background-color: $bg-secondary-color;
-    }
+	background-color: transparent;
+	width: 100%;
+	height: 200px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 30px;
+	@media screen and (min-width: $breakpoint-tablet) {
+		justify-content: space-evenly;
+	}
+	@media screen and (min-width: $breakpoint-laptop) {
+		justify-content: space-evenly;
+	}
 
+	&__logoCampaña-logo {
+		width: 200px;
+	}
 
+	&__ong {
+		display: none;
+		@media screen and (min-width: $breakpoint-tablet) {
+			display: flex;
+		}
+	}
 
-
-    &__logoCampaña-logo {
-        width: 200px;
-    }
-
-    &__ong {
-        display: none;
-        @media screen and (min-width: $breakpoint-tablet) {
-            display: flex;
-        }
-    }
-
-    &__slogan {
-        display: none;
-        @media screen and (min-width: $breakpoint-laptop) {
-            display: flex;
-            flex-direction: column;
-            }
-        }
-    
-
+	&__slogan {
+		display: none;
+		@media screen and (min-width: $breakpoint-laptop) {
+			display: flex;
+			flex-direction: column;
+		}
+	}
 }

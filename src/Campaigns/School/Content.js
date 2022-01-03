@@ -19,15 +19,16 @@ const Content = ({ event = 20000 * 4324 }) => {
 	};
 	return (
 		<div className="campaign__container">
-			<div className="campaign__box mt-5">
-				<h1 className="m-auto">
-					13-12-2021 / 13:15hrs Calle 123, Localidad, Provincia
+			<div className="campaign__box mt-5 px-16">
+				<h1 className="text-center">
+					Carrera 22 entre 80-73, Bogotá, Colombia
 				</h1>
+				<h2 className="text-center">13-12-2021 / 13:15hrs </h2>
 				<hr />
 				<div className="campaign__countdown">
 					<img
 						className="campaign__img countdown__img-left"
-						src="https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png?w=640"
+						src="https://images.vexels.com/media/users/3/200184/isolated/lists/cb73b9acfb176a64a34c519bf6769761-dos-libros-planos-simples.png"
 						alt="img-campaign"
 					/>
 					<div className="countdown__container m-auto">
@@ -39,11 +40,11 @@ const Content = ({ event = 20000 * 4324 }) => {
 					</div>
 					<img
 						className="campaign__img countdown__img-right "
-						src="https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png?w=640"
+						src="https://images.vexels.com/media/users/3/200184/isolated/lists/cb73b9acfb176a64a34c519bf6769761-dos-libros-planos-simples.png"
 						alt="img-campaign"
 					/>
 				</div>
-				<p className="campaign__description">
+				<p className="campaign__description text-center">
 					El espacio de apoyo escolar es el corazón del área educativa.
 					Actualmente se encuentran inscriptos a este programa 150 niños y niñas
 					de 6 a 15 años y 50 adolescentes entre 13 y 20 años. Tambien contamos
@@ -54,17 +55,17 @@ const Content = ({ event = 20000 * 4324 }) => {
 				<div className="campaign__img-container">
 					<img
 						className="campaign__img countdown__img-left"
-						src="https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png?w=640"
+						src="https://images.vexels.com/media/users/3/200184/isolated/lists/cb73b9acfb176a64a34c519bf6769761-dos-libros-planos-simples.png"
 						alt="img-campaign"
 					/>
 					<img
 						className="campaign__img"
-						src="https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png?w=640"
+						src="https://images.vexels.com/media/users/3/200184/isolated/lists/cb73b9acfb176a64a34c519bf6769761-dos-libros-planos-simples.png"
 						alt="img-campaign"
 					/>
 					<img
 						className="campaign__img countdown__img-right"
-						src="https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png?w=640"
+						src="https://images.vexels.com/media/users/3/200184/isolated/lists/cb73b9acfb176a64a34c519bf6769761-dos-libros-planos-simples.png"
 						alt="img-campaign"
 					/>
 				</div>

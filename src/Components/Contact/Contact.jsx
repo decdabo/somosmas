@@ -5,7 +5,7 @@ import { Get } from "../../Services/publicApiService";
 import useAuthActions from "../../store/hooks/useAuthActions";
 import LeafletMap from "../LeafletMap/LeafletMap";
 import { Title } from "../Title/Title";
-
+import somosMas from "../../assets/images/logo.png";
 import "./Contact.scss";
 
 const Contact = () => {
@@ -34,39 +34,40 @@ const Contact = () => {
 
 	return (
 		<>
-			{getRoleId() ===  1 ? (
+			{getRoleId() === 1 ? (
 				<Redirect to="/" />
 			) : (
 				<div className="contact__container">
-					<Title title="Contacto" />
-					{contactData.address ? (
-						<div>
-							<div>
-								<i className="fas fa-envelope"></i>
-								{contactData.address}
-							</div>
-							<div>
-								<i className="fab fa-instagram"></i>
-								{contactData.instagram_url}
-							</div>
-							<div>
-								<i className="fab fa-facebook-f"></i>
-								{contactData.facebook_url}
-							</div>
-							<div>
-								<i className="fab fa-twitter"></i>
-								{contactData.twitter_url}
-							</div>
-							<div>
-								<i className="fas fa-phone-alt"></i>
-								{contactData.cellphone}
-							</div>
-
-							<LeafletMap />
-						</div>
-					) : (
-						<div>Loading...</div>
-					)}
+					<div className="container__flex">
+						<Title title="Contacto" image={somosMas} />
+						{contactData.address ? (
+							<ul className="contact__list">
+								<li className="list__item">
+									<i className="fas fa-envelope"></i>
+									somosmas@ong.com
+								</li>
+								<li className="list__item">
+									<i className="fab fa-instagram"></i>
+									{contactData.instagram_url}
+								</li>
+								<li className="list__item">
+									<i className="fab fa-facebook-f"></i>
+									{contactData.facebook_url}
+								</li>
+								<li className="list__item">
+									<i className="fab fa-twitter"></i>
+									{contactData.twitter_url}
+								</li>
+								<li className="list__item">
+									<i className="fas fa-phone-alt"></i>
+									{contactData.cellphone}
+								</li>
+							</ul>
+						) : (
+							<div>Loading...</div>
+						)}
+					</div>
+					<LeafletMap />
 				</div>
 			)}
 		</>

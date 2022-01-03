@@ -1,42 +1,50 @@
 [
-  {
-    "title": "Novedades",
-    "image": "http://atrilco.com/wp-content/uploads/2017/11/ef3-placeholder-image.jpg",
-    "description": "seccion novedades"
-  },
-  {
-    "title": "Actividades",
-    "image": "http://atrilco.com/wp-content/uploads/2017/11/ef3-placeholder-image.jpg",
-    "description": "seccion actividades"
-  },
-  {
-    "title": "Categorias",
-    "image": "http://atrilco.com/wp-content/uploads/2017/11/ef3-placeholder-image.jpg",
-    "description": "seccion categorias"
-  },
-  {
-    "title": "Testimonios",
-    "image": "http://atrilco.com/wp-content/uploads/2017/11/ef3-placeholder-image.jpg",
-    "description": "seccion testimonios"
-  },
-  {
-    "title": "Organizacion",
-    "image": "http://atrilco.com/wp-content/uploads/2017/11/ef3-placeholder-image.jpg",
-    "description": "seccion organizacion"
-  },
-  {
-    "title": "Slides",
-    "image": "http://atrilco.com/wp-content/uploads/2017/11/ef3-placeholder-image.jpg",
-    "description": "seccion slides"
-  },
-  {
-    "title": "Usuarios",
-    "image": "http://atrilco.com/wp-content/uploads/2017/11/ef3-placeholder-image.jpg",
-    "description": "seccion usuarios"
-  },
-  {
-    "title": "Miembros",
-    "image": "http://atrilco.com/wp-content/uploads/2017/11/ef3-placeholder-image.jpg",
-    "description": "seccion miembros"
-  }
+	{
+		"title": "Novedades",
+		"image": "far fa-newspaper",
+		"description": "seccion novedades",
+		"link": "/backoffice/news"
+	},
+	{
+		"title": "Actividades",
+		"image": "far fa-clipboard",
+		"description": "seccion actividades",
+		"link": "/backoffice/activities"
+	},
+	{
+		"title": "Categorias",
+		"image": "far fa-list-alt",
+		"description": "seccion categorias",
+		"link": "/backoffice/categories"
+	},
+	{
+		"title": "Testimonios",
+		"image": "far fa-comment-alt",
+		"description": "seccion testimonios",
+		"link": "/backoffice/testimonials"
+	},
+	{
+		"title": "Organizacion",
+		"image": "fas fa-sitemap",
+		"description": "seccion organizacion",
+		"link": "/backoffice/organization"
+	},
+	{
+		"title": "Slides",
+		"image": "far fa-images",
+		"description": "seccion slides",
+		"link": "/backoffice/slides"
+	},
+	{
+		"title": "Usuarios",
+		"image": "fas fa-user-cog",
+		"description": "seccion usuarios",
+		"link": "/backoffice/users"
+	},
+	{
+		"title": "Miembros",
+		"image": "fas fa-users",
+		"description": "seccion miembros",
+		"link": "/backoffice/members"
+	}
 ]

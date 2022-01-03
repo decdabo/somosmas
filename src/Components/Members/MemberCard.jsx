@@ -1,16 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { CgSpinner } from "react-icons/cg";
 import { Link } from "react-router-dom";
-import apiDateToText from "../../helpers/apiDateToText";
 
-export const ItemList = ({ data, deleteSlide, types="Slides" }) => {
+const MemberCard = ({ member, deleteMember }) => {
 	const [isDeleting, setIsDeleting] = useState(false);
-	const date = apiDateToText(data.updated_at).date;
-	const order = data.order ? `Order: ${data.order}` : date;
 
 	const handleDelete = async () => {
 		setIsDeleting(true);
-		await deleteSlide(data.id);
+		await deleteMember(member.id);
 		setIsDeleting(false);
 	};
 	return (
@@ -20,18 +17,26 @@ export const ItemList = ({ data, deleteSlide, types="Slides" }) => {
 			)}
 			<img
 				className="backofficeLists__cardImage"
-				src={data.image}
-				alt={data.image}
+				src={member.image || ""}
+				alt="descripcion"
+				onError={(e) => {
+					e.target.src =
+						"https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png";
+				}}
+				loading="lazy"
 			/>
 
 			<div className="backofficeLists__cardContent">
-				<div>{data.name}</div>
-				<div>{order}</div>
+				<div>{member.name}</div>
 				<div className="backofficeLists__cardBtnsContainer">
-					<Link to={`/backoffice/${types}/edit/${data.id}`}>
+					<Link to={`/backoffice/members/edit/${member.id}`}>
 						<button className="form__btn-secondary">Editar</button>
 					</Link>
-					<button onClick={handleDelete} className="form__btn-secondary">
+					<button
+						className="form__btn-secondary"
+						onClick={handleDelete}
+						disabled={isDeleting}
+					>
 						Eliminar
 					</button>
 				</div>
@@ -39,3 +44,5 @@ export const ItemList = ({ data, deleteSlide, types="Slides" }) => {
 		</div>
 	);
 };
+
+export default MemberCard;

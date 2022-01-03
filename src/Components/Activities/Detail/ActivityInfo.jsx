@@ -24,46 +24,46 @@ RETURNS => activity info component and displays some interesting data about a sp
 */
 
 const ActivityInfo = () => {
-  const { id } = useParams();
-  const [currentActivity, setCurrentActivity] = useState({});
+	const { id } = useParams();
+	const [currentActivity, setCurrentActivity] = useState({});
 
-  const dispatch = useDispatch((state) => state);
+	const dispatch = useDispatch((state) => state);
 
-  useEffect(() => {
-    setTimeout(() => {
-      dispatch(fetchActivities(id))
-        .then(({ payload }) => setCurrentActivity(payload))
-        .catch((error) => alertError("No se pudo cargar la actividad"));
-    }, 1000);
-  }, [id]);
+	useEffect(() => {
+		setTimeout(() => {
+			dispatch(fetchActivities(id))
+				.then(({ payload }) => setCurrentActivity(payload))
+				.catch((error) => alertError("No se pudo cargar la actividad"));
+		}, 1000);
+	}, [id]);
 
-  const { name, description, created_at, image } = currentActivity;
+	const { name, description, created_at, image } = currentActivity;
 
-  const getDateTime = useCallback(() => {
-    return created_at !== undefined
-      ? apiDateToText(created_at)
-      : { date: null, time: null };
-  }, [created_at]);
+	const getDateTime = useCallback(() => {
+		return created_at !== undefined
+			? apiDateToText(created_at)
+			: { date: null, time: null };
+	}, [created_at]);
 
-  return (
-    <>
-      {currentActivity && name ? (
-        <section className="detail">
-          <Title image={image} title={name} />
-          <hgroup className="detail__datetime">
-            <p className="detail__datetime-text">
-              {getDateTime().date} {getDateTime().time}
-            </p>
-          </hgroup>
+	return (
+		<>
+			{currentActivity && name ? (
+				<section className="detail">
+					<Title width="full" image={image} title={name} />
+					<hgroup className="detail__datetime">
+						<p className="detail__datetime-text">
+							{getDateTime().date} {getDateTime().time}
+						</p>
+					</hgroup>
 
-          {/* OTRA VEZ LA MALA PRACTICA PERO NO ENCUENTRO ALTERNATIVA */}
-          <div dangerouslySetInnerHTML={{ __html: description }}></div>
-        </section>
-      ) : (
-        <ActivitySkeleton variant="info" />
-      )}
-    </>
-  );
+					{/* OTRA VEZ LA MALA PRACTICA PERO NO ENCUENTRO ALTERNATIVA */}
+					<div dangerouslySetInnerHTML={{ __html: description }}></div>
+				</section>
+			) : (
+				<ActivitySkeleton variant="info" />
+			)}
+		</>
+	);
 };
 
 export default ActivityInfo;

@@ -19,12 +19,13 @@ const NewsCards = () => {
 						<div className="card__container" key={item.id}>
 							<img
 								className="card__image"
-								src={item.image}
+								src={item.image || ""}
 								alt="user"
 								onError={(e) => {
 									e.target.src =
 										"https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png";
 								}}
+								loading="lazy"
 							/>
 							<p className="card__title">{item.name}</p>
 							<p

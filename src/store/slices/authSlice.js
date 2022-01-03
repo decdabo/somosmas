@@ -15,12 +15,13 @@ import { Get } from "../../Services/privateApiService";
  * @returns {import("@reduxjs/toolkit").AsyncThunk} Async thunk action to dispatch
  *
  */
-const validateAuth = createAsyncThunk("auth/validateAuth", async (userData) => {
-	const response = await Post("login", userData).catch((err) =>
-		console.log(err)
-	);
-	return response;
-});
+const validateAuth = createAsyncThunk(
+	"auth/validateAuth",
+	async (userData, { fulfillWithValue }) => {
+		const response = await Post("login", userData);
+		return fulfillWithValue(response);
+	}
+);
 
 /**
  * Async thunk action that get user info if it is a token saved in LocalStorage
@@ -31,10 +32,13 @@ const validateAuth = createAsyncThunk("auth/validateAuth", async (userData) => {
  * @returns {import("@reduxjs/toolkit").AsyncThunk} Async thunk action to dispatch
  *
  */
-const getUserInfo = createAsyncThunk("auth/getUserInfo", async () => {
-	const response = await Get("auth/me").catch((err) => console.log(err));
-	return response;
-});
+const getUserInfo = createAsyncThunk(
+	"auth/getUserInfo",
+	async (_, { fulfillWithValue }) => {
+		const response = await Get("auth/me");
+		return fulfillWithValue(response);
+	}
+);
 
 /**
  * Async thunk action that registers a new user
@@ -51,11 +55,9 @@ const getUserInfo = createAsyncThunk("auth/getUserInfo", async () => {
  */
 const registerUser = createAsyncThunk(
 	"auth/register",
-	async (registrationData) => {
-		const response = await Post("register", registrationData).catch((err) =>
-			console.log(err)
-		);
-		return response;
+	async (registrationData, { fulfillWithValue }) => {
+		const response = await Post("register", registrationData);
+		return fulfillWithValue(response);
 	}
 );
 
@@ -72,6 +74,8 @@ export const authSlice = createSlice({
 		userEmail: "",
 		token: "",
 		role_id: 0,
+		error: "",
+		loading: true,
 	},
 	reducers: {
 		logout: (state) => {
@@ -83,6 +87,8 @@ export const authSlice = createSlice({
 				userEmail: "",
 				token: "",
 				role_id: 0,
+				error: "",
+				loading: false,
 			};
 		},
 	},
@@ -91,46 +97,74 @@ export const authSlice = createSlice({
 
 		// ASYNC THUNK REGISTER USER
 		builder.addCase(registerUser.fulfilled, (state, action) => {
-			if (action.payload.error) return { ...state };
-			const { name, email, id, role_id } = action.payload.data.user;
-			const token = action.payload.data.token;
-
+			console.log(action.payload);
+			if (action.payload.success) {
+				const { name, email, id, role_id } = action.payload.data.user;
+				const token = action.payload.data.token;
+				localStorage.setItem("token", token);
+				return {
+					...state,
+					isAuth: true,
+					userEmail: email,
+					userName: name,
+					id: id,
+					token: token,
+					role_id: role_id,
+					error: "",
+					loading: false,
+				};
+			}
 			return {
 				...state,
-				isAuth: true,
-				userEmail: email,
-				userName: name,
-				id: id,
-				token: token,
-				role_id: role_id,
+				isAuth: false,
+				id: 0,
+				userName: "",
+				userEmail: "",
+				token: "",
+				role_id: 0,
+				error: action.payload.error.response.data.message,
+				loading: false,
 			};
 		});
 
+		builder.addCase(registerUser.pending, (state) => {
+			return { ...state, loading: true };
+		});
+
 		builder.addCase(registerUser.rejected, (state) => {
-			return { ...state, isAuth: false };
+			return { ...state, isAuth: false, loading: true };
 		});
 
 		// ASYNC THUNK GET USER INFO CASES
 		builder.addCase(getUserInfo.fulfilled, (state, action) => {
 			const response = action.payload;
 
-			if (!response.success) {
-				return { ...state, isAuth: false };
+			if (response.success) {
+				const { id, name, email, role_id } = response.data.user;
+				return {
+					...state,
+					isAuth: true,
+					userEmail: email,
+					userName: name,
+					id: id,
+					role_id: role_id,
+					loading: false,
+				};
 			}
-			const { id, name, email, role_id } = response.data.user;
 			return {
 				...state,
-				isAuth: true,
-				userEmail: email,
-				userName: name,
-				id: id,
-				role_id: role_id,
+				isAuth: false,
+				loading: false,
 			};
+		});
+		builder.addCase(getUserInfo.pending, (state) => {
+			return { ...state, loading: true };
 		});
 		builder.addCase(getUserInfo.rejected, (state) => {
 			return {
 				...state,
 				isAuth: false,
+				loading: false,
 			};
 		});
 
@@ -139,7 +173,13 @@ export const authSlice = createSlice({
 			const response = action.payload;
 
 			if (response["error"] === "No token") {
-				return { ...state, isAuth: false, token: "" };
+				return {
+					...state,
+					isAuth: false,
+					token: "",
+					loading: false,
+					error: "Usuario y/o contraseña incorrectos.",
+				};
 			}
 			localStorage.setItem("token", response.data.token);
 
@@ -147,7 +187,12 @@ export const authSlice = createSlice({
 				...state,
 				isAuth: true,
 				token: response.data.token,
+				loading: false,
+				error: "",
 			};
+		});
+		builder.addCase(validateAuth.pending, (state) => {
+			return { ...state, loading: true, error: "" };
 		});
 		builder.addCase(validateAuth.rejected, (state) => {
 			return { ...state, isAuth: false, token: "", role_id: 0 };

@@ -7,6 +7,10 @@ import { fetchUsers } from "../../store/slices/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import LoadingSpinner from "../Spinner/LoadingSpinner";
+import { Delete } from "../../Services/privateApiService";
+import { alertError } from "../../Services/alerts/Alerts";
+
 export const UsersList = () => {
 	const { usersReducer } = useSelector((state) => state);
 	const history = useHistory();
@@ -15,6 +19,15 @@ export const UsersList = () => {
 	);
 	const [searchField, setSearchField] = useState("");
 	const dispatch = useDispatch();
+
+	const handleDelete = async (id) => {
+		const userDelete = await Delete("users", id);
+		if (userDelete.success) {
+			dispatch(fetchUsers({ searchQueryParam, limit: 100 }));
+		} else {
+			alertError("El usuario no existe");
+		}
+	};
 
 	useEffect(() => {
 		dispatch(
@@ -30,24 +43,28 @@ export const UsersList = () => {
 	};
 
 	return (
-		<div>
-			<header>
+		<div className="backofficeLists__container">
+			<h2 className="text__title-secondary">Lista de usuarios</h2>
+			<div className="search__container">
 				<input
-					placeholder="Search..."
+					placeholder="Buscar..."
 					name="search-field"
 					id="search-field"
-					className="form__input"
 					type="text"
 					onChange={handleSearchField}
 					defaultValue={searchQueryParam}
 				/>
-			</header>
-			<div className="return">
-				<Link className="return__button" to="/backoffice/users/create">
-					Regresar
-				</Link>
+				<i className="fas fa-search"></i>
 			</div>
-			<UsersTable users={usersReducer} />
+			{usersReducer.loading ? (
+				<LoadingSpinner />
+			) : usersReducer.data.length ? (
+				usersReducer.data.map((user) => (
+					<UsersTable key={user.id} user={user} deleteUser={handleDelete} />
+				))
+			) : (
+				<div className="backofficeLists__emptyCard">No hay resultados...</div>
+			)}
 		</div>
 	);
 };

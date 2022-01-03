@@ -1,0 +1,9 @@
+@import "../variables.scss";
+
+.login__container {
+	margin: 10px 20px;
+	@media screen and( min-width:$breakpoint-tablet) {
+		max-width: $breakpoint-tablet;
+		margin: 40px auto;
+	}
+}

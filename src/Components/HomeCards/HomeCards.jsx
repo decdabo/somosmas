@@ -1,24 +1,13 @@
 import { Link } from "react-router-dom";
-import "../../utils.scss"
-import "./HomeCards.scss"
-import LazyLoadingImage from "../LazyLoadingImage/LazyLoadingImage";
+import "../../utils.scss";
+import "./HomeCards.scss";
 
-const HomeCards = ({title, image, description}) => {
-
-    return (
-        <div className="card__home-dashboard my-1r txt-center w-18r">
-            <h5 className="my-1r">{ title }</h5>
-            <div>
-                <LazyLoadingImage url={image} description={description}/>
-            </div>
-            <div >
-                <Link to={ "/" } className="card__btn" role="button">Ir</Link>
-            </div>
-        </div>
-    )
-}
+const HomeCards = ({ title, image, link }) => {
+	return (
+		<Link to={link} className="dashboardCard__container">
+			<h3 className="text__title-tertiary">{title}</h3>
+			<i className={image}></i>
+		</Link>
+	);
+};
 export default HomeCards;
-
-
-
-

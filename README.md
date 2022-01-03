@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Uso de SweetAlert2
 
-Las Alertas se encuentran Services/alerts/Alerts.js
+Las Alertas se encuentran en /Services/alerts/Alerts.js
 
 ### Modo de implementación
 
@@ -15,18 +15,18 @@ import { alertError } from '../../Services/alerts/Alerts'
 
 ```
 
-Posee parámetros por lo que podemos manejar el error e introducirle mas información o dejarlo vacío:
+Recibe parámetros por los que podemos manejar el error e introducirle mas información o dejarlo vacío:
 
 ```
 const alertError = (textError = '') => { Swal.fire({ type: 'error', title: 'Oops...', text: textError, })}
 ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Para más información visitar [deployment](https://facebook.github.io/create-react-app/docs/deployment).
 
 ### 'Progress.js'
 
-Un loader progress bar customizable que puede importarse por default y e implementarse con hooks.
-Si se utilizan dentro de un botón tiene que ser una arrow function:
+Una barra de progreso customizable que puede importarse por default e implementarse con hooks.
+Si se utilizan dentro de un botón debe estar dentro de una función flecha anónima:
 
 ```
 <button onClick={()=>alertError('ha ocurrido un error')} </button>
@@ -39,7 +39,7 @@ catch (error) { alertError(error) }
 
 ```
 
-### Cambios en extensión Prettier para evitar la colision con la nueva configuración de Eslint:
+### Cambios en extensión Prettier para evitar la colision con la configuración de Eslint:
 
 Ir a pestañas de extensiones, buscar Prettier, en icono de ajustes / Extension settings y finalmente bajar y marcar donde dice Prettier Use tabs
 para indentar de la misma manera que eslint.

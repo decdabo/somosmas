@@ -1,28 +1,29 @@
 @import "../mixins.scss";
 
 .leaflet__map {
-  height: 450px;
-  max-width: 500px;
-  width: 86vw;
+	height: 450px;
+	max-width: 500px;
+	width: 86vw;
 }
 
 .leaflet-popup-content-wrapper {
-  border-radius: 0;
+	border-radius: 0px !important;
 }
 
 .leaflet-container a.leaflet-popup-close-button {
-  top: 10px;
-  right: 10px;
+	top: 10px;
+	right: 10px;
 }
 
 .leaflet-popup-content {
-  gap: 10px;
-  width: 80%;
-  @include flex-column-center();
+	gap: 10px;
+	width: 80%;
+	border-radius: 0;
+	@include flex-column-center();
 }
 
 .popup__item {
-  display: flex;
-  gap: 10px;
-  align-items: center;
+	display: flex;
+	gap: 10px;
+	align-items: center;
 }

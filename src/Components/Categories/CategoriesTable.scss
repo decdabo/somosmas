@@ -1,0 +1,22 @@
+.categoriesList {
+	.backofficeLists__cardContent {
+		width: 250px;
+		margin: 0;
+		flex-direction: column;
+		@media screen and (min-width: 769px) {
+			width: 500px;
+			flex-direction: row;
+		}
+	}
+
+	.backofficeLists__cardBtnsContainer {
+		margin-left: 0;
+		@media screen and (min-width: 769px) {
+			margin-left: 20px;
+		}
+	}
+
+	.backofficeLists__cardSpinner {
+		right: -40px;
+	}
+}

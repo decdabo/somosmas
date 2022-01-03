@@ -1,22 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import NewsItem from "./NewsItem";
 import { Link } from "react-router-dom";
 
 import "../../styles/components/listStyles.scss";
-import LoaderComponent from "../Loader/Loader";
 import { alertError } from "../../Services/alerts/Alerts";
 import { fetchNews } from "../../store/slices/newsSlice";
 import { useDispatch, useSelector } from "react-redux";
+import LoadingSpinner from "../Spinner/LoadingSpinner";
+import NewsSearchBar from "./NewsSearchBar.jsx";
 
 const NewsList = () => {
+	const [isLoading, setIsLoading] = useState(true);
 	const { newsData } = useSelector((state) => state);
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(fetchNews());
+		dispatch(fetchNews()).then((_) => {
+			setIsLoading(false);
+		});
 	}, []);
-
-	useEffect(() => {}, [newsData]);
 
 	useEffect(() => {
 		if (newsData.error) {
@@ -25,27 +28,25 @@ const NewsList = () => {
 	}, [newsData.error]);
 
 	return (
-		<div className="news-list">
-			<header className="header">
-				<h1 className="header__title">Listado de Novedades</h1>
+		<div className="backofficeLists__container">
+			<h2 className="text__title-secondary">Lista de novedades</h2>
+			<div className="backofficeLists__searchContainer">
+				<NewsSearchBar />
 				<Link to={"news/create"}>
-					<button className="form__btn-secondary">Crear</button>
+					<button className="form__btn-secondary">Crear nueva novedad +</button>
 				</Link>
-			</header>
-			<ul className="list">
-				{newsData.loading && (
-					<div className="m-auto">
-						<LoaderComponent />
-					</div>
-				)}
-				{newsData.data.length > 0 ? (
-					newsData.data.map((element) => {
-						return <NewsItem {...element} key={element.id} />;
+			</div>
+			{isLoading ? (
+				<LoadingSpinner />
+			) : newsData.data.length ? (
+				[...newsData.data]
+					.sort((a, b) => {
+						return new Date(b.updated_at) - new Date(a.updated_at);
 					})
-				) : (
-					<p>No hay novedades</p>
-				)}
-			</ul>
+					.map((item) => <NewsItem {...item} key={item.id} />)
+			) : (
+				<div className="backofficeLists__emptyCard">No hay resultados...</div>
+			)}
 		</div>
 	);
 };

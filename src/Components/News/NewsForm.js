@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-
+import "./NewsForm.scss";
 import { Get, Post, Put } from "../../Services/privateApiService";
 import { alertError } from "../../Services/alerts/Alerts";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../../store/slices/categoriesSlice";
+import LoadingSpinner from "../Spinner/LoadingSpinner";
 
 const NewsForm = () => {
 	// const [categories, setCategories] = useState([]);
@@ -21,7 +22,7 @@ const NewsForm = () => {
 	const { id } = useParams();
 
 	// post new article
-	const submitNew = async (values, { setSubmitting }) => {
+	const submitNew = async (values, { setSubmitting, resetForm }) => {
 		setMessage("");
 		const body = {
 			name: values.title,
@@ -32,6 +33,7 @@ const NewsForm = () => {
 		};
 		const response = await Post(process.env.REACT_APP_API_NEWS, body);
 		if (response.success) {
+			resetForm();
 			setMessage("Creado exitosamente");
 		} else {
 			alertError("Algo salió mal, intente nuevamente");
@@ -68,8 +70,6 @@ const NewsForm = () => {
 	const loadApiData = useCallback(async () => {
 		try {
 			dispatch(fetchCategories());
-			// const categories = await Get("categories");
-			// setCategories(categories.data);
 			if (id) {
 				const newData = await Get(process.env.REACT_APP_API_NEWS, id);
 				if (newData.success) {
@@ -96,128 +96,138 @@ const NewsForm = () => {
 		loadApiData();
 	}, []);
 
-	return isLoading ? (
-		<div className="form__container">
-			<div>Loading...</div>
-		</div>
-	) : id && !existingNew.id ? (
-		<div className="form__container">Noticia no encontrada</div>
-	) : (
-		<Formik
-			validateOnChange={false}
-			validateOnBlur={false}
-			initialValues={{
-				title: existingNew.name || "",
-				content: existingNew.content || "",
-				category: existingNew.category_id || "",
-				image: existingNew.image || "",
-			}}
-			onSubmit={id ? submitEdit : submitNew}
-			validate={(values) => {
-				const errors = {};
-				if (!values.title) {
-					errors.title = "Ingresar un título";
-				}
-				if (!values.content) {
-					errors.content = "Ingresar contenido";
-				}
-				if (!values.category) {
-					errors.category = "Seleccionar categoría";
-				}
-				if (!values.image) {
-					errors.image = "Añadir una foto";
-				}
-				return errors;
-			}}
-		>
-			{({ isSubmitting, values, setFieldValue, errors }) => {
-				return (
-					<Form className="form__container">
-						<h3 className="text__title-tertiary">
-							{id ? "Editar noticia" : "Crear noticia"}
-						</h3>
+	return (
+		<>
+			<div className="newsForm__titleContainer">
+				<h2 className="text__title-secondary">
+					{id ? "Editar noticia" : "Nueva noticia"}
+				</h2>
+				<Link to="/backoffice/news">
+					<button className="form__btn-secondary">
+						<i className="fas fa-arrow-left"></i>
+					</button>
+				</Link>
+			</div>
+			{isLoading ? (
+				<LoadingSpinner />
+			) : id && !existingNew.id ? (
+				<div className="form__container">Noticia no encontrada</div>
+			) : (
+				<Formik
+					validateOnChange={false}
+					validateOnBlur={false}
+					initialValues={{
+						title: existingNew.name || "",
+						content: existingNew.content || "",
+						category: existingNew.category_id || "",
+						image: existingNew.image || "",
+					}}
+					onSubmit={id ? submitEdit : submitNew}
+					validate={(values) => {
+						const errors = {};
+						if (!values.title) {
+							errors.title = "Ingresar un título";
+						}
+						if (!values.content) {
+							errors.content = "Ingresar contenido";
+						}
+						if (!values.category) {
+							errors.category = "Seleccionar categoría";
+						}
+						if (!values.image) {
+							errors.image = "Añadir una foto";
+						}
+						return errors;
+					}}
+				>
+					{({ isSubmitting, values, setFieldValue, errors }) => {
+						return (
+							<Form className="form__container">
+								<Field
+									type="text"
+									name="title"
+									className="form__input"
+									id="title"
+									placeholder="Título"
+								/>
+								<div className="form__message-validation">{errors.title}</div>
 
-						<Field
-							type="text"
-							name="title"
-							className="form__input"
-							id="title"
-							placeholder="Título"
-						/>
-						<div className="form__message-validation">{errors.title}</div>
-
-						<CKEditor
-							editor={ClassicEditor}
-							data={values.content}
-							onChange={(event, editor) => {
-								const data = editor.getData();
-								setFieldValue("content", data);
-							}}
-							config={{
-								placeholder: "Contenido",
-							}}
-						/>
-						<div className="form__message-validation">{errors.content}</div>
-
-						<Field
-							name="category"
-							as="select"
-							className="form__select"
-							children={[
-								<option value="" disabled key={0}>
-									Seleccionar categoría Seleccionar categoría
-								</option>,
-							].concat(
-								categoriesData.data.map((category) => (
-									<option value={category.id} key={category.id}>
-										{category.name}
-									</option>
-								))
-							)}
-						/>
-						<div className="form__message-validation">{errors.category}</div>
-
-						<label>
-							<input
-								className="form__image-input"
-								type="file"
-								accept="image/*"
-								onChange={(e) => handleImageChange(e, setFieldValue)}
-							/>
-
-							<div className="form__image-container">
-								<img
-									src={values.image}
-									alt="article"
-									onError={(e) => {
-										e.target.src =
-											"https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png";
+								<CKEditor
+									editor={ClassicEditor}
+									data={values.content}
+									onChange={(event, editor) => {
+										const data = editor.getData();
+										setFieldValue("content", data);
+									}}
+									config={{
+										placeholder: "Contenido",
 									}}
 								/>
-							</div>
-						</label>
-						<div className="form__message-validation">{errors.image}</div>
+								<div className="form__message-validation">{errors.content}</div>
 
-						<button
-							className="form__btn-primary"
-							type="submit"
-							disabled={isSubmitting}
-						>
-							Enviar
-						</button>
-						<div
-							className={
-								message.includes("mal")
-									? "form__message-fail"
-									: "form__message-success"
-							}
-						>
-							{message}
-						</div>
-					</Form>
-				);
-			}}
-		</Formik>
+								<Field
+									name="category"
+									as="select"
+									className="form__select"
+									children={[
+										<option value="" disabled key={0}>
+											Seleccionar categoría
+										</option>,
+									].concat(
+										categoriesData.data.map((category) => (
+											<option value={category.id} key={category.id}>
+												{category.name}
+											</option>
+										))
+									)}
+								/>
+								<div className="form__message-validation">
+									{errors.category}
+								</div>
+
+								<label>
+									<input
+										className="form__image-input"
+										type="file"
+										accept="image/*"
+										onChange={(e) => handleImageChange(e, setFieldValue)}
+									/>
+
+									<div className="form__image-container">
+										<img
+											src={values.image}
+											alt="article"
+											onError={(e) => {
+												e.target.src =
+													"https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png";
+											}}
+										/>
+									</div>
+								</label>
+								<div className="form__message-validation">{errors.image}</div>
+
+								<button
+									className="form__btn-primary"
+									type="submit"
+									disabled={isSubmitting}
+								>
+									Enviar
+								</button>
+								<div
+									className={
+										message.includes("mal")
+											? "form__message-fail"
+											: "form__message-success"
+									}
+								>
+									{message}
+								</div>
+							</Form>
+						);
+					}}
+				</Formik>
+			)}
+		</>
 	);
 };
 

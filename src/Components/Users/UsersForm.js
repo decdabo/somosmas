@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useHistory, Redirect } from "react-router-dom";
+import { useParams, useHistory, Redirect, Link } from "react-router-dom";
 import { Field, Form, Formik } from "formik";
 import Popup from "reactjs-popup";
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
@@ -105,10 +105,17 @@ const UserForm = () => {
 
 	return (
 		<>
-			<h2 className="text__title-secondary">
-				{id ? "Editar usuario" : "Crear usuario"}
-			</h2>
-			{isLogged ? (
+			<div className="newsForm__titleContainer">
+				<h2 className="text__title-secondary">
+					{id ? "Editar usuario" : "Crear usuario"}
+				</h2>
+				<Link to="/backoffice/users">
+					<button className="form__btn-secondary">
+						<i className="fas fa-arrow-left"></i>
+					</button>
+				</Link>
+			</div>
+			{!isLogged ? (
 				<Redirect to="/login-form" />
 			) : (
 				<Formik

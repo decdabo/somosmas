@@ -1,54 +1,65 @@
+import { useState } from "react";
+import { CgSpinner } from "react-icons/cg";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import apiDateToText from "../../helpers/apiDateToText";
 import { alertError, alertInformation } from "../../Services/alerts/Alerts";
 import { Delete } from "../../Services/privateApiService";
+import { fetchCategories } from "../../store/slices/categoriesSlice";
+import "./CategoriesTable.scss";
 
 export const CategoriesTable = ({ category }) => {
-	const handleDelete = async (id, category) => {
+	const [isDeleting, setIsDeleting] = useState(false);
+	const dispatch = useDispatch();
+
+	const handleDelete = async () => {
+		setIsDeleting(true);
 		const categoryDelete = await Delete("categories", category.id);
 
-		if (categoryDelete.message) {
+		if (categoryDelete.success) {
+			dispatch(fetchCategories());
 			alertInformation(categoryDelete.message);
 		} else {
 			alertError("La categoria no existe");
 		}
+
+		setIsDeleting(false);
 	};
 
 	return (
-		<>
-			<table className="table text-center">
-				<thead>
-					<tr className="table__rows">
-						<th className="table__head">Nombre</th>
-						<th className="table__head">Creado</th>
-						<th className="table__head">Acciones</th>
-					</tr>
-				</thead>
-				{category?.data.map((category, id) => (
-					<tbody key={id}>
-						<tr className="table__rows">
-							<td className="v-align">{category.name || ""}</td>
-							<td className="v-align">
-								{apiDateToText(category.created_at).date || ""}
-							</td>
-							<td className="table__actions">
-								<button
-									className="table__buttons"
-									onClick={() => handleDelete(id, category)}
-								>
-									<i className="fas fa-trash-alt" />
-								</button>
-								<Link
-									to={`/backoffice/categories/edit/${category.id}`}
-									className="table__buttons edit-button"
-								>
-									<i className="fas fa-edit"></i>
-								</Link>
-							</td>
-						</tr>
-					</tbody>
-				))}
-			</table>
-		</>
+		<div className="categoriesList backofficeLists__cardContainer">
+			{isDeleting && (
+				<CgSpinner className="spinner__circle backofficeLists__cardSpinner" />
+			)}
+			{/* <img
+				className="backofficeLists__cardImage"
+				src={category.image || ""}
+				alt="descripcion"
+				onError={(e) => {
+					e.target.src =
+						"https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png";
+				}}
+			/> */}
+			<div className="backofficeLists__cardContent">
+				<div>
+					<div>
+						<strong>{category.name}</strong>
+					</div>
+					<small>{apiDateToText(category.created_at).date}</small>
+				</div>
+				<div className="backofficeLists__cardBtnsContainer">
+					<Link to={`/backoffice/categories/edit/${category.id}`}>
+						<button className="form__btn-secondary">Editar</button>
+					</Link>
+					<button
+						className="form__btn-secondary"
+						onClick={handleDelete}
+						disabled={isDeleting}
+					>
+						Eliminar
+					</button>
+				</div>
+			</div>
+		</div>
 	);
 };

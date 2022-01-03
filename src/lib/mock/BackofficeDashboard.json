@@ -18,12 +18,6 @@
 		"link": "/backoffice/categories"
 	},
 	{
-		"title": "Testimonios",
-		"image": "far fa-comment-alt",
-		"description": "seccion testimonios",
-		"link": "/backoffice/testimonials"
-	},
-	{
 		"title": "Organizacion",
 		"image": "fas fa-sitemap",
 		"description": "seccion organizacion",

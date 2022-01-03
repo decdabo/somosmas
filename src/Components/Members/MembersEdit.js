@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Get } from "../../Services/publicApiService";
 import { Post, Put } from "../../Services/privateApiService";
 import { Formik, Field, Form } from "formik";
@@ -100,9 +100,16 @@ const MembersEdit = () => {
 	}
 	return (
 		<>
-			<h2 className="text__title-secondary">
-				{id ? "Editar miembro" : "Nuevo miembro"}
-			</h2>
+			<div className="newsForm__titleContainer">
+				<h2 className="text__title-secondary">
+					{id ? "Editar miembro" : "Nuevo miembro"}
+				</h2>
+				<Link to="/backoffice/members">
+					<button className="form__btn-secondary">
+						<i className="fas fa-arrow-left"></i>
+					</button>
+				</Link>
+			</div>
 			<Formik
 				initialValues={{
 					name,

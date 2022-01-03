@@ -8,8 +8,10 @@ const initialState = {
 };
 export const fetchNews = createAsyncThunk(
 	"news/fetchSlides",
-	async (_, { rejectWithValue }) => {
-		const response = await Get("news");
+	async (query, { rejectWithValue }) => {
+		const response = await Get(
+			`${process.env.REACT_APP_API_NEWS}${query ? `?search=${query}` : ""}`
+		);
 		if (response.success) {
 			return response.data;
 		}
@@ -20,11 +22,7 @@ export const fetchNews = createAsyncThunk(
 const slice = createSlice({
 	name: "news",
 	initialState: initialState,
-	reducers: {
-		deleteNew: (state, action) => {
-			state.data = state.data.filter((item) => item.id !== action.payload.id);
-		},
-	},
+	reducers: {},
 	extraReducers(builder) {
 		builder
 			.addCase(fetchNews.pending, (state) => {
@@ -40,5 +38,4 @@ const slice = createSlice({
 			});
 	},
 });
-export const { deleteNew } = slice.actions;
 export default slice.reducer;

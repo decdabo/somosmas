@@ -3,14 +3,14 @@ import { CgSpinner } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import apiDateToText from "../../helpers/apiDateToText";
 
-export const ItemList = ({ data, deleteSlide, types="Slides" }) => {
+export const ItemList = ({ data, deleteActivity, types = "Slides" }) => {
 	const [isDeleting, setIsDeleting] = useState(false);
 	const date = apiDateToText(data.updated_at).date;
 	const order = data.order ? `Order: ${data.order}` : date;
 
 	const handleDelete = async () => {
 		setIsDeleting(true);
-		await deleteSlide(data.id);
+		await deleteActivity(data.id);
 		setIsDeleting(false);
 	};
 	return (

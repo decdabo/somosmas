@@ -6,7 +6,7 @@ const categoryPutApiRequest = yup.object().shape({
 		.string("Name must be a string.")
 		.required("Name required.")
 		.min(4, "Minimum length: 4."),
-	image: yup.string("Image must be a string").required("Image required."),
+	// image: yup.string("Image must be a string").required("Image required."),
 	description: yup
 		.string("Description must be a string")
 		.required("Description required."),
@@ -17,7 +17,7 @@ const categoryPostApiRequest = yup.object().shape({
 		.string("Name must be a string.")
 		.required("Name required.")
 		.min(4, "Minimum length: 4."),
-	image: yup.string("Image must be a string").required("Image required."),
+	// image: yup.string("Image must be a string").required("Image required."),
 	description: yup
 		.string("Description must be a string")
 		.required("Description required."),

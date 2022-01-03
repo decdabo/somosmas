@@ -1,45 +1,56 @@
 import React, { useState } from "react";
+import { CgSpinner } from "react-icons/cg";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import apiDateToText from "../../helpers/apiDateToText";
-import { alertError } from "../../Services/alerts/Alerts";
 import { Delete } from "../../Services/privateApiService";
-import { deleteNew } from "../../store/slices/newsSlice";
-import LoaderComponent from "../Loader/Loader";
+import { fetchNews } from "../../store/slices/newsSlice";
 
 const NewsItem = ({ id, name, image, created_at }) => {
 	const { date, time } = apiDateToText(created_at);
-	const [deleting, setDeleting] = useState(false);
+	const [isDeleting, setIsDeleting] = useState(false);
 	const dispatch = useDispatch();
-	const handleDelete = () => {
-		setDeleting(true);
-		Delete("news", id)
-			.then(() => {
-				dispatch(deleteNew({ id: id }));
-			})
-			.catch((err) => alertError(err));
+
+	const handleDelete = async () => {
+		setIsDeleting(true);
+		const response = await Delete("news", id);
+		if (response.success) {
+			dispatch(fetchNews());
+		}
 	};
 
 	return (
-		<li className="list__item">
-			<img className="item__image" src={image} alt={name} />
-			<div className="item__group">
-				<h3 className="item__title">{name}</h3>
-				<p className="item__datetime">
+		<li className="backofficeLists__cardContainer">
+			{isDeleting && (
+				<CgSpinner className="spinner__circle backofficeLists__cardSpinner" />
+			)}
+			<img
+				className="backofficeLists__cardImage"
+				src={image || ""}
+				alt={name}
+				onError={(e) => {
+					e.target.src =
+						"https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png";
+				}}
+			/>
+			<div className="backofficeLists__cardContent">
+				<div>{name}</div>
+				<div>
 					{date} {time}
-				</p>
-				<div className="flex align-center gap-20px">
+				</div>
+
+				<div className="backofficeLists__cardBtnsContainer">
 					<Link to={`news/edit/${id}`}>
 						<button className="form__btn-secondary">Editar</button>
 					</Link>
 
-					{!deleting ? (
-						<button onClick={handleDelete} className="form__btn-secondary">
-							Remover
-						</button>
-					) : (
-						<LoaderComponent />
-					)}
+					<button
+						onClick={handleDelete}
+						className="form__btn-secondary"
+						disabled={isDeleting}
+					>
+						Eliminar
+					</button>
 				</div>
 			</div>
 		</li>

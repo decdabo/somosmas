@@ -4,7 +4,7 @@ import {
 	categoryPostApiRequest,
 } from "../../schemas/privateApi/categoryApiSchemas";
 
-import {Post, Put} from "../privateApiService";
+import { Post, Put } from "../privateApiService";
 const BASE_URL = "http://ongapi.alkemy.org/api";
 
 /*
@@ -28,6 +28,7 @@ const modifyCategory = (categoryObject) => {
 		categoryPutApiRequest
 			.validate(categoryObject)
 			.then(() => {
+				delete categoryObject.image;
 				Put("categories", `${categoryObject.id}`, categoryObject)
 					.then((res) => {
 						if (res.status === 200) {

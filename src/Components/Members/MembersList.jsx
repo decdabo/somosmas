@@ -40,21 +40,19 @@ const MembersList = () => {
 			<div className="backofficeLists__searchContainer">
 				<SearchBar setSerachResult={setMembers} />
 				<Link to="/backoffice/members/create">
-					<button className="form__btn-secondary">Crear nuevo +</button>
+					<button className="form__btn-secondary">Crear nuevo miembro +</button>
 				</Link>
 			</div>
 			{isLoading ? (
 				<LoadingSpinner />
 			) : members.length ? (
-				<div>
-					{members.map((member) => (
-						<MemberCard
-							member={member}
-							key={member.id}
-							deleteMember={handleDeleteMember}
-						/>
-					))}
-				</div>
+				members.map((member) => (
+					<MemberCard
+						member={member}
+						key={member.id}
+						deleteMember={handleDeleteMember}
+					/>
+				))
 			) : (
 				<div className="backofficeLists__emptyCard">No hay resultados...</div>
 			)}

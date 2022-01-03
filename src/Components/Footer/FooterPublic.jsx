@@ -38,9 +38,9 @@ const FooterPublic = () => {
 	return (
 		<div className="footer__container">
 			<div className="footer__links">
-				<Link to={"/toys-campaign"}>Actividades</Link>
-				<Link to={"/toys-campaign"}>Nosotros</Link>
-				{getRoleId() === 1 ? null : <Link to={"/toys-campaign"}>Contacto</Link> }
+				<Link to={"/actividades"}>Actividades</Link>
+				<Link to={"/about"}>Nosotros</Link>
+				{getRoleId() === 1 ? null : <Link to={"/contacto"}>Contacto</Link>}
 			</div>
 			<div className="flex-column-center logo-nombre">
 				<Link to={"/"}>

@@ -9,13 +9,14 @@ import { fetchNews } from "../../store/slices/newsSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const NewsList = () => {
-	const [news, setNews] = useState([]);
 	const { newsData } = useSelector((state) => state);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(fetchNews());
 	}, []);
+
+	useEffect(() => {}, [newsData]);
 
 	useEffect(() => {
 		if (newsData.error) {
@@ -39,7 +40,7 @@ const NewsList = () => {
 				)}
 				{newsData.data.length > 0 ? (
 					newsData.data.map((element) => {
-						return <NewsItem {...element} key={element.id} setNews={setNews} />;
+						return <NewsItem {...element} key={element.id} />;
 					})
 				) : (
 					<p>No hay novedades</p>

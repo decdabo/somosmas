@@ -8,7 +8,7 @@ const initialState = {
 };
 export const fetchNews = createAsyncThunk(
 	"news/fetchSlides",
-	async (_, {rejectWithValue}) => {
+	async (_, { rejectWithValue }) => {
 		const response = await Get("news");
 		if (response.success) {
 			return response.data;
@@ -20,7 +20,11 @@ export const fetchNews = createAsyncThunk(
 const slice = createSlice({
 	name: "news",
 	initialState: initialState,
-	reducers: {},
+	reducers: {
+		deleteNew: (state, action) => {
+			state.data = state.data.filter((item) => item.id !== action.payload.id);
+		},
+	},
 	extraReducers(builder) {
 		builder
 			.addCase(fetchNews.pending, (state) => {
@@ -34,7 +38,7 @@ const slice = createSlice({
 				state.loading = false;
 				state.error = action.payload;
 			});
-
 	},
 });
+export const { deleteNew } = slice.actions;
 export default slice.reducer;

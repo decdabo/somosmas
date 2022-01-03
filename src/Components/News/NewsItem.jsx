@@ -1,19 +1,21 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import apiDateToText from "../../helpers/apiDateToText";
 import { alertError } from "../../Services/alerts/Alerts";
 import { Delete } from "../../Services/privateApiService";
+import { deleteNew } from "../../store/slices/newsSlice";
 import LoaderComponent from "../Loader/Loader";
 
-const NewsItem = ({ id, name, image, created_at, setNews }) => {
+const NewsItem = ({ id, name, image, created_at }) => {
 	const { date, time } = apiDateToText(created_at);
 	const [deleting, setDeleting] = useState(false);
-
+	const dispatch = useDispatch();
 	const handleDelete = () => {
 		setDeleting(true);
 		Delete("news", id)
-			.then((res) => {
-				setNews((prev) => prev.filter((news) => news.id !== id));
+			.then(() => {
+				dispatch(deleteNew({ id: id }));
 			})
 			.catch((err) => alertError(err));
 	};

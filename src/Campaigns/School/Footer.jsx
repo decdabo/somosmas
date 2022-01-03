@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import somosMasLogo from "../../assets/images/logo.png";
 import { FaInstagram, FaFacebook } from "react-icons/fa";
 import { IoLogoTwitter } from "react-icons/io";
-
 import { Get } from "../../Services/publicApiService";
 import { alertError } from "../../Services/alerts/Alerts";
 import wwwToHttpsLink from "../../helpers/wwwToHttpsLink";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
 	const [social, setSocial] = useState({});
@@ -27,13 +27,7 @@ const Footer = () => {
 			<div className="footer__logo">
 				<img src={somosMasLogo} alt="Somas mas logo" loading="lazy" />
 				<div className="logo__onglink">
-					<a
-						href="http://somosmas.org"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						Visita somos mas
-					</a>
+					<Link to="/">Visita somos mas</Link>
 				</div>
 			</div>
 			<div className="footer__social">
@@ -69,9 +63,10 @@ const Footer = () => {
 				<h3>Campañas</h3>
 				<ul>
 					<li>
-						<a href="http://" target="_blank" rel="noopener noreferrer">
-							Campaña de jueguetes
-						</a>
+						<Link to="/toys-campaign">Campaña de jueguetes</Link>
+					</li>
+					<li>
+						<Link to="/school-campaign">Campaña de escuela</Link>
 					</li>
 				</ul>
 			</div>

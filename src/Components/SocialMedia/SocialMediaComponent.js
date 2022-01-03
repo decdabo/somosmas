@@ -3,8 +3,8 @@ import { LinkedinCompanyProfile, TwitterTweet } from "react-social-plugins";
 
 const mockTweets = [
 	"1450535690199085058",
-	"1440383594615042052",
 	"1389666789865541632",
+	"1440383594615042052",
 ];
 
 export const SocialMediaComponent = ({ tweets = mockTweets }) => {
@@ -35,7 +35,6 @@ export const SocialMediaComponent = ({ tweets = mockTweets }) => {
 							coversation="none"
 							tweetId={tweet}
 							theme="light"
-							width={500}
 						/>
 					);
 				})}

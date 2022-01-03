@@ -25,6 +25,7 @@ const NewsCards = () => {
 									e.target.src =
 										"https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png";
 								}}
+								loading="lazy"
 							/>
 							<p className="card__title">{item.name}</p>
 							<p

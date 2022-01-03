@@ -35,6 +35,7 @@ const InputImageFile = ({
 							"https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png"
 						}
 						alt="preview"
+						loading="lazy"
 					/>
 				</div>
 

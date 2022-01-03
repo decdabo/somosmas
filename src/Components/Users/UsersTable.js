@@ -23,6 +23,7 @@ export const UsersTable = ({ user, deleteUser }) => {
 					e.target.src =
 						"https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png";
 				}}
+				loading="lazy"
 			/>
 			<div className="backofficeLists__cardContent">
 				<div>{user.name || ""}</div>

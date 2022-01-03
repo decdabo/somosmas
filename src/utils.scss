@@ -31,6 +31,10 @@
 	width: 10%;
 }
 
+.w-100 {
+	width: 100%;
+}
+
 // HEIGHT
 .max-height-30 {
 	max-height: 30%;
@@ -100,4 +104,8 @@
 .image-300px {
 	width: 300px;
 	object-fit: contain;
+}
+
+.object-fit-cover {
+	object-fit: cover;
 }

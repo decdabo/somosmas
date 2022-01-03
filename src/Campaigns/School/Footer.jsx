@@ -6,7 +6,6 @@ import { IoLogoTwitter } from "react-icons/io";
 import { Get } from "../../Services/publicApiService";
 import { alertError } from "../../Services/alerts/Alerts";
 import wwwToHttpsLink from "../../helpers/wwwToHttpsLink";
-import { Link } from "react-router-dom";
 
 const Footer = () => {
 	const [social, setSocial] = useState({});
@@ -26,7 +25,7 @@ const Footer = () => {
 	return (
 		<footer className="school__footer">
 			<div className="footer__logo">
-				<img src={somosMasLogo} alt="Somas mas logo" />
+				<img src={somosMasLogo} alt="Somas mas logo" loading="lazy" />
 				<div className="logo__onglink">
 					<a
 						href="http://somosmas.org"
@@ -70,10 +69,9 @@ const Footer = () => {
 				<h3>Campañas</h3>
 				<ul>
 					<li>
-						<Link to="/school-campaign">Campaña de escuela</Link>
-					</li>
-					<li>
-						<Link to="/toys-campaign">Campaña de jueguetes</Link>
+						<a href="http://" target="_blank" rel="noopener noreferrer">
+							Campaña de jueguetes
+						</a>
 					</li>
 				</ul>
 			</div>

@@ -23,6 +23,7 @@ const MemberCard = ({ member, deleteMember }) => {
 					e.target.src =
 						"https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png";
 				}}
+				loading="lazy"
 			/>
 
 			<div className="backofficeLists__cardContent">

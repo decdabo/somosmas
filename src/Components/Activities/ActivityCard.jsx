@@ -17,7 +17,7 @@ const ActivityCard = ({ activity }) => {
 				<ActivitySkeleton variant="list" />
 			) : (
 				<li className="list__item">
-					<Title title={activity.name} image={activity.image} />
+					<Title width="full" title={activity.name} image={activity.image} />
 					<div className="item__group">
 						<p className="item__datetime">
 							{apiDateToText(activity["created_at"]).date}{" "}

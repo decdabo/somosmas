@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 import "../../styles/components/formStyles.scss";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 import useAuthActions from "../../store/hooks/useAuthActions";
 import { Redirect } from "react-router";
+import { Post } from "../../Services/publicApiService";
 const RegisterForm = () => {
 	const [formEnviado, setFormEnviado] = useState(false);
 	const { isLogged } = useAuthActions();
-	const [initialValues, setInitialValues] = useState({
-		name: "",
-		lastName: "",
-		email: "",
-		password: "",
-		confirmPassword: "",
-	});
 
 	return (
 		<>
@@ -31,155 +25,130 @@ const RegisterForm = () => {
 						let errores = {};
 
 						if (!values.name.trim()) {
-							errores.name = "Please enter a name";
+							errores.name = "Ingrese su nombre";
 						}
 
 						if (!values.lastName.trim()) {
-							errores.lastName = "Please enter a last name";
+							errores.lastName = "Ingrese su apellido";
 						}
 
 						if (!values.email.trim()) {
-							errores.email = "Please enter an email";
+							errores.email = "Ingrese un email";
 						} else if (
 							!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(
 								values.email
 							)
 						) {
-							errores.email = "Please enter a valid email";
+							errores.email = "Ingrese un email valido";
 						}
 
 						if (!values.password.trim()) {
-							errores.password = "Please enter a password";
+							errores.password = "Ingrese una contraseña";
 						} else if (values.password.length < 6) {
-							errores.password = "Your password must be at least 6 characters";
+							errores.password =
+								"La contraseña debe tener al menos 6 caracteres";
 						} else if (values.password.search(/[a-z]/i) < 0) {
-							errores.password =
-								"Your password must contain at least one letter.";
+							errores.password = "La contraseña debe tener al menos una letra";
 						} else if (values.password.search(/[0-9]/) < 0) {
-							errores.password =
-								"Your password must contain at least one digit.";
+							errores.password = "La contraseña debe tener al menos un dígito";
 						} else if (values.password.search(/(?=.*[!@#$%^&*])/)) {
 							errores.password =
-								"Your password must contain at least one special character.";
+								"La contraseña debe tener al menos un caracter especial";
 						}
 
 						if (!values.confirmPassword) {
-							errores.confirmPassword = "Please confirm password";
+							errores.confirmPassword = "Repita su contraseña";
 						} else if (values.confirmPassword !== values.password) {
-							errores.confirmPassword = "Passwords can not be different";
+							errores.confirmPassword = "Las contraseñas deben ser iguales";
 						}
 
 						return errores;
 					}}
-					onSubmit={(values, { resetForm }) => {
-						setInitialValues({
+					onSubmit={async (values, { resetForm }) => {
+						const response = await Post("register", {
 							name: values.name,
-							lastName: values.lastName,
 							email: values.email,
 							password: values.password,
 						});
 
-						setFormEnviado(true);
-						setTimeout(() => {
-							setFormEnviado(false);
-						}, 10000);
-						alert(
-							`
-                            Name: ${values.name}
-                            Last name: ${values.lastName}
-                            Email: ${values.email}
-                            Password: ${values.password}                    
-                            `
-						);
-						resetForm();
+						if (response.success) {
+							setFormEnviado(true);
+							setTimeout(() => {
+								setFormEnviado(false);
+							}, 10000);
+
+							resetForm();
+						}
 					}}
 				>
 					{({ errors }) => (
-						<Form className="form__container">
-							<Field
-								className="form__input"
-								type="text"
-								name="name"
-								id="name"
-								placeholder="Enter name"
-							/>
+						<div className="login__container">
+							<div className="text__title-secondary txt-center">
+								Crear cuenta
+							</div>
+							<Form className="form__container">
+								<Field
+									className="form__input"
+									type="text"
+									name="name"
+									id="name"
+									placeholder="Nombre"
+								/>
 
-							<ErrorMessage
-								name="name"
-								component={() => (
-									<div className="form__message-fail">{errors.name}</div>
-								)}
-							/>
+								<div className="form__message-validation">{errors.name}</div>
 
-							<Field
-								className="form__input"
-								type="text"
-								name="lastName"
-								id="lastName"
-								placeholder="Enter last name"
-							/>
+								<Field
+									className="form__input"
+									type="text"
+									name="lastName"
+									id="lastName"
+									placeholder="Apellido"
+								/>
 
-							<ErrorMessage
-								name="lastName"
-								component={() => (
-									<div className="form__message-fail">{errors.lastName}</div>
-								)}
-							/>
+								<div className="form__message-validation">
+									{errors.lastName}
+								</div>
 
-							<Field
-								className="form__input"
-								type="email"
-								name="email"
-								id="email"
-								placeholder="Enter email"
-							/>
-							<ErrorMessage
-								name="email"
-								component={() => (
-									<div className="form__message-fail">{errors.email}</div>
-								)}
-							/>
+								<Field
+									className="form__input"
+									type="email"
+									name="email"
+									id="email"
+									placeholder="Email"
+								/>
+								<div className="form__message-validation">{errors.email}</div>
 
-							<Field
-								className="form__input"
-								type="password"
-								name="password"
-								id="password"
-								placeholder="Enter password"
-							/>
-							<ErrorMessage
-								name="password"
-								component={() => (
-									<div className="form__message-fail">{errors.password}</div>
-								)}
-							/>
+								<Field
+									className="form__input"
+									type="password"
+									name="password"
+									id="password"
+									placeholder="Contraseña"
+								/>
+								<div className="form__message-validation">
+									{errors.password}
+								</div>
 
-							<Field
-								className="form__input"
-								type="password"
-								name="confirmPassword"
-								id="confirmPassword"
-								placeholder="Confirm password"
-							/>
-							<ErrorMessage
-								name="confirmPassword"
-								component={() => (
-									<div className="form__message-fail">
-										{errors.confirmPassword}
-									</div>
-								)}
-							/>
+								<Field
+									className="form__input"
+									type="password"
+									name="confirmPassword"
+									id="confirmPassword"
+									placeholder="Confirmar contraseña"
+								/>
+								<div className="form__message-validation">
+									{errors.confirmPassword}
+								</div>
 
-							<button className="form__btn-primary" type="submit">
-								Register
-							</button>
+								<button className="form__btn-primary" type="submit">
+									Enviar
+								</button>
 
-							{formEnviado && (
 								<p className="form__message-success">
-									Form submitted successfully
+									{formEnviado && "Form submitted successfully"}
 								</p>
-							)}
-						</Form>
+							</Form>
+						</div>
 					)}
 				</Formik>
 			)}

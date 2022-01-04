@@ -20,7 +20,7 @@ const AboutMain = ({
 
 					<div className="about__text">{about}</div>
 					<Link to="/about/members">
-						<button className="form__btn-primary">Ver miembros</button>
+						<button className="form__btn-primary my-10px">Ver miembros</button>
 					</Link>
 				</div>
 				<SocialMediaComponent />

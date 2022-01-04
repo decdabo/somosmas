@@ -5,8 +5,8 @@ import useAuthActions from "../../store/hooks/useAuthActions";
 import { Redirect } from "react-router";
 import { Post } from "../../Services/publicApiService";
 const RegisterForm = () => {
-	const [formEnviado, setFormEnviado] = useState(false);
-	const { isLogged } = useAuthActions();
+	const [error, setError] = useState(false);
+	const { isLogged, registerUserData } = useAuthActions();
 
 	return (
 		<>
@@ -65,20 +65,18 @@ const RegisterForm = () => {
 						return errores;
 					}}
 					onSubmit={async (values, { resetForm }) => {
-						const response = await Post("register", {
+						registerUserData({
 							name: values.name,
 							email: values.email,
 							password: values.password,
+						}).then(() => {
+							if (!isLogged) {
+								setError(true);
+								setTimeout(() => {
+									setError(false);
+								}, 4000);
+							}
 						});
-
-						if (response.success) {
-							setFormEnviado(true);
-							setTimeout(() => {
-								setFormEnviado(false);
-							}, 10000);
-
-							resetForm();
-						}
 					}}
 				>
 					{({ errors }) => (
@@ -144,8 +142,8 @@ const RegisterForm = () => {
 									Enviar
 								</button>
 
-								<p className="form__message-success">
-									{formEnviado && "Form submitted successfully"}
+								<p className="form__message-validation">
+									{error && "Hubo un error al registrarse. Intente de nuevo."}
 								</p>
 							</Form>
 						</div>

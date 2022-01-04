@@ -6,7 +6,7 @@
  */
 
 const wwwToHttpsLink = (url = "www.google.com") => {
-  return "https://" + url.slice(4);
+	return "https://" + url.slice(4);
 };
 
 export default wwwToHttpsLink;

@@ -7,6 +7,7 @@ import { alertError } from "../../../Services/alerts/Alerts";
 import { useDispatch } from "react-redux";
 import { fetchActivities } from "../../../store/slices/activitiesSlice";
 import ActivitySkeleton from "../Skeletons/ActivitySkeleton";
+import { Link } from "react-router-dom";
 
 /*
 RECEIVES => empty
@@ -45,24 +46,29 @@ const ActivityInfo = () => {
 			: { date: null, time: null };
 	}, [created_at]);
 
-	return (
-		<>
-			{currentActivity && name ? (
-				<section className="detail">
-					<Title width="full" image={image} title={name} />
-					<hgroup className="detail__datetime">
-						<p className="detail__datetime-text">
-							{getDateTime().date} {getDateTime().time}
-						</p>
-					</hgroup>
+	return currentActivity && name ? (
+		<div className="activityInfo">
+			<div className="detail">
+				<Title width="full" image={image} title={name} />
+				<hgroup className="detail__datetime">
+					<p className="detail__datetime-text">
+						{getDateTime().date} {getDateTime().time}
+					</p>
+				</hgroup>
 
-					{/* OTRA VEZ LA MALA PRACTICA PERO NO ENCUENTRO ALTERNATIVA */}
-					<div dangerouslySetInnerHTML={{ __html: description }}></div>
-				</section>
-			) : (
-				<ActivitySkeleton variant="info" />
-			)}
-		</>
+				{/* OTRA VEZ LA MALA PRACTICA PERO NO ENCUENTRO ALTERNATIVA */}
+				<div dangerouslySetInnerHTML={{ __html: description }}></div>
+			</div>
+			<Link to="/actividades">
+				<button className="form__btn-secondary">
+					<i className="fas fa-arrow-left"></i>
+				</button>
+			</Link>
+		</div>
+	) : (
+		<div className="activityInfo">
+			<ActivitySkeleton variant="info" />
+		</div>
 	);
 };
 

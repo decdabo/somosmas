@@ -8,6 +8,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import { alertError } from "../../Services/alerts/Alerts";
+import LoadingSpinner from "../Spinner/LoadingSpinner";
 const validUrl =
 	/((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/;
 const linkedInUrl =
@@ -43,7 +44,7 @@ const MembersEdit = () => {
 
 	const { id } = useParams();
 	const getMember = async () => {
-		await Get(process.env.REACT_APP_API_MEMBERS_EXAMPLE, id).then((res) => {
+		await Get(process.env.REACT_APP_API_MEMBERS, id).then((res) => {
 			const {
 				data: { name, description, image, facebookUrl, linkedinUrl },
 			} = res;
@@ -61,7 +62,7 @@ const MembersEdit = () => {
 		if (image == values.image) {
 			delete body.image;
 		}
-		const response = await Put(process.env.REACT_APP_API_MEMBERS_EXAMPLE, id, body);
+		const response = await Put(process.env.REACT_APP_API_MEMBERS, id, body);
 
 		if (!response.success) {
 			alertError("Algo salio mal");
@@ -69,7 +70,7 @@ const MembersEdit = () => {
 	};
 
 	const SubmitNew = async (values) => {
-		const response = await Post(process.env.REACT_APP_API_MEMBERS_EXAMPLE, values);
+		const response = await Post(process.env.REACT_APP_API_MEMBERS, values);
 		if (!response.success) {
 			alertError("Algo salio mal");
 		}
@@ -96,7 +97,7 @@ const MembersEdit = () => {
 	};
 
 	if (isLoading) {
-		return <div>Loading...</div>;
+		return <LoadingSpinner />;
 	}
 	return (
 		<>

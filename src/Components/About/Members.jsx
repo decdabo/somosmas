@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Get } from "../../Services/privateApiService";
 import { fetchMembers } from "../../store/slices/aboutSlice";
-import LoaderComponent from "../Loader/Loader";
+import LoadingSpinner from "../Spinner/LoadingSpinner";
 import "./styles/members.scss";
 
 const Members = () => {
@@ -10,49 +10,51 @@ const Members = () => {
 
 	const dispatch = useDispatch();
 
+	const getData = async () => {
+		await Get("members");
+	};
 	useEffect(() => {
-		const getData = async () => {
-			const data = await Get("members");
-		};
 		getData();
 		dispatch(fetchMembers());
 	}, []);
 
 	return (
-		<div className="container">
+		<div className="members__container">
+			<div className="text__title-secondary">Miembros de Somos Más</div>
 			{aboutData.loading ? (
-				<LoaderComponent />
+				<LoadingSpinner />
 			) : (
-				aboutData.data.map((item) => (
-					<div className="card" key={item.id}>
-						<figure>
+				<div className="members__cardsContainer">
+					{aboutData.data.map((item) => (
+						<div className="members__card" key={item.id}>
 							<img src={item.image} alt="imagen" loading="lazy" />
-						</figure>
-						<div className="card__container">
-							<h4 className="card__title">{item.name}</h4>
-							<h3 className="card__description">{item.description}</h3>
-							<div className="links">
-								<a
-									className="card__description"
-									href={item.facebookUrl}
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									Facebook
-								</a>
+							<div className="members__content">
+								<h4 className="text__title-tertiary">{item.name}</h4>
+								<div
+									className="members__description"
+									dangerouslySetInnerHTML={{ __html: item.description }}
+								></div>
+								<div className="links">
+									<a
+										href={item.facebookUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										Facebook
+									</a>
 
-								<a
-									className="card__description"
-									href={item.linkedinUrl}
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									Linkedin
-								</a>
+									<a
+										href={item.linkedinUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										Linkedin
+									</a>
+								</div>
 							</div>
 						</div>
-					</div>
-				))
+					))}
+				</div>
 			)}
 		</div>
 	);

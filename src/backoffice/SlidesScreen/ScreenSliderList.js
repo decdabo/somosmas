@@ -8,6 +8,7 @@ import { Delete } from "../../Services/privateApiService";
 import { alertError } from "../../Services/alerts/Alerts";
 
 export const ScreenSliderList = () => {
+	const [isLoading, setIsLoading] = useState(true);
 	const { slidesData } = useSelector((state) => state);
 	const dispatch = useDispatch();
 
@@ -21,7 +22,7 @@ export const ScreenSliderList = () => {
 	};
 
 	useEffect(() => {
-		dispatch(fetchSlides());
+		dispatch(fetchSlides()).then((_) => setIsLoading(false));
 	}, []);
 
 	return (
@@ -33,7 +34,7 @@ export const ScreenSliderList = () => {
 					<button className="form__btn-secondary">Crear nuevo +</button>
 				</Link>
 			</div>
-			{slidesData.loading ? (
+			{isLoading ? (
 				<LoadingSpinner />
 			) : slidesData.data.length ? (
 				slidesData.data.map((data, i) => {

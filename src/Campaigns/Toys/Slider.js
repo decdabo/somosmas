@@ -22,19 +22,19 @@ const Slider = () => {
 				<div className="slide__container">
 					<img src={slide1} alt="" className="slide__image" />
 					<q className="slide__quote">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+						El equipo planificando las proximas colectas
 					</q>
 				</div>
 				<div className="slide__container">
 					<img src={slide2} alt="" className="slide__image" />
 					<q className="slide__quote">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+						Los chicos jugando durante las actividades recreativas!
 					</q>
 				</div>
 				<div className="slide__container">
 					<img src={slide3} alt="" className="slide__image" />
 					<q className="slide__quote">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+						El arte tambien tiene su espacio en Somos Mas!
 					</q>
 				</div>
 			</Slides>

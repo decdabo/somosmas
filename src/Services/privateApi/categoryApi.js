@@ -31,7 +31,7 @@ const modifyCategory = (categoryObject) => {
 				delete categoryObject.image;
 				Put("categories", `${categoryObject.id}`, categoryObject)
 					.then((res) => {
-						if (res.status === 200) {
+						if (res.success) {
 							resolve(res.data.message);
 						} else {
 							reject(res.data.message);
@@ -67,7 +67,7 @@ const uploadCategory = (categoryObject) => {
 			.then(() => {
 				Post("categories", categoryObject)
 					.then((res) => {
-						if (res.status === 200) {
+						if (res.success) {
 							resolve(res.data.message);
 						} else {
 							reject(res.data.message);

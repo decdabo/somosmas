@@ -16,7 +16,7 @@ const InputCkEditor = ({
 				className="form__input"
 				name={name}
 				editor={classicEditor}
-				data={defaultObjectValues ? defaultObjectValues[name] : ""}
+				data={values[name]}
 				onChange={(e, editor) => (values[name] = editor.getData())}
 				onBlur={() => {
 					setTouched({ ...touched, [name]: true });

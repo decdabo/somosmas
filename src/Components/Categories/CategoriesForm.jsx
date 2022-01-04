@@ -12,6 +12,7 @@ import InputCkEditor from "./InputCkEditor";
 import { Link, useParams } from "react-router-dom";
 import { Get } from "../../Services/privateApiService";
 import LoadingSpinner from "../Spinner/LoadingSpinner";
+import { alertError, alertInformation } from "../../Services/alerts/Alerts";
 
 /*
 
@@ -52,25 +53,29 @@ const CategoriesForm = () => {
 		setIsLoading(false);
 	};
 
-	const handleSubmit = (values) => {
+	const handleSubmit = (values, { resetForm }) => {
 		!id
 			? uploadCategory({ ...values, image: imagePreview })
 					.then((res) => {
+						alertInformation("Creada exitosamente");
+						resetForm();
 						setStatus(res);
 					})
 					.catch((err) => {
 						setStatus(err);
+						alertError("Algo salió mal, intente nuevamente");
 					})
 			: modifyCategory({
 					...values,
-					// image: imagePreview,
 					id: id,
 			  })
 					.then((res) => {
+						alertInformation("Editada exitosamente");
 						setStatus(res);
 					})
 					.catch((err) => {
 						setStatus(err);
+						alertError("Algo salió mal, intente nuevamente");
 					});
 	};
 
@@ -155,33 +160,10 @@ const CategoriesForm = () => {
 							touched={touched}
 							errors={errors}
 						/>
-						{/* <InputImageFile
-							name="image"
-							values={values}
-							handleBlur={handleBlur}
-							fileReader={fileReader}
-							handleChange={handleChange}
-							imageInputRef={imageInputRef}
-							errors={errors}
-							touched={touched}
-							imagePreview={imagePreview}
-							required={true}
-						/> */}
 
 						<button className="form__btn-primary" type="submit">
 							Enviar
 						</button>
-						{setStatus && (
-							<div
-								className={
-									/success/gi.test(status)
-										? "form__message-success"
-										: "form__message-fail"
-								}
-							>
-								{status}
-							</div>
-						)}
 					</Form>
 				)}
 			</Formik>

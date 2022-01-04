@@ -114,6 +114,14 @@
 				margin-right: 100px;
 			}
 		}
+		& a:last-child {
+			& button {
+				@media screen and (min-width: 1020px) {
+					min-width: 40px;
+					margin-left: 10px;
+				}
+			}
+		}
 	}
 
 	&__menuBtn {

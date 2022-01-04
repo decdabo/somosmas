@@ -47,8 +47,15 @@
 					margin-right: 0;
 				}
 			}
+
+			& a:last-child {
+				& button {
+					@media screen and (min-width: 1020px) {
+						min-width: 40px;
+						margin-left: 10px;
+					}
+				}
+			}
 		}
 	}
 }
-
-

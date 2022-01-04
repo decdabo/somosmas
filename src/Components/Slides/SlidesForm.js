@@ -9,11 +9,11 @@ import { Get, Post } from "../../Services/publicApiService";
 import { Put } from "../../Services/privateApiService";
 import "../../styles/components/formStyles.scss";
 import "./slidesForm.scss";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import LoadingSpinner from "../Spinner/LoadingSpinner";
 import { alertError, alertInformation } from "../../Services/alerts/Alerts";
 
-const SlidesForm = ({ type="slides" }) => {
+const SlidesForm = ({ type = "slides" }) => {
 	const [slide, setSlide] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
 
@@ -90,9 +90,18 @@ const SlidesForm = ({ type="slides" }) => {
 			}) => {
 				return (
 					<>
-						<h2 className="text__title-secondary">
-							{id ? `Editar ${type}` : `Crear ${type}`}
-						</h2>
+						<div className="newsForm__titleContainer">
+							<h2 className="text__title-secondary">
+								{id ? `Editar ${type}` : `Crear ${type}`}
+							</h2>
+							<Link to={`/backoffice/${type}`}>
+								<button className="form__btn-secondary">
+									<i className="fas fa-arrow-left"></i>
+								</button>
+							</Link>
+						</div>
+
+						<h2 className="text__title-secondary"></h2>
 						<form className="form__container" onSubmit={handleSubmit}>
 							<input
 								id="name"

@@ -35,9 +35,11 @@ export const CategoriesList = () => {
 			{isLoading ? (
 				<LoadingSpinner />
 			) : categoriesData.data.length ? (
-				categoriesData.data.map((item) => (
-					<CategoriesTable category={item} key={item.id} />
-				))
+				[...categoriesData.data]
+					.sort((a, b) => {
+						return new Date(b.updated_at) - new Date(a.updated_at);
+					})
+					.map((item) => <CategoriesTable category={item} key={item.id} />)
 			) : (
 				<div className="backofficeLists__emptyCard">No hay resultados...</div>
 			)}

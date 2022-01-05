@@ -17,9 +17,13 @@ const Home = () => {
 				<div className="home__presentationContainer">
 					<h1 className="text__title-primary">Bienvenidos!</h1>
 					<p className="home__presentationText">
-						Simply dummy text of the printing and typesetting industry. Lorem
-						Ipsum has been the industry's standard dummy text ever since the
-						1500s, when an unknown printer
+						Somos una asociación civil sin fines de lucro que se creó en 1997
+						con la intención de dar alimento a las familias del barrio. Con el
+						tiempo fuimos involucrándonos con la comunidad y agrandando y
+						mejorando nuestra capacidad de trabajo. Hoy somos un centro
+						comunitario que acompaña a más de 700 personas a través de las áreas
+						de: Educación, deportes, primera infancia, salud, alimentación y
+						trabajo social.
 					</p>
 
 					<div className="home__donateContainer">

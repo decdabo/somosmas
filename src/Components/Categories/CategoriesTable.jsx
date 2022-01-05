@@ -18,9 +18,6 @@ export const CategoriesTable = ({ category }) => {
 
 		if (categoryDelete.success) {
 			dispatch(fetchCategories());
-			alertInformation(categoryDelete.message);
-		} else {
-			alertError("La categoria no existe");
 		}
 
 		setIsDeleting(false);

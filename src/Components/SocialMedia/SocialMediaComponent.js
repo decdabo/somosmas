@@ -25,8 +25,9 @@ export const SocialMediaComponent = ({ tweets = mockTweets }) => {
 		<div>
 			<hr />
 			<div>
-				<h1 className="fs-1 text-center">Últimos tweets</h1>
-				<hr />
+				<h1 className="fs-1 text-center text__title-secondary">
+					Últimos tweets
+				</h1>
 				{tweets.map((tweet, index) => {
 					return (
 						<TwitterTweet
@@ -41,9 +42,8 @@ export const SocialMediaComponent = ({ tweets = mockTweets }) => {
 			</div>
 			<hr />
 			<div className="w-100 d-flex flex-column">
-				<h1 className="fs-1 text-center">LinkedIn</h1>
+				<h1 className="fs-1 text-center text__title-secondary">LinkedIn</h1>
 				<div className="w-75 d-flex flex-column align-self-center">
-					<hr />
 					<div
 						className="badge-base LI-profile-badge m-auto"
 						data-locale="es_ES"

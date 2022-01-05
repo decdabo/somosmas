@@ -23,18 +23,10 @@ const ActivityCard = ({ activity }) => {
 							{apiDateToText(activity["created_at"]).date}{" "}
 							{apiDateToText(activity["created_at"]).time}
 						</p>
-						{/*  esto es mala practica... ver como arreglarlo */}
-						<div
-							className="item__description"
-							dangerouslySetInnerHTML={{ __html: activity.description }}
-						></div>
 					</div>
 					<footer className="item__footer">
-						<Link
-							to={`/actividades/${activity.id}`}
-							className="item__edit-link "
-						>
-							Mas info...
+						<Link to={`/actividades/${activity.id}`}>
+							<button className="form__btn-secondary">Mas info...</button>
 						</Link>
 					</footer>
 				</li>

@@ -5,7 +5,11 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "./NewsForm.scss";
 import { Get, Post, Put } from "../../Services/privateApiService";
-import { alertError } from "../../Services/alerts/Alerts";
+import {
+	alertConfirmation,
+	alertError,
+	alertInformation,
+} from "../../Services/alerts/Alerts";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../../store/slices/categoriesSlice";
 import LoadingSpinner from "../Spinner/LoadingSpinner";
@@ -34,7 +38,7 @@ const NewsForm = () => {
 		const response = await Post(process.env.REACT_APP_API_NEWS, body);
 		if (response.success) {
 			resetForm();
-			setMessage("Creado exitosamente");
+			alertInformation("Creado exitosamente");
 		} else {
 			alertError("Algo salió mal, intente nuevamente");
 		}
@@ -58,7 +62,7 @@ const NewsForm = () => {
 
 		const response = await Put(process.env.REACT_APP_API_NEWS, id, body);
 		if (response.success) {
-			setMessage("Actualizado exitosamente");
+			alertInformation("Actualizado exitosamente");
 		} else {
 			alertError("Algo salió mal, intente nuevamente");
 		}
@@ -213,15 +217,6 @@ const NewsForm = () => {
 								>
 									Enviar
 								</button>
-								<div
-									className={
-										message.includes("mal")
-											? "form__message-fail"
-											: "form__message-success"
-									}
-								>
-									{message}
-								</div>
 							</Form>
 						);
 					}}

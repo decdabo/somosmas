@@ -18,7 +18,7 @@ import Header from "./Header";
 
 const CountDownTimer = () => {
 	// timer to 31 december at 17:30
-	const remainingTime = (+new Date("2021-12-31T17:30:59") - +new Date()) / 1000;
+	const remainingTime = (+new Date("2022-01-06T17:30:59") - +new Date()) / 1000;
 
 	const [time, setTime] = useState(remainingTime);
 

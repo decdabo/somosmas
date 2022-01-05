@@ -24,20 +24,16 @@ const HeaderWeb = () => {
 			link: "/",
 		},
 		{
+			text: "Actividades",
+			link: "/actividades",
+		},
+		{
 			text: "Nosotros",
 			link: "/about",
 		},
 		{
 			text: "Contacto",
 			link: "/contacto",
-		},
-		{
-			text: "Juguetes",
-			link: "/toys-campaign",
-		},
-		{
-			text: "Escuela",
-			link: "/school-campaign",
 		},
 	];
 
@@ -66,6 +62,26 @@ const HeaderWeb = () => {
 							</NavLink>
 						</li>
 					))}
+					<li>
+						<NavLink
+							to="/toys-campaign"
+							exact
+							className="header__link"
+							target="_blank"
+						>
+							Juguetes
+						</NavLink>
+					</li>
+					<li>
+						<NavLink
+							to="/school-campaign"
+							exact
+							className="header__link"
+							target="_blank"
+						>
+							Escuela
+						</NavLink>
+					</li>
 				</ul>
 				<div className="header__btnContainer">
 					{isLogged ? (

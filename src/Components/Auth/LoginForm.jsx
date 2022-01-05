@@ -25,7 +25,7 @@ const LoginForm = () => {
 
 	return (
 		<div className="login__container">
-			<h1 className="title my-10px txt-center">Login</h1>
+			<div className="text__title-secondary txt-center">Iniciar sesión</div>
 			<Formik
 				initialValues={{
 					email: "",
@@ -85,7 +85,7 @@ const LoginForm = () => {
 							id="email"
 							type="email"
 							name="email"
-							placeholder="Enter email"
+							placeholder="Email"
 						/>
 
 						<div className="form__message-validation">{errors.email}</div>
@@ -95,13 +95,13 @@ const LoginForm = () => {
 							id="password"
 							type="password"
 							name="password"
-							placeholder="Enter password"
+							placeholder="Contraseñas"
 						/>
 
 						<div className="form__message-validation">{errors.password}</div>
 
 						<button className="form__btn-primary" type="submit">
-							Login
+							Enviar
 						</button>
 
 						<div
